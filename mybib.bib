@@ -1,0 +1,1722 @@
+ 
+IEEEabrv.bib
+V1.12 (2007/01/11)
+Copyright (c) 2002-2007 by Michael Shell
+See: http://www.michaelshell.org/
+for current contact information.
+
+BibTeX bibliography string definitions of the ABBREVIATED titles of
+IEEE journals and magazines and online publications.
+
+This file is designed for bibliography styles that require 
+abbreviated titles and is not for use in bibliographies that
+require full-length titles.
+
+Support sites:
+http://www.michaelshell.org/tex/ieeetran/
+http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+and/or
+http://www.ieee.org/
+
+Special thanks to Laura Hyslop and ken Rawson of IEEE for their help
+in obtaining the information needed to compile this file. Also,
+Volker Kuhlmann and Moritz Borgmann kindly provided some corrections
+and additions.
+
+*************************************************************************
+Legal Notice:
+This code is offered as-is without any warranty either expressed or
+implied; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE! 
+User assumes all risk.
+In no event shall IEEE or any contributor to this code be liable for
+any damages or losses, including, but not limited to, incidental,
+consequential, or any other damages, resulting from the use or misuse
+of any information contained here.
+
+All comments are the opinions of their respective authors and are not
+necessarily endorsed by the IEEE.
+
+This work is distributed under the LaTeX Project Public License (LPPL)
+( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+distributed and modified. A copy of the LPPL, version 1.3, is included
+in the base LaTeX documentation of all distributions of LaTeX released
+2003/12/01 or later.
+Retain all contribution notices and credits.
+** Modified files should be clearly indicated as such, including  **
+** renaming them and changing author support contact information. **
+
+File list of work: IEEEabrv.bib, IEEEfull.bib, IEEEexample.bib,
+                   IEEEtran.bst, IEEEtranS.bst, IEEEtranSA.bst,
+                   IEEEtranN.bst, IEEEtranSN.bst, IEEEtran_bst_HOWTO.pdf
+*************************************************************************
+
+
+USAGE:
+
+\bibliographystyle{mybstfile}
+\bibliography{IEEEabrv,mybibfile}
+
+where the IEEE titles in the .bib database entries use the strings
+defined here. e.g.,
+
+
+   journal = IEEE_J_AC,
+
+
+to yield "{IEEE} Trans. Automat. Contr."
+
+
+IEEE uses abbreviated journal titles in their bibliographies -
+this file is suitable for work that is to be submitted to the IEEE.
+
+
+For work that requires full-length titles, you should use the full
+titles provided in the companion file, IEEEfull.bib.
+
+
+** NOTES **
+
+ 1. Journals have been grouped according to subject in order to make it
+    easier to locate and extract the definitions for related journals - 
+    as most works use references that are confined to a single topic.
+    Magazines are listed in straight alphabetical order.
+
+ 2. String names are closely based on IEEE's own internal acronyms.
+ 
+ 3. Abbreviations follow IEEE's style.
+
+ 4. Older, out-of-print IEEE titles are included (but not including titles
+    dating prior to IEEE's formation from the IRE and AIEE in 1963).
+
+ 5. The following NEW/current journal definitions have been disabled because
+    their abbreviations have not yet been verified:
+    
+    STRING{IEEE_J_CBB        = "{IEEE/ACM} Trans. Comput. Biology Bioinformatics"}
+    STRING{IEEE_J_CJECE      = "Canadian J. Elect. Comput. Eng."}
+    STRING{IEEE_J_DSC        = "{IEEE} Trans. Dependable Secure Comput."}
+    STRING{IEEE_O_DSO        = "{IEEE} Distrib. Syst. Online"}
+    
+ 6. The following OLD journal definitions have been disabled because
+    their abbreviations have not yet been found/verified:
+
+    STRING{IEEE_J_BCTV       = "{IEEE} Trans. Broadcast Television Receivers"}
+    STRING{IEEE_J_EWS        = "{IEEE} Trans. Eng. Writing Speech"}
+
+If you know what the proper abbreviation is for a string in #5 or #6 above,
+email me and I will correct them in the next release.
+
+
+
+
+
+IEEE Journals 
+
+
+
+aerospace and military
+@STRING{IEEE_J_AES        = "{IEEE} Trans. Aerosp. Electron. Syst."}
+@STRING{IEEE_J_ANE        = "{IEEE} Trans. Aerosp. Navig. Electron."}
+@STRING{IEEE_J_ANNE       = "{IEEE} Trans. Aeronaut. Navig. Electron."}
+@STRING{IEEE_J_AS         = "{IEEE} Trans. Aerosp."}
+@STRING{IEEE_J_AIRE       = "{IEEE} Trans. Airborne Electron."}
+@STRING{IEEE_J_MIL        = "{IEEE} Trans. Mil. Electron."}
+
+
+
+autos, transportation and vehicles (non-aerospace)
+@STRING{IEEE_J_ITS        = "{IEEE} Trans. Intell. Transp. Syst."}
+@STRING{IEEE_J_VT         = "{IEEE} Trans. Veh. Technol."}
+@STRING{IEEE_J_VC         = "{IEEE} Trans. Veh. Commun."}
+
+
+
+circuits, signals, systems, audio and controls
+@STRING{IEEE_J_SPL        = "{IEEE} Signal Process. Lett."}
+@STRING{IEEE_J_ASL        = "{IEEE} Trans. Audio, Speech, Language Process."}
+@STRING{IEEE_J_ASSP       = "{IEEE} Trans. Acoust., Speech, Signal Process."}
+@STRING{IEEE_J_AU         = "{IEEE} Trans. Audio"}
+@STRING{IEEE_J_AUEA       = "{IEEE} Trans. Audio Electroacoust."}
+@STRING{IEEE_J_AC         = "{IEEE} Trans. Autom. Control"}
+@STRING{IEEE_J_CAS        = "{IEEE} Trans. Circuits Syst."}
+@STRING{IEEE_J_CASVT      = "{IEEE} Trans. Circuits Syst. Video Technol."}
+@STRING{IEEE_J_CASI       = "{IEEE} Trans. Circuits Syst. {I}"}
+@STRING{IEEE_J_CASII      = "{IEEE} Trans. Circuits Syst. {II}"}
+in 2004 CASI and CASII renamed part title to CASI_RP and CASII_EB, respectively.
+@STRING{IEEE_J_CASI_RP    = "{IEEE} Trans. Circuits Syst. {I}"}
+@STRING{IEEE_J_CASII_EB   = "{IEEE} Trans. Circuits Syst. {II}"}
+@STRING{IEEE_J_CT         = "{IEEE} Trans. Circuit Theory"}
+@STRING{IEEE_J_CST        = "{IEEE} Trans. Control Syst. Technol."}
+@STRING{IEEE_J_SP         = "{IEEE} Trans. Signal Process."}
+@STRING{IEEE_J_SU         = "{IEEE} Trans. Sonics Ultrason."}
+@STRING{IEEE_J_SAP        = "{IEEE} Trans. Speech Audio Process."}
+@STRING{IEEE_J_UE         = "{IEEE} Trans. Ultrason. Eng."}
+@STRING{IEEE_J_UFFC       = "{IEEE} Trans. Ultrason., Ferroelectr., Freq. Control"}
+
+
+
+communications
+@STRING{IEEE_J_COML       = "{IEEE} Commun. Lett."}
+@STRING{IEEE_J_JSAC       = "{IEEE} J. Sel. Areas Commun."}
+@STRING{IEEE_J_COM        = "{IEEE} Trans. Commun."}
+@STRING{IEEE_J_COMT       = "{IEEE} Trans. Commun. Technol."}
+@STRING{IEEE_J_WCOM       = "{IEEE} Trans. Wireless Commun."}
+
+
+
+components, packaging and manufacturing
+@STRING{IEEE_J_ADVP       = "{IEEE} Trans. Adv. Packag."}
+@STRING{IEEE_J_CHMT       = "{IEEE} Trans. Compon., Hybrids, Manuf. Technol."}
+@STRING{IEEE_J_CPMTA      = "{IEEE} Trans. Compon., Packag., Manuf. Technol. {A}"}
+@STRING{IEEE_J_CPMTB      = "{IEEE} Trans. Compon., Packag., Manuf. Technol. {B}"}
+@STRING{IEEE_J_CPMTC      = "{IEEE} Trans. Compon., Packag., Manuf. Technol. {C}"}
+@STRING{IEEE_J_CAPT       = "{IEEE} Trans. Compon. Packag. Technol."}
+@STRING{IEEE_J_CAPTS      = "{IEEE} Trans. Compon. Packag. Technol."}
+@STRING{IEEE_J_CPART      = "{IEEE} Trans. Compon. Parts"}
+@STRING{IEEE_J_EPM        = "{IEEE} Trans. Electron. Packag. Manuf."}
+@STRING{IEEE_J_MFT        = "{IEEE} Trans. Manuf. Technol."}
+@STRING{IEEE_J_PHP        = "{IEEE} Trans. Parts, Hybrids, Packag."}
+@STRING{IEEE_J_PMP        = "{IEEE} Trans. Parts, Mater., Packag."}
+
+
+
+CAD
+@STRING{IEEE_J_TCAD       = "{IEEE} J. Technol. Comput. Aided Design"}
+@STRING{IEEE_J_CAD        = "{IEEE} Trans. Comput.-Aided Design Integr. Circuits Syst."}
+
+
+
+coding, data, information, knowledge
+@STRING{IEEE_J_IT         = "{IEEE} Trans. Inf. Theory"}
+@STRING{IEEE_J_KDE        = "{IEEE} Trans. Knowl. Data Eng."}
+
+
+
+computers, computation, networking and software
+@STRING{IEEE_J_C          = "{IEEE} Trans. Comput."}
+@STRING{IEEE_J_CAL        = "{IEEE} Comput. Archit. Lett."}
+disabled till definition is verified
+STRING{IEEE_J_DSC         = "{IEEE} Trans. Dependable Secure Comput."}
+@STRING{IEEE_J_ECOMP      = "{IEEE} Trans. Electron. Comput."}
+@STRING{IEEE_J_EVC        = "{IEEE} Trans. Evol. Comput."}
+@STRING{IEEE_J_FUZZ       = "{IEEE} Trans. Fuzzy Syst."}
+@STRING{IEEE_J_IFS        = "{IEEE} Trans. Inf. Forensics Security"}
+@STRING{IEEE_J_MC         = "{IEEE} Trans. Mobile Comput."}
+@STRING{IEEE_J_NET        = "{IEEE/ACM} Trans. Netw."}
+@STRING{IEEE_J_NN         = "{IEEE} Trans. Neural Netw."}
+@STRING{IEEE_J_PDS        = "{IEEE} Trans. Parallel Distrib. Syst."}
+@STRING{IEEE_J_SE         = "{IEEE} Trans. Softw. Eng."}
+
+
+
+computer graphics, imaging, and multimedia
+@STRING{IEEE_J_JDT        = "{IEEE/OSA} J. Display Technol."}
+@STRING{IEEE_J_IP         = "{IEEE} Trans. Image Process."}
+@STRING{IEEE_J_MM         = "{IEEE} Trans. Multimedia"}
+@STRING{IEEE_J_VCG        = "{IEEE} Trans. Vis. Comput. Graphics"}
+
+
+
+cybernetics, ergonomics, robots, man-machine, and automation
+@STRING{IEEE_J_ASE        = "{IEEE} Trans. Autom. Sci. Eng."}
+@STRING{IEEE_J_JRA        = "{IEEE} J. Robot. Autom."}
+@STRING{IEEE_J_HFE        = "{IEEE} Trans. Hum. Factors Electron."}
+@STRING{IEEE_J_MMS        = "{IEEE} Trans. Man-Mach. Syst."}
+@STRING{IEEE_J_PAMI       = "{IEEE} Trans. Pattern Anal. Mach. Intell."}
+in 1989 JRA became RA
+in August 2004, RA split into ASE and RO
+@STRING{IEEE_J_RA         = "{IEEE} Trans. Robot. Autom."}
+@STRING{IEEE_J_RO         = "{IEEE} Trans. Robot."}
+@STRING{IEEE_J_SMC        = "{IEEE} Trans. Syst., Man, Cybern."}
+@STRING{IEEE_J_SMCA       = "{IEEE} Trans. Syst., Man, Cybern. {A}"}
+@STRING{IEEE_J_SMCB       = "{IEEE} Trans. Syst., Man, Cybern. {B}"}
+@STRING{IEEE_J_SMCC       = "{IEEE} Trans. Syst., Man, Cybern. {C}"}
+@STRING{IEEE_J_SSC        = "{IEEE} Trans. Syst. Sci. Cybern."}
+
+
+
+earth, wind, fire and water
+@STRING{IEEE_J_GE         = "{IEEE} Trans. Geosci. Electron."}
+@STRING{IEEE_J_GRS        = "{IEEE} Trans. Geosci. Remote Sens."}
+@STRING{IEEE_J_GRSL       = "{IEEE} Geosci. Remote Sens. Lett."}
+@STRING{IEEE_J_OE         = "{IEEE} J. Ocean. Eng."}
+
+
+
+education, engineering, history, IEEE, professional
+disabled till definition is verified
+STRING{IEEE_J_CJECE       = "Canadian J. Elect. Comput. Eng."}
+@STRING{IEEE_J_PROC       = "Proc. {IEEE}"}
+@STRING{IEEE_J_EDU        = "{IEEE} Trans. Educ."}
+@STRING{IEEE_J_EM         = "{IEEE} Trans. Eng. Manag."}
+disabled till definition is verified
+STRING{IEEE_J_EWS         = "{IEEE} Trans. Eng. Writing Speech"}
+@STRING{IEEE_J_PC         = "{IEEE} Trans. Prof. Commun."}
+
+
+
+electromagnetics, antennas, EMI, magnetics and microwave
+@STRING{IEEE_J_AWPL       = "{IEEE} Antennas Wireless Propag. Lett."}
+@STRING{IEEE_J_MGWL       = "{IEEE} Microw. Guided Wave Lett."}
+IEEE seems to want "Compon." here, not "Comp."
+@STRING{IEEE_J_MWCL       = "{IEEE} Microw. Wireless Compon. Lett."}
+@STRING{IEEE_J_AP         = "{IEEE} Trans. Antennas Propag."}
+@STRING{IEEE_J_EMC        = "{IEEE} Trans. Electromagn. Compat."}
+@STRING{IEEE_J_MAG        = "{IEEE} Trans. Magn."}
+@STRING{IEEE_J_MTT        = "{IEEE} Trans. Microw. Theory Tech."}
+@STRING{IEEE_J_RFI        = "{IEEE} Trans. Radio Freq. Interference"}
+@STRING{IEEE_J_TJMJ       = "{IEEE} Transl. J. Magn. Jpn."}
+
+
+
+energy and power
+@STRING{IEEE_J_EC         = "{IEEE} Trans. Energy Convers."}
+@STRING{IEEE_J_PEL        = "{IEEE} Power Electron. Lett."}
+@STRING{IEEE_J_PWRAS      = "{IEEE} Trans. Power App. Syst."}
+@STRING{IEEE_J_PWRD       = "{IEEE} Trans. Power Del."}
+@STRING{IEEE_J_PWRE       = "{IEEE} Trans. Power Electron."}
+@STRING{IEEE_J_PWRS       = "{IEEE} Trans. Power Syst."}
+
+
+
+industrial, commercial and consumer
+@STRING{IEEE_J_APPIND     = "{IEEE} Trans. Appl. Ind."}
+@STRING{IEEE_J_BC         = "{IEEE} Trans. Broadcast."}
+disabled till definition is verified
+STRING{IEEE_J_BCTV        = "{IEEE} Trans. Broadcast Television Receivers"}
+@STRING{IEEE_J_CE         = "{IEEE} Trans. Consum. Electron."}
+@STRING{IEEE_J_IE         = "{IEEE} Trans. Ind. Electron."}
+@STRING{IEEE_J_IECI       = "{IEEE} Trans. Ind. Electron. Contr. Instrum."}
+@STRING{IEEE_J_IA         = "{IEEE} Trans. Ind. Appl."}
+@STRING{IEEE_J_IGA        = "{IEEE} Trans. Ind. Gen. Appl."}
+@STRING{IEEE_J_IINF       = "{IEEE} Trans. Ind. Informat."}
+@STRING{IEEE_J_PSE        = "{IEEE} J. Product Safety Eng."}
+
+
+
+instrumentation and measurement
+@STRING{IEEE_J_IM         = "{IEEE} Trans. Instrum. Meas."}
+
+
+
+insulation and materials
+@STRING{IEEE_J_JEM        = "{IEEE/TMS} J. Electron. Mater."}
+@STRING{IEEE_J_DEI        = "{IEEE} Trans. Dielectr. Electr. Insul."}
+@STRING{IEEE_J_EI         = "{IEEE} Trans. Electr. Insul."}
+
+
+
+mechanical
+@STRING{IEEE_J_MECH       = "{IEEE/ASME} Trans. Mechatronics"}
+@STRING{IEEE_J_MEMS       = "J. Microelectromech. Syst."}
+
+
+
+medical and biological
+@STRING{IEEE_J_BME        = "{IEEE} Trans. Biomed. Eng."}
+Note: The B-ME journal later dropped the hyphen and became the BME.
+@STRING{IEEE_J_B-ME       = "{IEEE} Trans. Bio-Med. Eng."}
+@STRING{IEEE_J_BMELC      = "{IEEE} Trans. Bio-Med. Electron."}
+disabled till definition is verified
+STRING{IEEE_J_CBB         = "{IEEE/ACM} Trans. Comput. Biology Bioinformatics"}
+@STRING{IEEE_J_ITBM       = "{IEEE} Trans. Inf. Technol. Biomed."}
+@STRING{IEEE_J_ME         = "{IEEE} Trans. Med. Electron."}
+@STRING{IEEE_J_MI         = "{IEEE} Trans. Med. Imag."}
+@STRING{IEEE_J_NB         = "{IEEE} Trans. Nanobiosci."}
+@STRING{IEEE_J_NSRE       = "{IEEE} Trans. Neural Syst. Rehabil. Eng."}
+@STRING{IEEE_J_RE         = "{IEEE} Trans. Rehabil. Eng."}
+
+
+
+ optics, lightwave and photonics
+@STRING{IEEE_J_PTL        = "{IEEE} Photon. Technol. Lett."}
+@STRING{IEEE_J_JLT        = "J. Lightw. Technol."}
+
+
+
+physics, electrons, nanotechnology, nuclear and quantum electronics
+@STRING{IEEE_J_EDL        = "{IEEE} Electron Device Lett."}
+@STRING{IEEE_J_JQE        = "{IEEE} J. Quantum Electron."}
+@STRING{IEEE_J_JSTQE      = "{IEEE} J. Sel. Topics Quantum Electron."}
+@STRING{IEEE_J_ED         = "{IEEE} Trans. Electron Devices"}
+@STRING{IEEE_J_NANO       = "{IEEE} Trans. Nanotechnol."}
+@STRING{IEEE_J_NS         = "{IEEE} Trans. Nucl. Sci."}
+@STRING{IEEE_J_PS         = "{IEEE} Trans. Plasma Sci."}
+
+
+
+reliability
+IEEE seems to want "Mat." here, not "Mater."
+@STRING{IEEE_J_DMR        = "{IEEE} Trans. Device Mater. Rel."}
+@STRING{IEEE_J_R          = "{IEEE} Trans. Rel."}
+
+
+
+semiconductors, superconductors, electrochemical and solid state
+@STRING{IEEE_J_ESSL       = "{IEEE/ECS} Electrochem. Solid-State Lett."}
+@STRING{IEEE_J_JSSC       = "{IEEE} J. Solid-State Circuits"}
+@STRING{IEEE_J_ASC        = "{IEEE} Trans. Appl. Supercond."}
+@STRING{IEEE_J_SM         = "{IEEE} Trans. Semicond. Manuf."}
+
+
+
+sensors
+@STRING{IEEE_J_SENSOR     = "{IEEE} Sensors J."}
+
+
+
+VLSI
+@STRING{IEEE_J_VLSI       = "{IEEE} Trans. {VLSI} Syst."}
+
+
+
+
+
+
+IEEE Magazines 
+
+
+
+@STRING{IEEE_M_AES        = "{IEEE} Aerosp. Electron. Syst. Mag."}
+@STRING{IEEE_M_HIST       = "{IEEE} Ann. Hist. Comput."}
+@STRING{IEEE_M_AP         = "{IEEE} Antennas Propag. Mag."}
+@STRING{IEEE_M_ASSP       = "{IEEE} {ASSP} Mag."}
+@STRING{IEEE_M_CD         = "{IEEE} Circuits Devices Mag."}
+@STRING{IEEE_M_CAS        = "{IEEE} Circuits Syst. Mag."}
+@STRING{IEEE_M_COM        = "{IEEE} Commun. Mag."}
+@STRING{IEEE_M_COMSOC     = "{IEEE} Commun. Soc. Mag."}
+@STRING{IEEE_M_CIM        = "{IEEE} Comput. Intell. Mag."}
+CSEM changed to CSE in 1999
+@STRING{IEEE_M_CSE        = "{IEEE} Comput. Sci. Eng."}
+@STRING{IEEE_M_CSEM       = "{IEEE} Comput. Sci. Eng. Mag."}
+@STRING{IEEE_M_C          = "{IEEE} Computer"}
+@STRING{IEEE_M_CAP        = "{IEEE} Comput. Appl. Power"}
+@STRING{IEEE_M_CGA        = "{IEEE} Comput. Graph. Appl."}
+@STRING{IEEE_M_CONC       = "{IEEE} Concurrency"}
+@STRING{IEEE_M_CS         = "{IEEE} Control Syst. Mag."}
+@STRING{IEEE_M_DTC        = "{IEEE} Des. Test. Comput."}
+@STRING{IEEE_M_EI         = "{IEEE} Electr. Insul. Mag."}
+@STRING{IEEE_M_ETR        = "{IEEE} ElectroTechnol. Rev."}
+@STRING{IEEE_M_EMB        = "{IEEE} Eng. Med. Biol. Mag."}
+@STRING{IEEE_M_EMR        = "{IEEE} Eng. Manag. Rev."}
+@STRING{IEEE_M_EXP        = "{IEEE} Expert"}
+@STRING{IEEE_M_IA         = "{IEEE} Ind. Appl. Mag."}
+@STRING{IEEE_M_IM         = "{IEEE} Instrum. Meas. Mag."}
+@STRING{IEEE_M_IS         = "{IEEE} Intell. Syst."}
+@STRING{IEEE_M_IC         = "{IEEE} Internet Comput."}
+@STRING{IEEE_M_ITP        = "{IEEE} {IT} Prof."}
+@STRING{IEEE_M_MICRO      = "{IEEE} Micro"}
+@STRING{IEEE_M_MW         = "{IEEE} Microw. Mag."}
+@STRING{IEEE_M_MM         = "{IEEE} Multimedia"}
+@STRING{IEEE_M_NET        = "{IEEE} Netw."}
+IEEE's editorial manual lists "Pers. Commun.", 
+but "Personal Commun. Mag." seems to be what is used in the journals
+@STRING{IEEE_M_PCOM       = "{IEEE} Personal Commun. Mag."}
+@STRING{IEEE_M_POT        = "{IEEE} Potentials"}
+CAP and PER merged to form PE in 2003
+@STRING{IEEE_M_PE         = "{IEEE} Power Energy Mag."}
+@STRING{IEEE_M_PER        = "{IEEE} Power Eng. Rev."}
+@STRING{IEEE_M_PVC        = "{IEEE} Pervasive Comput."}
+@STRING{IEEE_M_RA         = "{IEEE} Robot. Autom. Mag."}
+@STRING{IEEE_M_SAP        = "{IEEE} Security Privacy"}
+@STRING{IEEE_M_SP         = "{IEEE} Signal Process. Mag."}
+@STRING{IEEE_M_S          = "{IEEE} Softw."}
+@STRING{IEEE_M_SPECT      = "{IEEE} Spectr."}
+@STRING{IEEE_M_TS         = "{IEEE} Technol. Soc. Mag."}
+@STRING{IEEE_M_VT         = "{IEEE} Veh. Technol. Mag."}
+@STRING{IEEE_M_WC         = "{IEEE} Wireless Commun. Mag."}
+@STRING{IEEE_M_TODAY      = "Today's Engineer"}
+
+
+
+
+
+
+IEEE Online Publications 
+
+
+
+@STRING{IEEE_O_CSTO        = "{IEEE} Commun. Surveys Tuts."}
+disabled till definition is verified
+STRING{IEEE_O_DSO          = "{IEEE} Distrib. Syst. Online"}
+
+
+
+
+
+@inproceedings{kim2014robust,
+  title={Robust speech recognition using temporal masking and thresholding algorithm},
+  author={Kim, Chanwoo and Chin, Kean K and Bacchiani, Michiel and Stern, Richard M},
+  booktitle = {Proc. of Interspeech},
+  address = {Singapore, Singapore},
+  year={2014},
+  month ={Sep. 14-18},
+  pages={2734-2738}
+}
+
+@article{boll1979suppression,
+  title={Suppression of acoustic noise in speech using spectral subtraction},
+  author={Boll, Steven},
+  journal=IEEE_J_ASSP,
+  volume={27},
+  number={2},
+  pages={113--120},
+  year={1979},
+  publisher={IEEE}
+}
+
+@InProceedings{Principi13b,
+author = {E. Principi and S. Squartini and F. Piazza and D. Fuselli and M. Bonifazi},
+title = {A Distributed System for Recognizing Home Automation Commands and Distress Calls in the Italian Language},
+booktitle = {Proc. of Interspeech},
+year = {2013},
+address = {Lyon, France},
+pages = {2049-2053}
+}
+
+@article{sohn1999statistical,
+  title={A statistical model-based voice activity detection},
+  author={Sohn, Jongseo and Kim, Nam Soo and Sung, Wonyong},
+  journal=IEEE_J_SPL,
+  volume={6},
+  number={1},
+  pages={1--3},
+  year={1999},
+  publisher={IEEE}
+}
+
+@article{itu1996silence,
+  title={A silence compression scheme for {G}.729 optimized for terminals to conforming {V}.70},
+  author={ITU},
+  journal={ITU-T Rec. G. 729, Annex B},
+  year={1996}
+}
+
+@inproceedings{cabras2010restoration,
+  title={Restoration of audio documents with low {SNR}: a {NMF} parameter estimation and perceptually motivated Bayesian suppression rule},
+  author={Cabras, Giuseppe and Canazza, Sergio and Montessoro, Pier Luca and Rinaldo, Roberto},
+  booktitle={Proc. of SMC, Barcelona},
+  pages={314--321},
+  year={2010}
+}
+
+@inproceedings{hughes2013recurrent,
+  title={Recurrent neural networks for voice activity detection},
+  author={Hughes, Thad and Mierle, Keir},
+  booktitle={Proc. of ICASSP},
+  pages={7378-7382},
+  year={2013},
+  address = {Vancouver, BC, Canada},
+  month={Mar. 26-31}
+}
+
+@inproceedings{cristoforetti2014dirha,
+  title={The {DIRHA} simulated corpus},
+  author={Cristoforetti, L. and Ravanelli, M. and Omologo, M. and Sosi, A. and Abad, A. and Hagm{\"u}ller, M. and Maragos, P.},
+  booktitle={Proc. of LREC},
+  volume={5},
+  year={2014},
+  month = {May 26-31},
+  address = {Reykjavik, Iceland},
+  pages={2629-2634}
+}
+
+@article{chang2006voice,
+  title={Voice activity detection based on multiple statistical models},
+  author={Chang, Joon-Hyuk and Kim, Nam Soo and Mitra, Sanjit K},
+  journal=IEEE_J_SP,
+  volume={54},
+  number={6},
+  pages={1965--1976},
+  year={2006},
+  publisher={IEEE}
+}
+
+@article{woo2000robust,
+  title={Robust voice activity detection algorithm for estimating noise spectrum},
+  author={Woo, Kyoung-Ho and Yang, Tae-Young and Park, Kun-Jung and Lee, Chungyong},
+  journal={Electronics Letters},
+  volume={36},
+  number={2},
+  pages={180--181},
+  year={2000},
+  publisher={IET}
+}
+
+@inproceedings{shin2005voice,
+  title={Voice Activity Detection based on Generalized Gamma Distribution},
+  author={Shin, Jong Won and Chang, Joon-Hyuk and Yun, Hwan Sik and Kim, Nam Soo},
+  booktitle={Proc. of ICASSP},
+  address = {Philadelphia, PA},
+  pages={781-784},
+  month={Mar. 18-25},
+  year={2005}
+}
+
+@article{ramirez2005statistical,
+  title={Statistical voice activity detection using a multiple observation likelihood ratio test},
+  author={Ram{\'\i}rez, Javier and Segura, Jos{\'e} C and Ben{\'\i}tez, Carmen and Garc{\'\i}a, Luz and Rubio, Antonio},
+  journal=IEEE_J_SPL,
+  volume={12},
+  number={10},
+  pages={689--692},
+  year={2005},
+  publisher={IEEE}
+}
+
+@article{ying2011voice,
+  title={Voice activity detection based on an unsupervised learning framework},
+  author={Ying, Dongwen and Yan, Yonghong and Dang, Jianwu and Soong, Frank K},
+  journal=IEEE_J_ASL,
+  volume={19},
+  number={8},
+  pages={2624--2633},
+  year={2011},
+  publisher={IEEE}
+}
+
+@article{wu2011efficient,
+  title={An efficient voice activity detection algorithm by combining statistical model and energy detection},
+  author={Wu, Ji and Zhang, Xiao-Lei},
+  journal={EURASIP Journal on Advances in Signal Processing},
+  volume={2011},
+  number={1},
+  pages={1--10},
+  year={2011},
+  publisher={Springer}
+}
+
+@article{ramirez2004efficient,
+  title={Efficient voice activity detection algorithms using long-term speech information},
+  author={Ram{\i}rez, Javier and Segura, Jos{\'e} C and Ben{\i}tez, Carmen and De La Torre, Angel and Rubio, Antonio},
+  journal={Speech communication},
+  volume={42},
+  number={3},
+  pages={271--287},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{shin2010voice,
+  title={Voice activity detection based on statistical models and machine learning approaches},
+  author={Shin, Jong Won and Chang, Joon-Hyuk and Kim, Nam Soo},
+  journal={Computer Speech \& Language},
+  volume={24},
+  number={3},
+  pages={515--530},
+  year={2010},
+  publisher={Elsevier}
+}
+
+@article{chen2010improved,
+  title={Improved voice activity detection algorithm using wavelet and support vector machine},
+  author={Chen, Shi-Huang and Guido, Rodrigo Capobianco and Truong, Trieu-Kien and Chang, Yaotsu},
+  journal={Computer Speech \& Language},
+  volume={24},
+  number={3},
+  pages={531--543},
+  year={2010},
+  publisher={Elsevier}
+}
+
+@article{wu2011efficientMK,
+  title={Efficient multiple kernel support vector machine based voice activity detection},
+  author={Wu, Ji and Zhang, Xiao-Lei},
+  journal=IEEE_J_SPL,
+  volume={18},
+  number={8},
+  pages={466--469},
+  year={2011}
+}
+
+@inproceedings{ryant2013speech,
+  title={Speech activity detection on youtube using deep neural networks.},
+  author={Ryant, Neville and Liberman, Mark and Yuan, Jiahong},
+  booktitle={Proc. of Interspeech 2013},
+  address = {Lyon, France},
+  pages={728--731},
+  year={2013}
+}
+
+@article{mousazadeh2011ar,
+  title={{AR-GARCH} in presence of noise: parameter estimation and its application to voice activity detection},
+  author={Mousazadeh, Saman and Cohen, Israel},
+  journal=IEEE_J_ASL,
+  volume={19},
+  number={4},
+  pages={916--926},
+  year={2011},
+  publisher={IEEE}
+}
+
+@inproceedings{eyben2013real,
+  author = {Florian Eyben and Felix Weninger and Stefano Squartini and Bj\"orn Schuller},
+  title = {{Real-life Voice Activity Detection with LSTM Recurrent Neural Networks and an Application to Hollywood Movies}}, 
+  booktitle = {Proc. of ICASSP}, 
+  year = {2013},
+  pages = {483-487},
+  address={Vancouver, BC, Canada},
+  month = {May 26-31}  
+}
+
+@article{zhang2013deep,
+  title={Deep belief networks based voice activity detection},
+  author={Zhang, Xiao-Lei and Wu, Ji},
+  journal=IEEE_J_ASL,
+  volume={21},
+  number={4},
+  pages={697--710},
+  year={2013},
+  publisher={IEEE}
+}
+
+@inproceedings{zhang2014bDNN,
+  title={Boosted deep neural networks and multi-resolution cochleagram features for voice activity detection},
+  author={Zhang, Xiao-Lei and Wang, DeLiang},
+  booktitle={Proc. of Interspeech},
+  pages={1534-1538},
+  year={2014},
+  address = {Singapore, Singapore},
+  month ={Sep. 14-18},
+}
+
+@inproceedings{zhang2013denoising,
+  title={Denoising deep neural networks based voice activity detection},
+  author={Zhang, Xiao-Lei and Wu, Ji},
+  booktitle={Proc. of ICASSP},
+  pages={853--857},
+  year={2013},
+  address = {Vancouver, Canada},
+  organization={IEEE}
+}
+
+@inproceedings{tachioka2014ensemble,
+  title={Ensemble integration of calibrated speaker localization and statistical speech detection in domestic environments},
+  author={Tachioka, Yuuki and Narita, Tomohiro and Watanabe, Shinji and Le Roux, Jonathan},
+  booktitle={Proc. of HSCMA, 2014},
+  pages={162-166},
+  address = {Florence, Italy},
+  year={2014},
+  month={May 12-14}
+}
+
+@inproceedings{brutti2014speech,
+  title={A speech event detection and localization task for multiroom environments},
+  author={Brutti, Alessio and Ravanelli, Mirco and Svaizer, Piergiorgio and Omologo, Maurizio},
+  booktitle={Proc. of HSCMA, 2014},
+  pages={157-161},
+  address = {Florence, Italy},
+  year={2014},
+  month={May 12-14}
+}
+ 
+@inproceedings{giannoulis2014athena,
+  title={The Athena-{RC} system for speech activity detection and speaker localization in the DIRHA smart home},
+  author={Giannoulis, P and Tsiami, A and Rodomagoulakis, I and Katsamanis, A and Potamianos, G and Maragos, P},
+  booktitle={Proc. of HSCMA, 2014},
+  pages={167-171},
+  address = {Florence, Italy},
+  year={2014},
+  month={May 12-14}
+}
+
+@article{hinton2006fast,
+  title={A fast learning algorithm for deep belief nets},
+  author={Hinton, G. and Osindero, S. and Teh, Y.},
+  journal={Neural computation},
+  volume={18},
+  number={7},
+  pages={1527--1554},
+  year={2006},
+  publisher={MIT Press}
+}
+
+@ARTICLE{dengthree,
+author={Deng, L.},
+title={A tutorial survey of architectures, algorithms, and applications for deep learning},
+journal={APSIPA Trans. on Signal and Information Process.},
+year={2014},
+volume={3},
+doi={10.1017/ATSIP.2013.99},
+art_number={e2},
+document_type={Review},
+source={Scopus},
+}
+
+@article{hochreiter1997long,
+  title={Long short-term memory},
+  author={Hochreiter, S. and Schmidhuber, J.},
+  journal={Neural computation},
+  volume={9},
+  number={8},
+  pages={1735--1780},
+  year={1997},
+  publisher={MIT Press}
+}
+
+@book{graves2012supervised, 
+title={Supervised sequence labelling with recurrent neural networks}, 
+author={Graves, A.}, 
+volume={385}, 
+year={2012}, 
+publisher={Springer}
+}
+
+@inproceedings{eyben2013recent,
+  author = {Florian Eyben and Felix Weninger and Florian Gro{\ss} and Bj\"orn Schuller},
+  title = {{Recent Developments in openSMILE, the Munich Open-Source Multimedia Feature Extractor}}, 
+  booktitle = {Proc. of ACM Int. Conf. on Multimedia}, 
+  year = {2013},
+  editor = {},
+  volume = {},
+  series = {},
+  pages = {835-838},
+  address = {Barcelona, Spain},
+  month = {Oct. 21-25}
+}
+
+@article{wolf2014channel,
+  title={Channel selection measures for multi-microphone speech recognition},
+  author={Wolf, M. and Nadeu, C.},
+  journal={Speech Communication},
+  volume={57},
+  pages={170--180},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{hermes1988measurement,
+  title={Measurement of pitch by subharmonic summation},
+  author={Hermes, D. J.},
+  journal={The journal of the acoustical society of America},
+  volume={83},
+  number={1},
+  pages={257--264},
+  year={1988},
+  publisher={Acoustical Society of America}
+}
+
+@article{hermansky1994rasta,
+  title={{RASTA} processing of speech},
+  author={Hermansky, Hynek and Morgan, Nelson},
+  journal=IEEE_J_SAP,
+  volume={2},
+  number={4},
+  pages={578--589},
+  year={1994},
+  publisher={IEEE}
+}
+
+@article{kollmeier1994speech,
+  title={Speech enhancement based on physiological and psychoacoustical models of modulation perception and binaural interaction},
+  author={Kollmeier, Birger and Koch, Ren{\'e}},
+  journal={J. Acoust. Soc. Am. },
+  volume={95},
+  number={3},
+  pages={1593--1602},
+  year={1994},
+  publisher={Acoustical Society of America}
+}
+
+@inproceedings{marchi2014multi,
+  author = {Erik Marchi and Giacomo Ferroni and Florian Eyben and Leonardo Gabrielli and Stefano Squartini and Bj\"orn Schuller},
+  title = {{Multi-resolution Linear Prediction Based Features for Audio Onset Detection with Bidirectional LSTM Neural Networks}}, 
+  booktitle = {Proc. of ICASSP}, 
+  year = {2014},
+  editor = {},
+  volume = {},
+  series = {},
+  pages = {2183-2187},
+  address = {Florence, Italy},
+  month = {May 4-9}
+}
+
+@inproceedings{smucker2007comparison,
+  title={A comparison of statistical significance tests for information retrieval evaluation},
+  author={Smucker, Mark D and Allan, James and Carterette, Ben},
+  booktitle={Proc. of ACM Conf. on Information and Knowledge Management},
+  pages={623-632},
+  year={2007},
+  month={Nov. 6-9},
+	address={Lisboa, Portugal}
+}
+
+@incollection{hochreiter2001gradient,
+author = {Hochreiter, Sepp and Bengio, Yoshua and Frasconi, Paolo and Schmidhuber, J{\"u}rgen},
+title = {Gradient flow in recurrent nets: the difficulty of learning long-term dependencies},
+booktitle = {A field guide to dynamical recurrent neural networks},
+year = {2001},
+editor = {S. C. Kremer and J. F. Kolen},
+publisher = {Wiley-IEEE Press}
+}
+
+@Article{Davis80,
+author = {S. B. Davis and P. Mermelstein},
+title = {Comparison of parametric representations for monosyllabic word recognition in continuously spoken sentences},
+journal=IEEE_J_ASSP,
+pages = {357-366},
+year = {1980},
+volume = {28},
+number = {4},
+}
+
+@inproceedings{ferronineural,
+  title={{Neural Networks Based Methods for Voice Activity Detection in a Multi-room Domestic Environment}},
+  author={Ferroni, Giacomo and Bonfigli, Roberto and Principi, Emanuele and Squartini, Stefano and Piazza, Francesco},
+  booktitle={Proc. of EVALITA},
+  year = {2014},
+  pages={153-158},
+  month={Dec. 11},
+  address={Pisa, Italy}
+}
+
+@inproceedings{abadl2f,
+  title={{The L2F system for the EVALITA-2014 speech activity detection challenge in domestic environments}},
+  author={Abad, Alberto and Matos, Miguel and Meinedo, Hugo and Astudillo, Ramon F and Trancoso, Isabel},
+  booktitle={Proc. of EVALITA},
+  year = {2014},
+  pages={147-152},
+}
+
+
+@Article{HAVIC,
+author = {Stephanie Strassel, Amanda Morris, Jonathan Fiscus, Christopher Caruso, Haejoong Lee, Paul Over, James Fiumara, Barbara Shaw, Brian Antonishek, Martial Michel},
+title = {Creating HAVIC: Heterogeneous Audio Visual Internet Collection},
+journal=IEEE_J_ASSP,
+year = {2012},
+month={May 21-27},
+}
+%LREC 2012: 8th International Conference on Language Resources and Evaluation, Istanbul, 
+
+@INPROCEEDINGS{6637694, 
+author={Eyben, F. and Weninger, F. and Squartini, S. and Schuller, B.}, 
+booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on}, 
+title={Real-life voice activity detection with LSTM Recurrent Neural Networks and an application to Hollywood movies}, 
+year={2013}, 
+pages={483-487},  
+doi={10.1109/ICASSP.2013.6637694}, 
+ISSN={1520-6149}, 
+month={May},}
+
+@Article{Lehner15,
+author = {Bernhard Lehner, Gerhard Widmer, Reinhard Sonnleitner},
+title = {Improving Voice Activity Detection in Movies},
+booktitle={Proc. of Interspeech 2015},
+pages = {357-366},
+year = {2015},
+}
+
+@Article{TIMIT,
+author = { S. Garofolo, L. D. Consortium et al},
+title = {TIMIT: acoustic-phonetic continuous speech corpus},
+year = {1993},
+}
+ %  Linguistic Data Consortium, 1993.
+ 
+ @Article{Mendelev,
+author = {Valentin Sergeyevich Mendelev, Tatiana Nikolaevna Prisyach, Alexey Alexandrovich Prudnikov},
+title = {: Robust Voice Activity Detection with Deep Maxout Neural Networks},
+year = {2015},
+}
+
+@INPROCEEDINGS{6854054, 
+author={Thomas, S. and Ganapathy, S. and Saon, G. and Soltau, H.}, 
+booktitle={Proc. of ICASSP}, 
+title={Analyzing convolutional neural networks for speech activity detection in mismatched acoustic conditions}, 
+year={2014}, 
+pages={2519-2523}, 
+month={May 4-9},
+address={Florence, Italy}
+}
+
+@article{Weninger14-ICT,
+author = {Felix Weninger and Johannes Bergmann and Bj\"orn Schuller},
+title = {Introducing {CURRENNT}, the {Munich} open-source {CUDA RecurREnt Neural Network Toolkit}},
+journal = {Journal of Machine Learning Research},
+year = {2014},
+pages={547-551},
+volume={16}
+}
+
+
+@INPROCEEDINGS{ijcnn-vad, 
+author={Ferroni, G. and Bonfigli, R. and Principi, E. and Squartini, S. and Piazza, F.}, 
+booktitle={Proc. of IJCNN}, 
+title={A Deep Neural Network approach for Voice Activity Detection in multi-room domestic scenarios}, 
+year={2015}, 
+pages={1-8}, 
+month={Jul. 12-17},
+address={Killarney, Ireland}}
+
+@ARTICLE{zhang_2016_vad, 
+author={Zhang, X.-L. and Wang, D.}, 
+journal={IEEE/ACM Trans. on Audio, Speech, and Language Process.}, 
+title={Boosting Contextual Information for Deep Neural Network Based Voice Activity Detection}, 
+year={2016}, 
+volume={24}, 
+number={2}, 
+pages={252-264}, 
+keywords={Acoustics;Neural networks;Signal to noise ratio;Speech;Stacking;Training;Cochleagram;deep neural network;ensemble learning;multi-resolution stacking;noise-independent training;voice activity detection}, 
+doi={10.1109/TASLP.2015.2505415}, 
+ISSN={2329-9290}, 
+month={Feb},}
+
+@inproceedings{mcloughlin2015low,
+  title={Low Frequency Ultrasonic Voice Activity Detection using Convolutional Neural Networks},
+  author={McLoughlin, Ian and Song, Yan},
+  booktitle={Proc. of Interspeech},
+  year={2015},
+  address={Dresden, Germany},
+  month= {Sep. 6-10},
+  pages={2400-2404}
+}
+
+@ARTICLE{Rumelhart86-LRB,
+   author = {{Rumelhart}, D.~E. and {Hinton}, G.~E. and {Williams}, R.~J.},
+    title = {Learning representations by back-propagating errors},
+  journal = {Nature},
+     year = 1986,
+    month = Oct,
+   volume = 323,
+    pages = {533-536},
+      doi = {10.1038/323533a0},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{726791, 
+author={Lecun, Y. and Bottou, L. and Bengio, Y. and Haffner, P.}, 
+journal={Proceedings of the IEEE}, 
+title={Gradient-based learning applied to document recognition}, 
+year={1998}, 
+volume={86}, 
+number={11}, 
+pages={2278-2324}, 
+ISSN={0018-9219}, 
+month={Nov},}
+
+@inproceedings{morales2014distant,
+  title={Distant speech recognition in reverberant noisy conditions employing a microphone array},
+  author={Morales-Cordovilla, Juan A and Hagmuller, Martin and Pessentheiner, Hannes and Kubin, Gernot},
+  booktitle={Proc of EUSIPCO},
+  address={Lisbona, Portugal},
+  month = {Sep 1-5},
+  pages={2380--2384},
+  year={2014}
+}
+
+@inproceedings{mohamed2012understanding,
+  title={Understanding how deep belief networks perform acoustic modelling},
+  author={A. r. Mohamed and G. Hinton and G. Penn},
+  booktitle={Proc of ICASSP},
+  address={Kyoto, Japan},
+  month = {Mar 25-30},
+  pages={4273--4276},
+  year={2012}
+}
+
+@inproceedings{ullrich2014boundary,
+  title={Boundary Detection in Music Structure Analysis using Convolutional Neural Networks},
+  author={Ullrich, Karen and Schl{\"u}ter, Jan and Grill, Thomas},
+  booktitle={Proc of ISMIR},
+  address={Taipei, Taiwan},
+  month = {Oct 27-31},
+  pages={417--422},
+  year={2014}
+}
+
+@INPROCEEDINGS{6854054, 
+author={Thomas, S. and Ganapathy, S. and Saon, G. and Soltau, H.}, 
+booktitle={Proc. of ICASSP}, 
+title={Analyzing convolutional neural networks for speech activity detection in mismatched acoustic conditions}, 
+year={2014}, 
+pages={2519-2523}, 
+month={May 4-9},
+address={Florence, Italy}
+}
+
+@inproceedings{krizhevsky2012imagenet,
+  title={Imagenet classification with deep convolutional neural networks},
+  author={Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
+  booktitle={Advances in neural information processing systems},
+  pages={1097--1105},
+  year={2012}
+}
+
+
+@inproceedings{xiao2015learning,
+  title={A learning-based approach to direction of arrival estimation in noisy and reverberant environments},
+  author={Xiao, X. and Zhao, S. and Zhong, X. and Jones, D. L. and Chng, E. S. and Li, H.},
+  booktitle={Proc. of ICASSP},
+  month={Apr 19-24},
+  pages={2814--2818},
+  year={2015},
+  address={Brisbane, Australia},
+  organization={IEEE}
+}
+
+@ARTICLE{Schmidt86, 
+author={R. Schmidt}, 
+journal={IEEE Transactions on Antennas and Propagation}, 
+title={Multiple emitter location and signal parameter estimation}, 
+year={1986}, 
+volume={34}, 
+number={3}, 
+pages={276-280}, 
+keywords={Adaptive arrays;Direction-of-arrival estimation;Parameter estimation;Signal processing antennas;Direction of arrival estimation;Frequency estimation;Interference;Multiple signal classification;Parameter estimation;Polarization;Sensor arrays;Sensor phenomena and characterization;Signal processing;Working environment noise}, 
+ISSN={0018-926X}, 
+month={Mar},}
+
+
+@inproceedings{tsiami2014experiments,
+  title={Experiments in acoustic source localization using sparse arrays in adverse indoors environments},
+  author={Tsiami, A. and Katsamanis, A. and Maragos, P. and Potamianos, G.},
+  booktitle={Proc of EUSIPCO},
+  pages={2390--2394},
+  address={Lisbona, Portugal},
+  month = {Sep 1-5},
+  year={2014}
+}
+
+@article{Mumolo200369,
+title = {Algorithms for acoustic localization based on microphone array in service robotics},
+journal = {Robotics and Autonomous Systems},
+volume = {42},
+number = {2},
+pages = {69 - 88},
+year = {2003},
+author = {Mumolo, E. and Nolich, M. and Vercelli, G.}
+}
+
+@INPROCEEDINGS{Takeda2016b, 
+author={R. Takeda and K. Komatani}, 
+booktitle={Proc. of the IEEE Spoken Language Technology Workshop (SLT)}, 
+title={Discriminative multiple sound source localization based on deep neural networks using independent location model}, 
+year={2016}, 
+pages={603-609},  
+month={Dec},
+address={San Diego, CA, USA}}
+
+
+@inproceedings{Takeda2016a,
+author={Takeda, R. and Komatani, K.},
+title={Sound source localization based on deep neural networks with directional activate function exploiting phase information},
+booktitle={Proc. of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+year={2016},
+pages={405-409},
+address={Shanghai, China}
+}
+
+@inproceedings{Takeda2017,
+author={Takeda, R. and Komatani, K.},
+title={Discriminative multiple sound source localization based on deep neural networks using independent location model},
+booktitle={Proc. of IEEE Workshop on Spoken Language Technology (SLT)},
+year={2017},
+pages={603-609},
+address={San Diego, CA, USA}
+}
+
+@article{kingma2014adam,
+  title={Adam: A Method for Stochastic Optimization},
+  author={Kingma, D. P. and Ba, J.},
+  journal={Proc. of the 3rd International Conference on Learning Representations (ICLR)},
+  year={2014}
+}
+
+@incollection{Dibiase2001Robust,
+    author = {Dibiase, J. and Silverman, H. and Brandstein, M.},
+    editor = {Brandstein, Michael and Ward, Darren},
+    booktitle = {Microphone Arrays: Signal Processing Techniques and Applications},
+    chapter = {8}, 
+    title = {Robust localization in reverberant rooms},
+    year = {2001},
+    series = {Digital Signal Processing},
+    publisher = {Springer-Verlag},
+    address = {Berlin, Germany},
+    pages={157-180}
+}
+
+@ARTICLE{champagne1996performance, 
+author={B. Champagne and S. Bedard and A. Stephenne}, 
+journal={IEEE Transactions on Speech and Audio Processing}, 
+title={Performance of time-delay estimation in the presence of room reverberation}, 
+year={1996}, 
+volume={4}, 
+number={2}, 
+pages={148-152}
+}
+
+@article{gpumlib,
+ author = {Lopes, Noel and Ribeiro, Bernardete},
+ title = {Towards Adaptive Learning with Improved Convergence of Deep Belief Networks on Graphics Processing Units},
+ journal = {Pattern Recogn.},
+ issue_date = {January, 2014},
+ volume = {47},
+ number = {1},
+ year = {2014},
+ pages = {114--127},
+ publisher = {Elsevier Science Inc.},
+ address = {New York, NY, USA}
+}
+
+@INPROCEEDINGS{brandstein1997robust, 
+author={M. S. Brandstein and H. F. Silverman}, 
+booktitle={Proc. of ICASSP}, 
+title={A robust method for speech signal time-delay estimation in reverberant rooms}, 
+year={1997}, 
+volume={1}, 
+pages={375-378 vol.1}, 
+month={Apr},
+address={Munich, Germany}
+}
+
+@article{stephenne1997new,
+  title={A new cepstral prefiltering technique for estimating time delay under reverberant conditions},
+  author={St{\'e}phenne, A. and Champagne, B.},
+  journal={Signal Processing},
+  volume={59},
+  number={3},
+  pages={253--266},
+  year={1997},
+  publisher={Elsevier}
+}
+
+@misc{chollet2015keras,
+  author = {Chollet, F.},
+  title = {Keras},
+  year = {2015},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/fchollet/keras}}
+}
+
+@inproceedings{ijcnn2016-vad, 
+author = {Vesperini, F. and Vecchiotti, P. and Principi, E. and Squartini, S. and Piazza, F.}, 
+title = {Deep Neural Networks for Multi-Room Voice Activity Detection: Advancements and Comparative Evaluation}, 
+booktitle = {Proc. of IJCNN},
+year = {2016}, 
+address = {Vancouver, Canada},
+pages = {3391-3398},
+month = {24-29 Jul.}
+}
+
+@inproceedings{transfeld2015acoustic,
+  title={Acoustic event source localization for surveillance in reverberant environments supported by an event onset detection},
+  author={Transfeld, P. and Martens, U. and Binder, H. and Schypior, T. and Fingscheidt, T.},
+  booktitle={Proc. of ICASSP},
+  pages={2629--2633},
+  year={2015},
+  month={19-24 Apr.},
+  address={Brisbane, Australia}
+}
+
+@article{knapp1976generalized,
+  title={The generalized correlation method for estimation of time delay},
+  author={Knapp, C. H. and Carter, G. C.},
+  journal={{IEEE} Trans. Acoust., Speech, Signal Process.},
+  volume={24},
+  number={4},
+  pages={320--327},
+  year={1976},
+  publisher={IEEE}
+}
+
+@INPROCEEDINGS{zhang2008Phat, 
+author={C. Zhang and D. Florencio and Z. Zhang}, 
+  booktitle={Proc. of ICASSP}, 
+title={Why does {PHAT} work well in lownoise, reverberative environments?}, 
+year={2008}, 
+pages={2565-2568}, 
+address={Las Vegas, USA}}
+
+@article{ioffe2015batch,
+  title={Batch normalization: Accelerating deep network training by reducing internal covariate shift},
+  author={Ioffe, S. and Szegedy, C.},
+  journal={arXiv preprint arXiv:1502.03167},
+  year={2015}
+}
+
+@article{acampora2013survey,
+  title={A survey on ambient intelligence in healthcare},
+  author={Acampora, G. and Cook, D. J. and Rashidi, P. and Vasilakos, A. V.},
+  journal={Proceedings of the IEEE},
+  volume={101},
+  number={12},
+  pages={2470--2494},
+  year={2013},
+  publisher={IEEE}
+}
+
+@Inbook{Hussain2007,
+author="Hussain, A.
+and Chetouani, M.
+and Squartini, S.
+and Bastari, A.
+and Piazza, F.",
+editor="Stylianou, Yannis
+and Faundez-Zanuy, Marcos
+and Esposito, Anna",
+title="Nonlinear Speech Enhancement: An Overview",
+bookTitle="Progress in Nonlinear Speech Processing",
+year="2007",
+publisher="Springer Berlin Heidelberg",
+pages="217--248",
+}
+
+@Article{Principi14b,
+author = {E. Principi and S. Squartini and E. Cambria and F. Piazza},
+title = {{Acoustic Template-Matching for Automatic Emergency State Detection: an ELM based algorithm}},
+journal = {Neurocomputing},
+year = {2014},
+pages = {426-434},
+volume = {149},
+issue = {Part A},
+number = {Part A},
+doi={10.1016/j.neucom.2014.01.067}
+}
+
+@inproceedings{RotiliPSS11,
+  author = {Rotili, R. and Principi, E. and Squartini, S. and Schuller, B.},
+  editor = {Travieso-Gonz\'alez, Carlos Manuel and Hern\'andez, Jes\'us Bernardino Alonso},
+  booktitle = {Proc. of ISCA Tutorial and Research Workshop on NOn LInear Speech Processing (NOLISP)},
+  pages = {80-87},
+  publisher = {Springer-Verlag},
+  series = {Lecture Notes in Computer Science},
+  title = {A Real-Time Speech Enhancement Framework for Multi-party Meetings},
+  volume = {7015},
+  year = {2011},
+  address = {Berlin Heidelberg, Germany},
+}
+
+@ARTICLE{Rotili2013504,
+author={Rotili, R. and Principi, E. and Squartini, S. and Schuller, B.},
+title={A Real-Time Speech Enhancement Framework in Noisy and Reverberated Acoustic Scenarios},
+journal={Cognitive Computation},
+year={2013},
+volume={5},
+number={4},
+pages={504-516},
+doi={10.1007/s12559-012-9176-x},
+url={https://www.scopus.com/inward/record.uri?eid=2-s2.0-84890118085&partnerID=40&md5=c236ec5891b58d0fb891fae7ae120d4f},
+document_type={Article},
+source={Scopus},
+}
+
+
+@inproceedings{wollmer2010context,
+  title={Context-sensitive multimodal emotion recognition from speech and facial expression using bidirectional {LSTM} modeling},
+  author={W{\"o}llmer, Martin and Metallinou, Angeliki and Eyben, Florian and Schuller, Bj{\"o}rn and Narayanan, Shrikanth},
+  booktitle={Proc. of Interspeech},
+  pages={2362--2365},
+  year={2010},
+  month={26-30 Sep},
+  address={Makuhari, Chiba, Japan}
+}
+
+@Inbook{Bian2005,
+author="Bian, Xuehai and Abowd, Gregory D. and Rehg, James M.",
+editor="Gellersen, Hans -W. and Want, Roy and Schmidt, Albrecht",
+title="Using Sound Source Localization in a Home Environment",
+booktitle="Pervasive Computing: Third International Conference, PERVASIVE 2005, Munich, Germany, May 8-13, 2005. Proceedings",
+year="2005",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="19--36",
+}
+
+@article{cook2014mining,
+  title={Mining the home environment},
+  author={Cook, Diane J and Krishnan, Narayanan},
+  journal={Journal of intelligent information systems},
+  volume={43},
+  number={3},
+  pages={503--519},
+  year={2014},
+  publisher={Springer}
+}
+
+@article{augusto2013intelligent,
+  title={Intelligent environments: a manifesto},
+  author={Augusto, Juan C and Callaghan, Vic and Cook, Diane and Kameas, Achilles and Satoh, Ichiro},
+  journal={Human-Centric Computing and Information Sciences},
+  volume={3},
+  number={1},
+  pages={1},
+  year={2013},
+  publisher={Springer Berlin Heidelberg}
+}
+
+@book{loizou2013speech,
+  title={Speech enhancement: theory and practice},
+  author={Loizou, Philipos C},
+  year={2013},
+  publisher={CRC press},
+  address={Boca Raton, FL}
+}
+
+@article{GONG1995261,
+title = "Speech recognition in noisy environments: A survey",
+journal = "Speech Communication",
+volume = "16",
+number = "3",
+pages = "261 - 291",
+year = "1995",
+note = "",
+issn = "0167-6393",
+doi = "http://dx.doi.org/10.1016/0167-6393(94)00059-J",
+url = "http://www.sciencedirect.com/science/article/pii/016763939400059J",
+author = "Yifan Gong",
+keywords = "Survey",
+keywords = "Noisy speech recognition",
+keywords = "Parametrization",
+keywords = "Speech enhancement",
+keywords = "Compensation for noise"
+}
+
+@article{hornik1989multilayer,
+  title={Multilayer feedforward networks are universal approximators},
+  author={Hornik, Kurt and Stinchcombe, Maxwell and White, Halbert},
+  journal={Neural networks},
+  volume={2},
+  number={5},
+  pages={359--366},
+  year={1989},
+  publisher={Elsevier}
+}
+
+@inproceedings{nair2010rectified,
+  title={Rectified linear units improve restricted boltzmann machines},
+  author={Nair, Vinod and Hinton, Geoffrey E},
+  booktitle={Proc. of the 27th Int. Confi. on Machine Learning},
+  pages={807--814},
+  year={2010}
+}
+
+@article{roman2003speech,
+  title={Speech segregation based on sound localization},
+  author={Roman, Nicoleta and Wang, DeLiang and Brown, Guy J},
+  journal={The Journal of the Acoustical Society of America},
+  volume={114},
+  number={4},
+  pages={2236--2252},
+  year={2003},
+  publisher={Acoustical Society of America}
+}
+
+@article{zotkin2004accelerated,
+	title={Accelerated speech source localization via a hierarchical search of steered response power},
+	author={Zotkin, Dmitry N. and Duraiswami, Ramani},
+	journal={IEEE Transactions on Speech and Audio Processing},
+	volume={12},
+	number={5},
+	pages={499--508},
+	year={2004},
+	publisher={IEEE}
+}
+
+@incollection{stern-et-al-2006,
+    author = {Stern, Richard M. and Brown, Guy J. and Wang, Deliang},
+    booktitle = {Computational Auditory Scene Analysis: Principles, Algorithms, and Applications},
+    chapter = {5},
+    pages = {147--185},
+    publisher = {Wiley-IEEE Press},
+    title = {{Binaural Sound Localization}},
+    year = {2006}
+}
+
+@inproceedings{saxena2009learning,
+	title={Learning sound location from a single microphone},
+	author={Saxena, Ashutosh and Ng, Andrew Y},
+	booktitle={Proc. of the IEEE Int. Conf. on Robotics and Automation},
+	pages={1737-1742},
+	year={2009}
+}
+
+@inproceedings{trifa2007real,
+	title={Real-time acoustic source localization in noisy environments for human-robot multimodal interaction},
+	author={Trifa, Vlad M and Koene, Ansgar and Mor{\'e}n, Jan and Cheng, Gordon},
+	booktitle={Proc. of the 16th IEEE Int. Symp. on Robot and Human Interactive Communication},
+	pages={393-398},
+	year={2007}
+}
+
+@article{dashuman2016human,
+  title={Human Voice Localization in Noisy Environment by {SRP-PHAT} and {MFCC}},
+  author={Das, Arjun and Pillai, Lisha Gopalakrishnan and Muruganantham, C.},
+  journal={International Research Journal of Advanced Engineering and Science},
+  volume={1},
+  chapter={3},
+  pages={33--37},
+  year={2016}
+}
+
+@INPROCEEDINGS{Morales-cordovilla14roomlocalization,
+    author = {Juan A. Morales-Cordovilla and Hannes Pessentheiner and Gernot Kubin},
+    title = {Room localization for distant speech recognition},
+    booktitle = {Proc. of Interspeech},
+    pages = {2450-2453},
+    year = {2014}
+}
+
+@inproceedings{DoSY07,
+title={A real-time {SRP-PHAT} source location implementation using stochastic region contraction {(SRC)} on a large-aperture microphone array},
+author={Do, Hoang and Silverman, Harvey F and Yu, Ying},
+booktitle={Proc. of ICASSP},
+volume={1},
+pages={I--121},
+year={2007},
+organization={IEEE}
+}
+
+@article{asaei2009verified,
+	title={Verified speaker localization utilizing voicing level in split-bands},
+	author={Asaei, Afsaneh and Taghizadeh, Mohammad Javad and Bahrololum, Marjan and Ghanbari, Mohammed},
+	journal={Signal Processing},
+	volume={89},
+	number={6},
+	pages={1038--1049},
+	year={2009},
+	publisher={Elsevier}
+}
+
+@article{kundu2014acoustic,
+ title = "Acoustic source localization ",
+ journal = "Ultrasonics ",
+ volume = "54",
+ number = "1",
+ pages = "25 - 38",
+ year = "2014",
+ author = "Tribikram Kundu"
+ }
+
+
+
+@article{zakarauskas1991artificial,
+	title={Artificial neural networks for simultaneous and independent range and depth discrimination in passive acoustic localization.},
+	author={Zakarauskas, Pierre and Ozard, John M and Brouwer, Peter},
+	journal={The Journal of the Acoustical Society of America},
+	volume={90},
+	number={4},
+	pages={2366--2366},
+	year={1991},
+	publisher={Acoustical Society of America}
+}
+
+@article{datum1996artificial,
+  title={An artificial neural network for sound localization using binaural cues},
+  author={Datum, Michael S and Palmieri, Francesco and Moiseff, Andrew},
+  journal={The Journal of the Acoustical Society of America},
+  volume={100},
+  number={1},
+  pages={372--383},
+  year={1996},
+  publisher={Acoustical Society of America}
+}
+
+@INPROCEEDINGS{7438442, 
+author={L. Phillips and C. B. Porter and N. Kottege and M. D'Souza and M. Ros}, 
+booktitle={2015 9th International Conference on Sensing Technology (ICST)}, 
+title={Machine learning based acoustic sensing for indoor room localisation using mobile phones}, 
+year={2015}, 
+pages={456-460}, 
+month={Dec},}
+
+@inproceedings{murray2011neural,
+	title={A neural network classifier for notch filter classification of sound-source elevation in a mobile robot},
+	author={Murray, John C and Erwin, Harry R},
+	booktitle={Proc. of IJCNN},
+	pages={763--769},
+	year={2011},
+	organization={IEEE}
+}
+
+@inproceedings{dehkordi2011compressive,
+	title={A compressive sensing based compressed neural network for sound source localization},
+	author={Dehkordi, Mehdi Banitalebi and Abutalebi, Hamid Reza and Ghanei, Hossein},
+	booktitle={Proc. the Int Symp. on Artificial Intelligence and Signal Processing},
+	pages={6-10},
+	year={2011}
+}
+
+@inproceedings{brutti2007classification,
+  title={Classification of acoustic maps to determine speaker position and orientation from a distributed microphone network},
+  author={Brutti, Alessio and Omologo, Maurizio and Svaizer, Piergiorgio and Zieger, Christian},
+  booktitle={Proc. of the IEEE Int. Conf. on Acoustics, Speech and Signal Processing},
+  volume={4},
+  pages={IV--493},
+  year={2007}
+}
+
+@inproceedings{vesperini2016sloc,
+	title={A neural network based algorithm for speaker localization in a multi-room environment},
+	author={Vesperini, Fabio and Vecchiotti, Paolo and Principi, Emanuele and Squartini, Stefano and Piazza, Francesco},
+	booktitle={Proc. of the 26th Int. Workshop on Machine Learning for Signal Processing},
+	pages={1-6},
+	year={2016},
+	address={Vietri sul Mare, Italy},
+	date={Sep. 16-17}
+}
+
+@article{principi2015integrated,
+	title={An integrated system for voice command recognition and emergency detection based on audio signals},
+	author={Principi, Emanuele and Squartini, Stefano and Bonfigli, Roberto and Ferroni, Giacomo and Piazza, Francesco},
+	journal={Expert Systems with Applications},
+	volume={42},
+	number={13},
+	pages={5668--5683},
+	year={2015},
+	publisher={Elsevier}
+}
+
+@article{lawrence1997face,
+	title={Face recognition: A convolutional neural-network approach},
+	author={Lawrence, Steve and Giles, C Lee and Tsoi, Ah Chung and Back, Andrew D},
+	journal={IEEE Transactions on Neural Networks},
+	volume={8},
+	number={1},
+	pages={98--113},
+	year={1997}
+}
+
+@inproceedings{thomas2014analyzing,
+	title={Analyzing convolutional neural networks for speech activity detection in mismatched acoustic conditions},
+	author={Thomas, Samuel and Ganapathy, Sriram and Saon, George and Soltau, Hagen},
+	booktitle={Proc. of ICASSP},
+	pages={2519--2523},
+	year={2014},
+	organization={IEEE}
+}
+
+@article{malioutov2005sparse,
+	title={A sparse signal reconstruction perspective for source localization with sensor arrays},
+	author={Malioutov, Dmitry and {\c{C}}etin, M{\"u}jdat and Willsky, Alan S},
+	journal={IEEE Transactions on Signal Processing},
+	volume={53},
+	number={8},
+	pages={3010--3022},
+	year={2005},
+	publisher={IEEE}
+}
+
+@inproceedings{vesperini2016deep,
+  title={Deep neural networks for multi-room voice activity detection: Advancements and comparative evaluation},
+  author={Vesperini, Fabio and Vecchiotti, Paolo and Principi, Emanuele and Squartini, Stefano and Piazza, Francesco},
+  booktitle={Proc. of the International Joint Conference on Neural Networks (IJCNN)},
+  pages={3391-3398},
+  year={2016},
+	address={Vancouver, Canada},
+	date={Jul. 24-29}
+}
+
+@inproceedings{Giannoulis2015,
+author={Giannoulis, P. and Brutti, A. and Matassoni, M. and Abad, A. and Katsamanis, A. and Matos, M. and Potamianos, G. and Maragos, P.},
+title={Multi-room speech activity detection using a distributed microphone network in domestic environments},
+booktitle={Proc. of the 23rd European Signal Processing Conference (EUSIPCO)},
+year={2015},
+pages={1271-1275},
+address={Nice, France},
+month={31 Aug. - 4 Sep.}
+}
+
+@inproceedings{Katsamanis2014,
+author={Katsamanis, A. and Rodomagoulakis, I. and Potamianos, G. and Maragos, P. and Tsiami, A.},
+title={Robust far-field spoken command recognition for home automation combining adaptation and multichannel processing},
+booktitle={Proc. of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+year={2014},
+pages={5547-5551},
+address={Florence, Italy}
+}
+
+@inproceedings{wirn2016-vad, 
+	author = {Vecchiotti, P. and Vesperini, F.  and Principi, E. and Squartini, S. and Piazza, F.}, 
+	title = {Convolutional Neural Networks with {3-D} Kernels for Voice Activity Detection in a Multiroom Environment}, 
+	booktitle = {Proc. of WIRN},
+	year = {2016}, 
+	address = {Vietri sul Mare, Italy},
+	month={May, 18-20},
+	note = {(8 pages), to appear.}
+}
+
+@article{willert2006probabilistic,
+	title={A probabilistic model for binaural sound localization},
+	author={Willert, Volker and Eggert, Julian and Adamy, J{\"u}rgen and Stahl, Raphael and Korner, E},
+	journal={IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics)},
+	volume={36},
+	number={5},
+	pages={982--994},
+	year={2006},
+	publisher={IEEE}
+}
+
+
+@article{yook2016fast,
+	title={Fast sound source localization using two-level search space clustering},
+	author={Yook, Dongsuk and Lee, Taewoo and Cho, Youngkyu},
+	journal={IEEE Transactions on Cybernetics},
+	volume={46},
+	number={1},
+	pages={20-26},
+	year={2016}
+}
+
+@article{Lee2016,
+title = "Parallel SRP-PHAT for \{GPUs\}",
+journal = "Computer Speech \& Language",
+volume = "35",
+pages = "1-13",
+year = "2016",
+author = "Taewoo Lee and Sukmoon Chang and Dongsuk Yook"
+}
+
+@article{Minotto2012,
+title={GPU-based approaches for real-time sound source localization using the SRP-PHAT algorithm},
+journal={Int. J. High Perform. Comput. Appl.},
+author={Minotto, Vicente Peruffo and Jung, Claudio Rosito and da Silveira Jr, Luiz Gonzaga and Lee, Bowon},
+volume={27},
+number={3},
+year={2012},
+pages={291-306}
+}
+
+@article{Rodomagoulakis2017,
+title = "Room-localized spoken command recognition in multi-room, multi-microphone environments ",
+journal = "Computer Speech \& Language ",
+volume = "",
+number = "",
+pages = " - ",
+year = "2017",
+note = "",
+issn = "0885-2308",
+doi = "https://doi.org/10.1016/j.csl.2017.02.004",
+author = "Isidoros Rodomagoulakis and Athanasios Katsamanis and Gerasimos Potamianos and Panagiotis Giannoulis and Antigoni Tsiami and Petros Maragos",
+keywords = "Smart homes",
+keywords = "Distant speech recognition",
+keywords = "Speech activity detection",
+keywords = "Keyword spotting",
+keywords = "Multichannel processing",
+keywords = "Decision fusion",
+keywords = "Beamforming",
+keywords = "Channel selection "
+}
+
+@article{li2013sound,
+	title={Sound source localization for {HRI} using {FOC}-based time difference feature and spatial grid matching},
+	author={Li, Xiaofei and Liu, Hong},
+	journal={IEEE Transactions on Cybernetics},
+	volume={43},
+	number={4},
+	pages={1199--1212},
+	year={2013},
+	publisher={IEEE}
+}
+
+@ARTICLE{2016arXiv160502688short,
+   author = {{Theano Development Team}},
+    title = "{Theano: A {Python} framework for fast computation of mathematical expressions}",
+  journal = {arXiv e-prints},
+   volume = {abs/1605.02688},
+ primaryClass = "cs.SC",
+ keywords = {Computer Science - Symbolic Computation, Computer Science - Learning, Computer Science - Mathematical Software},
+     year = 2016,
+    month = may
+}
+
