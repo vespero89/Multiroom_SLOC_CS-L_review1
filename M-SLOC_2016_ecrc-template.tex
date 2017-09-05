@@ -502,7 +502,11 @@ The localization accuracy has been evaluated in terms of averaged Root Mean Squa
 where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames.
 In addition, the performance has been evaluated in terms of $P_{cor} = N_{FINE}/N_{TOT}$, where $N_{FINE}$ is the 
 number of frames with RMSE less than 500\,mm. 
-Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs. 
+%%ndFAB
+Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}. These two metrics are averaged over all the available network outputs. 
+%%%
+%TODO aggiungere tabellina con NTOT nelle varie condizioni: 
+%SIMU - Kit = 47630, Liv = 44801 ; REAL - Kit = 17580, Liv = 12885
 
 The algorithm has been implemented in the Python language using Keras \cite{chollet2015keras} and Theano \cite{2016arXiv160502688short} as deep learning libraries. A total amount of 2350 experiments has been conducted on the two subsets of the DIRHA dataset.
 
