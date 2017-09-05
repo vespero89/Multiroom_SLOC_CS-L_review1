@@ -204,8 +204,11 @@ Finally, \secref{sec:concl} concludes the manuscript.
 \end{figure*}
 
 \section{Proposed Method}\label{sec:ALGO}
-The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network. The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal evolution of the data. Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$, i.e., the position of the speaker inside the target room. A block diagram of the algorithm based on a CNN is shown in \figref{fig:proposed_method}.
-
+The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network (ANN). The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal evolution of the data. Hence, the artificial neural network is trained on labelled data to estimate the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ i.e., the position of the speaker inside the target room.
+A block diagram of the algorithm based on a CNN is shown in \figref{fig:proposed_method}.  %ndFAB
+%%%
+%The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always valid coordinates which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing.
+%%%
 In the multi-room scenario, speakers positions are estimated by means of a feature extraction stage and a neural network per room. Two different architectures have been investigated in this contribution: in the first, each neural network is dedicated to processing the audio signals coming from a room and it estimates the position of the speaker in that room. This architecture will be denoted as 1Rx1N-SLOC in the following. In the second architecture, the neural network jointly processes audio coming from different rooms, while estimating the speaker position only in one room. This architecture will be denoted as $K$Rx1N-SLOC in the following, where $K$ denotes the number of rooms. \figref{fig:2Rx1R} shows the differences between the two architectures in the two rooms case study ($K=2$). %(\textbf{ndemap: la figura non mostra le differenze tra 2Rx1R e 1Rx1R: cambiare frase o (meglio) inserire figura 1Rx1R}).
 
 \begin{figure}[t]
@@ -255,7 +258,7 @@ GCC-PHAT Patterns are calculated by using only microphone pairs belonging to the
 \Delta\tau_{max} = \frac{d_{max}}{\nu} \cdot f_s \approx 24,
 \end{equation} 
 where $\nu=340$\,m/s is the sound speed.
-Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size and a hop size respectively equal to 480\,ms and 160\,ms.
+Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. %ndFAB
 Under such conditions, only the central $2\Delta\tau_{max} + 1$ CSPCM values contain useful information. Thus, the first 50 values of $C_{ab}(n,\tau)$ are selected to compose the GCC-PHAT Pattern $\mathbf{x}_{ab}[n]$. 
 Finally, the vectors originated by the different considered microphone pairs are standardized to have zero mean and unitary standard deviation.
 Formally: 
@@ -346,7 +349,7 @@ where $\ast$ represent the convolution operation.
 The different feature maps obtained from each kernel of a convolutional layer are then summed to compose 
 the input data for the following layer.
 
-Commonly, a kernel layer is coupled with a pooling layer in order to assess more robustness against patterns shifts in the processed data. The CNN structure is completed by an MLP layer, whose task is to produce the network response - the estimated ($\chi,\psi$) positions in this case. 
+Commonly, a kernel layer is coupled with a pooling layer in order to assess more robustness against patterns shifts in the processed data. The CNN structure is completed by an MLP layer, whose task is to produce the network response - the estimated $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ positions in this case. %ndFAB
 
 Although this architecture was designed for image processing, several works in the literature have employed CNNs in the audio field \cite{thomas2014analyzing,mcloughlin2015low}. In this work, we exploit a 3-D arrangement of the input data (as described in \secref{sec:TEE}), %(\textbf{ndemap: dove?})),
 inspired by what occurs in image processing with RGB channels. Thus, the CNN-SLOC is able to efficiently process adjacent frames and to exploit the temporal evolution of the audio signal \cite{wirn2016-vad}. Up to the authors' knowledge, employing CNNs for indoor speaker localization are not present in the scientific literature.
@@ -488,7 +491,7 @@ The localization accuracy has been evaluated in terms of averaged Root Mean Squa
 \begin{equation}
 \text{RMSE} = \frac{\sqrt{(\chi-\chi_{\text{ref}})^2 + (\psi-\psi_{\text{ref}})^2}}{N_{TOT}},
 \end{equation}
-where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference coordinates, and $N_{TOT}$ is the total number of frames.
+where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames.
 In addition, the performance has been evaluated in terms of $P_{cor} = N_{FINE}/N_{TOT}$, where $N_{FINE}$ is the 
 number of frames with RMSE less than 500\,mm. 
 Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs. 
