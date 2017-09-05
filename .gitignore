@@ -134,3 +134,7 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+M-SLOC_2016_ecrc-template\.spl
+
+M-SLOC_2016_ecrc-template\.pdf
