@@ -314,7 +314,7 @@ The temporal context consists in the frames of the signal adjacent to the one be
 where $C$ is the total length of the chunk, and $s$ denotes the stride, which defines the temporal extension of the chunk. \figref{fig:cxt_str} shows an example with $s=2$.
 
 In cases where the selected frames do not contain speech, the GCC-PHAT Patterns matrices related to the first or the last frame of the segment are replicated accordingly.
-
+%TODO sostituire ''do not contain speech'' con va fuori limite or similar...cf punto 6d dell Results discussion review
 
 \begin{figure}[h] 
 	\centering
@@ -460,6 +460,7 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	On the contrary, in the case of CNN architecture a higher number of parameters must be considered, which have been reported in \tableref{tab:CNNs} for the sake of conciseness. 
 	\item{\textbf{GCC-PHAT Patterns Selection.}} This stage aims to find the most performing GCC-PHAT Patterns matrix $\mathbf{X}[n]$ between a subset of the available $\mathbf{X}^{(i)}[n]$ microphone combinations belonging to different arrays.
 	The starting point was the circular array placed on the room ceilings, which is composed of $N = 6$ microphones. Excluding the central one, it leads to 10 possible pairs. Then, combinations of signal pairs $\mathbf{\tilde{x}}_{ab}^{(i)}[n]$ coming from the wall arrays have been gradually added to the ceiling array signals with a sequential forward selection strategy, in order to arrange the evaluated $\mathbf{X}[n]$.
+	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
 	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e. $s=\{1,3,4,5\}$, and the context dimensions, i.e. $C=\{3,7,11,13,15,17,19,21\}$.
 \end{enumerate}
@@ -772,12 +773,15 @@ The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(
 
 %The introduction of the temporal context has beneficial effects also with the MLP, but with a lower error reduction (equal to 21.5\%).
 
-In this case the CNN results more effective with respect to the MLP architecture, and it is able to further reduce the RMSE. In particular, the CNN-2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
+In this case the CNN results more effective with respect to the MLP architecture, and it is able to further reduce the RMSE,
+%ndFAB Results discussion - 6c)
+as we can notice from the table \tableref{tab:bestCONF_SIMU}.
+In particular, the CNN-2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
 Indeed, the introduction of a temporal context improves the performance also with the MLP architecture, with RMSE reduction equal to 21.5\%.
-The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the different strides $s$ are plotted while varying the temporal context $C$. It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
-
-
-
+The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the different strides $s$ are plotted while varying the temporal context $C$. %It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
+%ndFAB Results discussion - 6c)
+It can be noticed that a similar trend of performance with respect to temporal resolution (i.e., equal to $C\cdot s$) of the input values is registered.
+%%
 
 
 \begin{figure}[t] 
