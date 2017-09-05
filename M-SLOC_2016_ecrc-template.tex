@@ -591,8 +591,12 @@ The results obtained by the different addressed algorithms in the Simulated case
 
 Focusing on the performance obtained without temporal context, the best DNN configuration is the 2Rx1N MLP-SLOC. In particular, both int the 1Rx1N and  2Rx1N configurations, the MLP performs slightly better than the CNN. 
 Furthermore, even if only little improvement is observable in terms of RMSE for the 2Rx1N case, the advantage of this setting lies in the statistical behavior, as reported in \figref{fig:boxplot_simu-mlp}. 
-The boxplots show in terms of mean and standard deviation a narrow dispersion of results.
-Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room. In details, the best MLP layouts for the Kitchen and Living room are two single layer networks of 256 and 1024 units, respectively. %As concerns the CNN-SLOC, the two best layouts are composed of a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by a two layers MLP with  512, 512 units and 128, 256 units respectively for Kitchen and Living Room.
+The boxplots show in terms of mean and standard deviation a narrow dispersion of results for both the CNN and MLP architectures.
+%Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room.
+%ndFAB results discussion 6a) 
+Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE.
+%%
+In details, the best MLP layouts for the Kitchen and Living room are two single layer networks of 256 and 1024 units, respectively. %As concerns the CNN-SLOC, the two best layouts are composed of a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by a two layers MLP with  512, 512 units and 128, 256 units respectively for Kitchen and Living Room.
 With regards to the CNN-SLOC, the two best layouts are the following: for the Kitchen, a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 512, 512 units, while for Livingroom, a single convolutional layer of 24 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 256 and 512 units.
 
 The CSP-SLOC and the SRP-SLOC algorithms obtain a lower localization performance compared to the neural network architectures, with an average RMSE respectively equal to 1464\,mm and 981\,mm.
