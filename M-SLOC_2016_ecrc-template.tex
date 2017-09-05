@@ -183,9 +183,16 @@ To the best of our knowledge, few studies recently investigated speaker localiza
 
 
 \subsection{Contribution}
-The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment. The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms. In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC.
-
+%The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment. 
+%%ndFAB - 1a)
+The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition.
+%%%
+The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms.
+In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC.
 Several aspects of the algorithm are investigated, such as the use of different neural networks (MLP and Convolutional Neural Network (CNN)), the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context.
+%%ndFAB - 1a)
+We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.
+%%%
 
 Although diverse examples can be found in the literature on indoor acoustic source localization, rare are the cases that consider a multi-room environment. Among these, the work by Tsiami \textit{et al.} \cite{tsiami2014experiments} proposes an algorithm based on Crosspower Spectrum Phase Speaker Localization (CSP-SLOC). 
 %Differently from a previous work by the authors \cite{vesperini2016sloc}, here the approach is extended by investigating the CNN architecture and the influence of the temporal context. 
@@ -202,6 +209,7 @@ Finally, \secref{sec:concl} concludes the manuscript.
 	\caption{Block diagram of the proposed Deep Neural Network algorithm for Speaker Localization. 	In this figure, the full Convolutional Neural Network (CNN) architecture is depicted.}
 	\label{fig:proposed_method}
 \end{figure*}
+%TODO ci sarebbero da modificare le coordinate nella figura con \left \langle \chi,\psi \right \rangle \left [mm\right ]
 
 \section{Proposed Method}\label{sec:ALGO}
 The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network (ANN). The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal evolution of the data. Hence, the artificial neural network is trained on labelled data to estimate the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ i.e., the position of the speaker inside the target room.
