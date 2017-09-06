@@ -75,7 +75,7 @@ The Authors
 \textbf{Reply}: \textbf{ndFAB: EMAP Needed! :)}
 
 \item When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\
-\textbf{Reply}: The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals and the room where is located the speaker. Cf. Section 5.1 - Experimental Setup
+\textbf{Reply}: The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals and the room where is located the speaker. Thus the room where speech is produced is a prior knowledge of the system. Cf. Section 5.1 - Experimental Setup
 
 \item Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\
 \textbf{Reply}:
@@ -98,8 +98,8 @@ The Authors
 \item Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\
 \textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
 
-\item The best performance is found when context corresponding to 8.5s is considered, which in my opinion is quite a lot for some applications but for others it is acceptable. This should be addressed.\\
-\textbf{Reply}: 
+\item The best performance is found when context corresponding to 8.5\,s is considered, which in my opinion is quite a lot for some applications but for others it is acceptable. This should be addressed.\\
+\textbf{Reply}:  This was another typo. Considering that the temporal context is equal to $C\cdot s$, for the best case it results equal to 85 frames, which corresponds to 0.85\,s - cf. Section 5.2.2. The same is for the evaluations on the Real dataset, cf. Section 5.3.2.
 
 \item Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\
 \textbf{Reply}: \textbf{ndFAB: Come sopra. Dovremmo valutare di inserire questa tecnica e fare nuovi esperimenti?}

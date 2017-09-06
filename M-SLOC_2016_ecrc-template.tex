@@ -727,7 +727,7 @@ The best localization performance has been obtained by using the CNN-SLOC having
 %by the variation of the feature set, except as previously said about stability to vary of the input microphones. %(da modificare)
 
 The results obtained at the very end of the optimization procedure show the ability of the CNN architecture to efficiently exploit the contextual information of adjacent frames, with a reduction of 42.2\% of the localization error with respect to the configuration with $(C,s)=(1,1)$, as shown in \figref{fig:cxtCNN-S}. 
-The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration approximatively equal to 8.5\,s.
+The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration approximatively equal to \textcolor{red}{0.85\,s.}
 
 \begin{figure}[t]
 	\centering
@@ -990,7 +990,7 @@ As result of the third optimization stage, the best performing MLP layout in the
 As performed with the Simulated dataset, the effects of the temporal context have been studied after the third optimization stage.  The introduction of the temporal context leads to an average localization accuracy of 387\,mm with the CNN-SLOC for the 2Rx1N configuration. As highlighted in \figref{fig:cxtCNN-R}, the RMSE reduces by 37.2\% for the 1Rx1N configuration and by 37.5\% for the 2Rx1N configuration. In concordance with the results obtained with the Simulated dataset, the MLP architecture benefits from the introduction of the temporal context, with a resulting error reduction of 36\% for the 1Rx1N and of 29\% for the 2Rx1N configuration.
 
 
-For the CNN-SLOC applied in the Real dataset, the best resulting values of context and strides are $(C,s)=(19,4)$ and $(C,s)=(17,3)$ respectively for Kitchen and Living Room, corresponding to a segment of length about 7.6\,s and 5.1\,s. 
+For the CNN-SLOC applied in the Real dataset, the best resulting values of context and strides are $(C,s)=(19,4)$ and $(C,s)=(17,3)$ respectively for Kitchen and Living Room, corresponding to a segment of length about \textcolor{red}{0.76\,s and 0.51\,s.} 
 
 
 \figref{ctx-str-REAL} reports the RMSE for different context sizes $C$ and strides $s$ in the case of 1Rx1N applied to the Kitchen room.
