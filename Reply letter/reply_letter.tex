@@ -60,13 +60,13 @@ The Authors
 \textbf{Reply}:
 
 \item It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\
-\textbf{Reply}:
+\textbf{Reply}: Cf. Section 1.2 - Contribution 
 
 \item What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\
-\textbf{Reply}:
+\textbf{Reply}: The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing. Cf. Section 2 - Proposed Method
 
 \item Did the authors experiment with the frame ? 480ms seems quite high to me and seems to violate the assumption of the aqcuired signal to be almost stationary within a frame. In my experience 64-128 is more appropriate.\\
-\textbf{Reply}:
+\textbf{Reply}: It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. Cf. Section 2 - Features based on GCC-PHAT Patterns
 
 \item It would also be interesting to discuss the applications of such systems and how it might impact the solution. For some applications it is not necessary to have a frame-level output.\\
 \textbf{Reply}:
@@ -84,19 +84,19 @@ The Authors
 \textbf{Reply}:
 
 \item Evaluation: How was the 500mm threshold determined?\\
-\textbf{Reply}:
+\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
 
 \item Evaluation: What was the number for N\_TOT?\\
-\textbf{Reply}:
+\textbf{Reply}: Cf. Table XX in Section 5 - Experiments
 
 \item Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\
-\textbf{Reply}:
+\textbf{Reply}: Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\
 \textbf{Reply}:
 
 \item Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\
-\textbf{Reply}:
+\textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
 
 \item The best performance is found when context corresponding to 8.5s is considered, which in my opinion is quite a lot for some applications but for others it is acceptable. This should be addressed.\\
 \textbf{Reply}:
@@ -108,7 +108,7 @@ The Authors
 \textbf{Reply}:
 
 \item Bullet 2 on line 321: I do not completely understand what is going on here, and it is quite difficult to understand from the text. Please elaborate and motivate it.\\
-\textbf{Reply}:
+\textbf{Reply}: It is a kind of features selection stage. Cf. Section 5.1 
 
 \item Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:\\
  1: It is true, that no tuning of parameters are needed once the network is ALREADY trained, but based on the experiments in this paper it is obvious that some tuning has been done to find the best performance. Furthermore, what are all these parameters in state-of-the art methods which need tuning? I would like to have a concrete example.\\
@@ -119,18 +119,18 @@ The Authors
 \textbf{Reply}:
 
 \item Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\
-\textbf{Reply}:
+\textbf{Reply}: "while different amounts of adjacent time frames have been concatenated to test the temporal context effect." Cf. Section 6 - Conclusion and Outlook
 \end{itemize}
 
 \newpage
 \section{Answers to reviewer 2}\label{sec:rev2}
 \begin{itemize}
 \item In page 7, line 134. "the coordinates $(\chi,\phi)$, i.e.," It is unclear what $\chi$ and $\phi$ represent. Please define the two symbols clearly and give their units. It seems very important due to that Eq. (15) defines the RMSE, and the unit of RMSE is millimeter (mm). $\phi$ is often denoted as angle.\\
-\textbf{Reply}:
+\textbf{Reply}:  The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room.
 \item  In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\
-\textbf{Reply}:
+\textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. Cf. Section 2 - Features based on GCC-PHAT Patterns
 \item  It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\
-\textbf{Reply}:
+\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
 \item  GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\
 \textbf{Reply}:
 \item  For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\
