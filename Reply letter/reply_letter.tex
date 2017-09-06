@@ -69,10 +69,10 @@ The Authors
 \textbf{Reply}: It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. Cf. Section 2 - Features based on GCC-PHAT Patterns
 
 \item It would also be interesting to discuss the applications of such systems and how it might impact the solution. For some applications it is not necessary to have a frame-level output.\\
-\textbf{Reply}:
+\textbf{Reply}: This work was not directly addressed to a real-life application of such systems, but we want to demonstrate that a complete data-driven approach to the speaker localization with no post-processing procedure is able to obtain better performances in term of localization accuracy compared to the state of the art algorithms.
 
 \item It would be nice to have a motivation for introducing convolutional networks. Why might it be expected to improve performance? I know that it can probably only be speculations, but as it is now, it appears a bit like trial-and-error.\\
-\textbf{Reply}:
+\textbf{Reply}: \textbf{ndFAB: EMAP Needed! :)}
 
 \item When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\
 \textbf{Reply}: The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals and the room where is located the speaker. Cf. Section 5.1 - Experimental Setup
@@ -99,7 +99,7 @@ The Authors
 \textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
 
 \item The best performance is found when context corresponding to 8.5s is considered, which in my opinion is quite a lot for some applications but for others it is acceptable. This should be addressed.\\
-\textbf{Reply}:
+\textbf{Reply}: 
 
 \item Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\
 \textbf{Reply}: \textbf{ndFAB: Come sopra. Dovremmo valutare di inserire questa tecnica e fare nuovi esperimenti?}
@@ -132,9 +132,9 @@ The Authors
 \item  It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\
 \textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
 \item  GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\
-\textbf{Reply}:
+\textbf{Reply}: \textbf{ndFAB: It is exactly what we have done with the CSP-SLOC. (Giusto?)}
 \item  For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\
-\textbf{Reply}:
+\textbf{Reply}: For the comparative CSP-SLOC approach we have implemented a cepstral dereverberation procedure, in order to improve the localization accuracy according to the author's specifications. In this work we highlight that the proposed method is able to already significantly overcome the reference algorithms with pretty standard features as input and no speech enhancement process. Certainly, the suppression of noise and reverberant components can improve the localization accuracy, but it falls outside the aim of this paper.
 
 \item  Please compare the computational complexity of these algorithms.\\
 \textbf{Reply}:
