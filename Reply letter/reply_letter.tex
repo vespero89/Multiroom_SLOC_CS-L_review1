@@ -60,7 +60,7 @@ The Authors
 \textbf{Reply}:
 
 \item It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\
-\textbf{Reply}: Cf. Section 1.2 - Contribution 
+\textbf{Reply}: The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition. We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy. Cf. Section 1.2 - Contribution 
 
 \item What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\
 \textbf{Reply}: The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing. Cf. Section 2 - Proposed Method
@@ -75,13 +75,13 @@ The Authors
 \textbf{Reply}:
 
 \item When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\
-\textbf{Reply}:
+\textbf{Reply}: The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals and the room where is located the speaker. Cf. Section 5.1 - Experimental Setup
 
 \item Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\
 \textbf{Reply}:
 
 \item Evaluation: Does the baseline methods, CSP and SRP, use any smoothing or temporal context or are they simply evaluated frame by frame? Based on my experience a simple histogram technique computed over a few seconds can improve robustness quite a lot.\\
-\textbf{Reply}:
+\textbf{Reply}: The baseline methods have been evaluated frame by frame, as they were presented in the relative reference papers. \textbf{ndFAB: Dovremmo valutare di inserire questa tecnica e fare nuovi esperimenti?}
 
 \item Evaluation: How was the 500mm threshold determined?\\
 \textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
@@ -93,7 +93,7 @@ The Authors
 \textbf{Reply}: Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\
-\textbf{Reply}:
+\textbf{Reply}: \textbf{ndFAB: It is strange also for us!}
 
 \item Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\
 \textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
@@ -102,13 +102,13 @@ The Authors
 \textbf{Reply}:
 
 \item Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\
-\textbf{Reply}:
+\textbf{Reply}: \textbf{ndFAB: Come sopra. Dovremmo valutare di inserire questa tecnica e fare nuovi esperimenti?}
 
 \item line 188: How are the frames containing speech found?\\
-\textbf{Reply}:
+\textbf{Reply}: The frames containing speech are indicated to the SLOC algorithm by a multi-room VAD stage which is assumed to operate before the proposed system.
 
 \item Bullet 2 on line 321: I do not completely understand what is going on here, and it is quite difficult to understand from the text. Please elaborate and motivate it.\\
-\textbf{Reply}: It is a kind of features selection stage. Cf. Section 5.1 
+\textbf{Reply}: \textbf{ndFAB: It is a kind of features selection stage. Cf. Section 5.1}
 
 \item Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:\\
  1: It is true, that no tuning of parameters are needed once the network is ALREADY trained, but based on the experiments in this paper it is obvious that some tuning has been done to find the best performance. Furthermore, what are all these parameters in state-of-the art methods which need tuning? I would like to have a concrete example.\\

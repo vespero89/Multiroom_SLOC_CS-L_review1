@@ -449,7 +449,7 @@ In this section the experimental procedure is presented and the obtained results
 
 \subsection{Experimental setup}
 The performance of the two proposed methods, 1Rx1N-SLOC and 2Rx1N-SLOC described in \secref{sec:ALGO}, are investigated in the two DIRHA subsets.
-Both architectures have been evaluated by using MLP and CNN.The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals.
+Both architectures have been evaluated by using MLP and CNN. The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals.
 
 The experiments have been conducted by means of a $k$-fold cross-validation technique in order to reduce the performance variance, and an early-stopping training strategy has been employed to prevent overfitting. In the \textit{Simulated} dataset $k$ is equal to 10, thus 64-8-8 scenes respectively compose the training, validation and test sets. In the \textit{Real} dataset, due to the total absence of speech in some scenes, only 11 of them were suitable for each room. Thus, a leave-2-out cross validation has been adopted, where 7 scenes compose the training set, 2 the validation set and 2 the test set.
 
