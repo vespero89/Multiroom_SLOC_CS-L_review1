@@ -62,7 +62,7 @@ The Authors
 \item \textbf{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
 \textbf{Reply}: To better define the algorithm's goals we modified the Section 1.2 - Contribution as follows:
 	\begin{quote}
-		The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.
+		\textit{The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.}
 	\end{quote}
 
 into:
@@ -77,7 +77,7 @@ into:
 \item \textbf{What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\}
 \textbf{Reply}: The output of the algorithms are the Cartesian coordinates of the speaker position inside the room. We have modified Section 2 - Proposed Method as follows:
 \begin{quote}
-	Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.
+	\textit{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.}
 \end{quote}
 into:
 \begin{quote}
@@ -90,7 +90,7 @@ TODO - Add origin of the axes?
 \textbf{Reply}: It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
 
 \begin{quote}
-	Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.
+	\textit{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.}
 \end{quote}
 into:
 \begin{quote}
@@ -116,7 +116,14 @@ TODO - Insert evaluations with DNN - VAD or refer to the MLSP paper. Cf. Section
 \textbf{Reply}: All the methods have been evaluated frame by frame, thus a post processing technique can have beneficial effects also for the DNN. TODO - Evaluations for best cases with smoothing?
 
 \item \textbf{Evaluation: How was the 500mm threshold determined?\\}
-\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+\textbf{Reply}:  This threshold and in general the evaluation metrics were chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+\begin{quote}
+	\textit{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs.}
+\end{quote}
+
+\begin{quote}
+	\textcolor{red}{\textbf{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}. These two metrics are averaged over all the available network outputs.}}
+\end{quote}
 
 \item \textbf{Evaluation: What was the number for $N_{TOT}$?\\}
 \textbf{Reply}: Cf. Table XX in Section 5 - Experiments
@@ -159,7 +166,14 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 TODO - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
 
 \item \textbf{Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\}
-\textbf{Reply}: "while different amounts of adjacent time frames have been concatenated to test the temporal context effect." Cf. Section 6 - Conclusion and Outlook
+\textbf{Reply}: The sentence in Section 6 - Conclusion and Outlook has been modified as follows:
+\begin{quote}
+	\textit{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while the temporal context has been tested by means of close in time frames.}
+\end{quote}
+into:
+\begin{quote}
+	\textcolor{red}{\textbf{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different amounts of adjacent time frames have been concatenated to test the temporal context effect.}}
+\end{quote}
 \end{enumerate}
 
 \newpage
@@ -168,7 +182,7 @@ TODO - discussion: some procedures, like transfer learning or pre-training of th
 \item \textbf{In page 7, line 134. "the coordinates $(\chi,\phi)$, i.e.," It is unclear what $\chi$ and $\phi$ represent. Please define the two symbols clearly and give their units. It seems very important due to that Eq. (15) defines the RMSE, and the unit of RMSE is millimeter (mm). $\phi$ is often denoted as angle.\\}
 \textbf{Reply}:  The output of the algorithms are the Cartesian coordinates of the speaker position inside the room. We have modified Section 2 - Proposed Method as follows:
 \begin{quote}
-	Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.
+	\textit{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.}
 \end{quote}
 into:
 \begin{quote}
@@ -180,7 +194,7 @@ TODO - Add origin of the axes?
 \textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
 
 \begin{quote}
-	Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.
+	\textit{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.}
 \end{quote}
 into:
 \begin{quote}
@@ -189,7 +203,14 @@ into:
 
 
 \item  \textbf{It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\}
-\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+\textbf{Reply}: This threshold and in general the evaluation metrics were chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+\begin{quote}
+	\textit{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs.}
+\end{quote}
+
+\begin{quote}
+	\textcolor{red}{\textbf{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}. These two metrics are averaged over all the available network outputs.}}
+\end{quote}
 
 \item  \textbf{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
 \textbf{Reply}:  It is exactly what we have done with the CSP-SLOC. TODO - explain the algorithm
