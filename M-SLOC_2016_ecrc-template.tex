@@ -291,7 +291,7 @@ An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors re
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.9\columnwidth]{imgs/GCC-PHAT-PATTERN}
+	%\includegraphics[width=0.9\columnwidth]{imgs/GCC-PHAT-PATTERN}
 	\caption{An example of GCC-PHAT Pattern matrix $\mathbf{X}[n]$ obtained from a combination of microphones belonging to a ceiling array. Blue tones represent maximum amplitude values of $C_{ab}(n,\tau)$ in the range of considered $\tau$.}
 	\label{fig:GCC-PATT}
 \end{figure}
@@ -500,14 +500,23 @@ The localization accuracy has been evaluated in terms of averaged Root Mean Squa
 \begin{equation}
 \text{RMSE} = \frac{\sqrt{(\chi-\chi_{\text{ref}})^2 + (\psi-\psi_{\text{ref}})^2}}{N_{TOT}},
 \end{equation}
-where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames.
+where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames, \textcolor{red}{\textbf{as reported in \ref{tab:N_TOT}. }}
 In addition, the performance has been evaluated in terms of $P_{cor} = N_{FINE}/N_{TOT}$, where $N_{FINE}$ is the 
 number of frames with RMSE less than 500\,mm. 
 %%ndFAB
 Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, \textcolor{red}{\textbf{according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}.}} These two metrics are averaged over all the available network outputs. 
-%%%
-%TODO aggiungere tabellina con NTOT nelle varie condizioni: 
-%SIMU - Kit = 47630, Liv = 44801 ; REAL - Kit = 17580, Liv = 12885
+
+\begin{table}[]
+\centering
+\label{tab:N_TOT}
+\begin{tabular}{cccc}
+\multicolumn{4}{c}{$N_{TOT}$}                                                                                                                                      \\ \hline
+\multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Simulations\\ Dataset\end{tabular}} & \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}}Real\\ Dataset\end{tabular}} \\ \hline
+\multicolumn{1}{c|}{Kitchen}           & \multicolumn{1}{c|}{Livingroom}          & \multicolumn{1}{c|}{Kitchen}                  & Livingroom                  \\ \hline
+\multicolumn{1}{c|}{47630}             & \multicolumn{1}{c|}{44801}               & \multicolumn{1}{c|}{17580}                    & 12885                      
+\end{tabular}
+\caption{Number of speech frames ($N_{TOT}$) for the considered rooms of the two datasets.}
+\end{table}
 
 The algorithm has been implemented in the Python language using Keras \cite{chollet2015keras} and Theano \cite{2016arXiv160502688short} as deep learning libraries. A total amount of 2350 experiments has been conducted on the two subsets of the DIRHA dataset.
 
@@ -1109,7 +1118,10 @@ In terms of absolute improvement respect to the SRP-PHAT approach, the CNN-SLOC 
 % As further remark, it is possible to notice that in almost every configuration, obtained at the end of the optimization scheme, which shows to have the lowest RMSE, it also has the highest $P_{cor}$. This means that the proposed algorithm is robust not only in terms of mean error, but also in terms of the number of frames in which a localization error occurs.
 
 The proposed method operates in a complete autonomous way.
-Indeed, once trained, the neural network provides the coordinates of the speaker directly from the speech excerpts of the signals captured by the microphone arrays. This allows to totally avoid the fine-tuning of parameters being generally needed by state-of-the-art approaches, which depends on the application environment and implicates a lack of generality.
+Indeed, once trained, the neural network provides the coordinates of the speaker directly from the speech excerpts of the signals captured by the microphone arrays.
+
+%This allows to totally avoid the fine-tuning of parameters being generally needed by state-of-the-art approaches, which depends on the application environment and implicates a lack of generality.
+\textcolor{red}{\textbf{Differently, a lack of generality is observed in the proposed state-of-the-art approaches. For example, the CSP-SLOC requires the knowledge of the room geometry, in addition, parameters such as iterations and number of searched maxima has been fine-tuned for the SRP-SLOC.}}
 %fine-tuning phase needed by the typical approaches on varying of the application environment.
 
 Future works will be oriented on the development of a joint multi-room VAD \cite{ijcnn-vad,ijcnn2016-vad} and SLOC neural network based system, in order to obtain an integrated and fully data-driven algorithm.
