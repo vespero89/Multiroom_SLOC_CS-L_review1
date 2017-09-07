@@ -6,7 +6,7 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{verbatim}
-\usepackage{color}
+%\usepackage{color}
 \usepackage{url}
 \usepackage{algorithmicx}
 \usepackage[ruled]{algorithm}
@@ -18,7 +18,7 @@
 \usepackage{nth}
 \usepackage{multirow}
 \usepackage{mathtools}
-
+\usepackage{xcolor}
 \begin{document}
 
 
@@ -57,16 +57,46 @@ The Authors
 \textbf{Reply}: TODO - Fabio - looking for implementations of such algorithms - discuss in literature
 
 \item \textbf{Assuming that the microphones are calibrated, a simple way of determining speaker position is to used the signal strength. This would also be valuable to include in a discussion.\\}
-\textbf{Reply}: TODO: Discussion about the use of energy as feature for the DNN - (maybe for the M-VAD)
+\textbf{Reply}: TODO: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
 
 \item \textbf{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
-\textbf{Reply}: The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition. We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy. Cf. Section 1.2 - Contribution 
+\textbf{Reply}: To better define the algorithm's goals we modified the Section 1.2 - Contribution as follows:
+	\begin{quote}
+		The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.
+	\end{quote}
+
+into:
+	\begin{quote}
+		\textcolor{red}{\textbf{The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition.}}\\
+		$\dots$\\
+		\textcolor{red}{\textbf{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}		
+	\end{quote}
+	
+%The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition. We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy. 
 
 \item \textbf{What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\}
-\textbf{Reply}: The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing. Cf. Section 2 - Proposed Method
+\textbf{Reply}: The output of the algorithms are the Cartesian coordinates of the speaker position inside the room. We have modified Section 2 - Proposed Method as follows:
+\begin{quote}
+	Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.
+\end{quote}
+into:
+\begin{quote}
+	\textcolor{red}{\textbf{The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing.}}
+\end{quote}
+TODO - Add origin of the axes?
+
 
 \item \textbf{Did the authors experiment with the frame ? 480ms seems quite high to me and seems to violate the assumption of the aqcuired signal to be almost stationary within a frame. In my experience 64-128 is more appropriate.\\}
-\textbf{Reply}: It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. Cf. Section 2 - Features based on GCC-PHAT Patterns
+\textbf{Reply}: It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
+
+\begin{quote}
+	Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.
+\end{quote}
+into:
+\begin{quote}
+	\textcolor{red}{\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}}
+\end{quote}
+
 
 \item \textbf{It would also be interesting to discuss the applications of such systems and how it might impact the solution. For some applications it is not necessary to have a frame-level output.\\}
 \textbf{Reply}: TODO: discussion - every algorithm has a frame level output and no post-processing procedure has been implemented, although it could be beneficial for the localization accuracy 
@@ -86,7 +116,7 @@ TODO - Insert evaluations with DNN - VAD or refer to the MLSP paper. Cf. Section
 \textbf{Reply}: All the methods have been evaluated frame by frame, thus a post processing technique can have beneficial effects also for the DNN. TODO - Evaluations for best cases with smoothing?
 
 \item \textbf{Evaluation: How was the 500mm threshold determined?\\}
-\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
+\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
 
 \item \textbf{Evaluation: What was the number for $N_{TOT}$?\\}
 \textbf{Reply}: Cf. Table XX in Section 5 - Experiments
@@ -136,13 +166,34 @@ TODO - discussion: some procedures, like transfer learning or pre-training of th
 \section{Answers to reviewer 2}\label{sec:rev2}
 \begin{enumerate}
 \item \textbf{In page 7, line 134. "the coordinates $(\chi,\phi)$, i.e.," It is unclear what $\chi$ and $\phi$ represent. Please define the two symbols clearly and give their units. It seems very important due to that Eq. (15) defines the RMSE, and the unit of RMSE is millimeter (mm). $\phi$ is often denoted as angle.\\}
-\textbf{Reply}:  The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room.
+\textbf{Reply}:  The output of the algorithms are the Cartesian coordinates of the speaker position inside the room. We have modified Section 2 - Proposed Method as follows:
+\begin{quote}
+	Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.
+\end{quote}
+into:
+\begin{quote}
+	\textcolor{red}{\textbf{The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing.}}
+\end{quote}
+TODO - Add origin of the axes?
+
 \item  \textbf{In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\}
-\textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. Cf. Section 2 - Features based on GCC-PHAT Patterns
+\textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
+
+\begin{quote}
+	Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.
+\end{quote}
+into:
+\begin{quote}
+	\textcolor{red}{\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}}
+\end{quote}
+
+
 \item  \textbf{It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\}
-\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. Cf. Section 5 - Experiments
+\textbf{Reply}: This threshold was chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014 http://dirha.fbk.eu/SASLODOM2014) task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+
 \item  \textbf{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
 \textbf{Reply}:  It is exactly what we have done with the CSP-SLOC. TODO - explain the algorithm
+
 \item  \textbf{For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\}
 \textbf{Reply}: For the comparative CSP-SLOC approach we have implemented a cepstral dereverberation procedure, in order to improve the localization accuracy according to the author's specifications. In this work we highlight that the proposed method is able to already significantly overcome the reference algorithms with pretty standard features as input and no speech enhancement process. Certainly, the suppression of noise and reverberant components can improve the localization accuracy, but it falls outside the aim of this paper.
 
