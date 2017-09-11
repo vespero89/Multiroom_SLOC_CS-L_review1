@@ -114,7 +114,7 @@ was replaced with the sentence:
 \begin{quote}
 \textcolor{red}{The feature extraction stage calculates GCC-PHAT Patterns [35] from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speaker's position. The first is network, denoted as MLP, is composed of fully connected layers with units  ReLU activation function. The second network, denoted as CNN, is composed of convolutional and fully connected layers. The motivation behind the use of convolutional layers resides in its ability to capture the structure of GCC-PHAT Pattern matrices [35], which is lost by using fully connected layers only. Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.}
 \end{quote}
-\item \textit{When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\}
+\item \textit{When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\}\label{resp:vad}
 \textbf{Reply}: Thank you for your comment. A preliminary stage of the proposed speaker localization algorithm is a multi-room voice activity detector (VAD) able to discriminate between silence and speech portions as conventional VADs as well as to identify the room where the speaker is present. In this paper, the focus is on estimating the speakers' position inside the room where the VAD identifies the presence of a source, thus we assumed the presence of an Oracle multi-room VAD able to perform the task without errors. As reported also in a previous work by the authors, Vesperini et al. ``A neural network based algorithm for speaker localization in a multi-room environment,'' in Proc. of MLSP, 2016, the development of a complete system able to perform both the tasks of the multi-room VAD and of the multi-room speaker localization presented in this paper will be addressed in future works.
 
 In order to clarify this aspect and better describe the architecture of the proposed approach, Fig.~1 (\textcolor{red}{TODO}) has been modified by including the multi-room VAD and the following sentence has been included in Section 2 (Proposed Method):
@@ -132,11 +132,11 @@ In a preliminary stage, a multi-room VAD [16,40] (\textcolor{red}{TODO: controll
 \item \textit{Evaluation: How was the 500mm threshold determined?\\}
 \textbf{Reply}: Thank you for your comment. This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
 \begin{quote}
-	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge [53] (TODO: controllare che il numero rimanga lo stesso!).}
+	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014) task of the EVALITA 2014 challenge [53] (TODO: controllare che il numero rimanga lo stesso!).}
 \end{quote}
 
 \item \textit{Evaluation: What was the number for $N_{TOT}$?\\}
-\textbf{Reply}: Cf. Table XX in Section 5 - Experiments
+\textbf{Reply}: Cf. Table XX in Section 5 - Experiments \textcolor{red}{TODO}
 
 \item \textit{Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\}
 \textbf{Reply}: \textcolor{red}{TODO} - Explain better what the box-plots show.\\
@@ -156,10 +156,15 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 In the SRP phat algorithm we use a frame size equal to 2048 (approximately 4 frame w.r.t. the DNN inputs), which corresponds to 128 ms at 16kHz sample rate.
 
 \item \textit{line 188: How are the frames containing speech found?\\}
-\textbf{Reply}: The frames containing speech are indicated to the SLOC algorithm by a multi-room VAD stage which is assumed to operate before the proposed system.
+\textbf{Reply}: Please refer to response number \ref{resp:vad} for a detailed discussion.
 
 \item \textit{Bullet 2 on line 321: I do not completely understand what is going on here, and it is quite difficult to understand from the text. Please elaborate and motivate it.\\}
-\textbf{Reply}: \textcolor{red}{TODO} - explain better (maybe just here on the reply letter)
+\textbf{Reply}: The kitchen and the living room considered in the experiments contain multiple microphones grouped in several linear arrays and one circular array. Referring to equations 6 and 7, the final feature matrix is obtained by stacking the GCC-PHAT Patterns calculated by using the microphone pairs of the individual arrays of a room. The objective of the GCC-PHAT Patterns selection is to choose composition of the final matrix $\mathbf{X}[n]$ (equation 7), i.e., which pairs of microphones provide the best localization performance. The evaluation procedure is performed separately for each room and it starts by considering the pairs of the circular array on the ceiling. This matrix is then augmented by gradually including the GCC-PHAT Patterns of the pairs of microphones of the remaining arrays. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded. %Considering the kitchen (Fig. 5), three linear arrays are present: A=[K1R, K1L], [K3L, K3C, K3R], and [K2L, K2R]. The microphones pairs are [K1R, K1L] from array A, [K3L, K3C], [K3L, K3R], and [K3C, K3R] from array B, and [K2L, K2R] from array C. The related GCC-Patterns are gradually included in the initial feature matrix composed of the GCC-Patterns calculated from the circular array.
+
+This aspect has been clarified by rewriting the GCC-PHAT Patterns selection description as follows:
+\begin{quote}
+ \textcolor{red}{The objective of this stage is to find the composition of the feature matrix $\mathbf{X}[n]$ defined in Eq. 7 that provides the best localization performance. The procedure is performed separately for each room and it starts by considering the circular arrays on the ceilings: each array is composed of 6 microphones, thus, excluding the central one, the number of microphone pairs is 10 and the size of the initial feature matrix is $10 \times 50$. This matrix is then augmented by gradually including the GCC-PHAT Patterns $\mathbf{\tilde{x}}_{ab}[n]$ (see Eq. 5) related to the pairs of microphones of the remaining arrays of the room. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded.}
+\end{quote}
 
 \item \textit{Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:\\}
 	\begin{enumerate}

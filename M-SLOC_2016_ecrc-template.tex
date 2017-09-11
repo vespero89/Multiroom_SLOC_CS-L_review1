@@ -272,7 +272,7 @@ Finally, the vectors originated by the different considered microphone pairs are
 Formally: 
 \begin{align}
 \mathbf{x}_{ab}[n] = & \;  [C_{ab}(n,0)\,C_{ab}(n,1) \cdots C_{ab}(n,49)]^T,\\
-\tilde{\mathbf{x}}_{ab}[n] =  & \;  \frac{\mathbf{x}_{ab}[n] - \mu}{\sigma},
+\tilde{\mathbf{x}}_{ab}[n] =  & \;  \frac{\mathbf{x}_{ab}[n] - \mu}{\sigma}, \label{eq:gcc_pattern}
 \end{align}
 where $\mu$ is the mean value of $\mathbf{x}_{ab}$, $\sigma$ the standard deviation, and $T$ denotes the transpose operation.
 
@@ -283,7 +283,7 @@ Successively, all possible combinations for each array are considered. In partic
 \end{equation}
 
 Finally, considering all the $M$ arrays located in the environment, the input matrix $\mathbf{X}[n]$ is given by:
-\begin{equation}
+\begin{equation}\label{eq:fx_matrix}
 \mathbf{X}[n] =   \begin{bmatrix} \mathbf{X}^{(1)}[n] \\ \mathbf{X}^{(2)}[n] \\ \vdots\\ \mathbf{X}^{(M)}[n] \end{bmatrix},
 \end{equation}
 An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors represent the amplitude of $C_{ab}(n,\tau)$, and orange tones denote the lowest values and blue tones the highest values in the range of $\tau$ considered. In the exposed case, the matrix $\mathbf{X}[n]$ is composed of 10 GCC-PHAT Patterns, belonging to a subset of the possible pairs originated from a circular ceiling array. It is possible to note that the maximum arrival time difference is equal to 9 samples (corresponding to about 0.2\,s), observed in the GCC-PHAT Pattern of the fourth microphone pair.
@@ -458,8 +458,10 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	\item{\textbf{Network Size Selection.}}  It consists in varying the network layout while keeping fixed the input signals (i.e., 4 microphone pairs for the Kitchen and 5 microphone pairs for the Living Room). 
 	Concerning the MLP architecture, 30 different network topologies have been investigated, composed of 1, 2 or 3 hidden layers with 4, 8, \dots, 1024 units. 
 	On the contrary, in the case of CNN architecture a higher number of parameters must be considered, which have been reported in \tableref{tab:CNNs} for the sake of conciseness. 
-	\item{\textbf{GCC-PHAT Patterns Selection.}} This stage aims to find the most performing GCC-PHAT Patterns matrix $\mathbf{X}[n]$ between a subset of the available $\mathbf{X}^{(i)}[n]$ microphone combinations belonging to different arrays.
-	The starting point was the circular array placed on the room ceilings, which is composed of $N = 6$ microphones. Excluding the central one, it leads to 10 possible pairs. Then, combinations of signal pairs $\mathbf{\tilde{x}}_{ab}^{(i)}[n]$ coming from the wall arrays have been gradually added to the ceiling array signals with a sequential forward selection strategy, in order to arrange the evaluated $\mathbf{X}[n]$.
+	\item{\textbf{GCC-PHAT Patterns Selection.}} \textcolor{red}{The objective of this stage is to find the composition of the feature matrix $\mathbf{X}[n]$ defined in \eqref{eq:fx_matrix} that provides the best localization performance. The procedure is performed separately for each room and it starts by considering the circular arrays on the ceilings: each array is composed of 6 microphones, thus, excluding the central one, the number of microphone pairs is 10 and the size of the initial feature matrix is $10 \times 50$. This matrix is then augmented by gradually including the GCC-PHAT Patterns $\mathbf{\tilde{x}}_{ab}[n]$ (see \eqref{eq:gcc_pattern}) related to the pairs of microphones of the remaining arrays of the room. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded.}
+	
+%	This stage aims to find the most performing GCC-PHAT Patterns matrix $\mathbf{X}[n]$ between a subset of the available $\mathbf{X}^{(i)}[n]$ microphone combinations belonging to different arrays.
+%	The starting point was the circular array placed on the room ceilings, which is composed of $N = 6$ microphones. Excluding the central one, it leads to 10 possible pairs. Then, combinations of signal pairs $\mathbf{\tilde{x}}_{ab}^{(i)}[n]$ coming from the wall arrays have been gradually added to the ceiling array signals with a sequential forward selection strategy, in order to arrange the evaluated $\mathbf{X}[n]$.
 	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
 	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e. $s=\{1,3,4,5\}$, and the context dimensions, i.e. $C=\{3,7,11,13,15,17,19,21\}$.
