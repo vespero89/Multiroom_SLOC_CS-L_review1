@@ -54,32 +54,32 @@ The Authors
 \section{Answers to reviewer 1}\label{sec:rev1}
 \begin{enumerate}
 \item \textit{Given that a map of the environment is available, it would be interesting to see the performance of a ray-tracing style algorithm. It should be possible to find the intersection of all the paths given by the peaks in each microphone pair GCC-PHAT output. If it is not feasible to carry out this experiment, I would suggest a dicussion of this kind of method and refer to literature.\\}
-\textbf{Reply}: TODO - Fabio - looking for implementations of such algorithms - discuss in literature
+\textbf{Reply}: \textcolor{red}{TODO} - Fabio - looking for implementations of such algorithms - discuss in literature
 
 \item \textit{Assuming that the microphones are calibrated, a simple way of determining speaker position is to used the signal strength. This would also be valuable to include in a discussion.\\}
-\textbf{Reply}: TODO: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
+\textbf{Reply}: \textcolor{red}{TODO}: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
 
 \item \textit{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
 \textbf{Reply}: Thank you for your comment. These aspect have been clarified by
 
  To better define the algorithm's goals we modified the Section 1.2 - Contribution as follows:
 	\begin{quote}
-		\textit{The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.}
+		\textbf{The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.}
 	\end{quote}
 
 into:
 	\begin{quote}
-		\textcolor{red}{\textbf{The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition.}}\\
+		\textcolor{red}{{The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition.}}\\
 		$\dots$\\
-		\textcolor{red}{\textbf{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}		
+		\textcolor{red}{{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}		
 	\end{quote}
 	
 %The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition. We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy. 
 
 \item \textit{What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\}
-\textbf{Reply}: Thank your comment. The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) was modified as follows:
+\textbf{Reply}: Thank your comment. The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) has been modified as follows:
 \begin{quote}
-	\textit{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
+	\textbf{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
 \end{quote}
 into:
 \begin{quote}
@@ -92,7 +92,7 @@ Additionally, the origin of the coordinates system has been added to Fig. 1. \te
 \textbf{Reply}: Thank you for your remark. The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2 (Features based on GCC-PHAT Patterns) as follows:
 
 \begin{quote}
-	\textit{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
+	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
 \end{quote}
 into:
 \begin{quote}
@@ -101,11 +101,11 @@ into:
 
 
 \item \textit{It would also be interesting to discuss the applications of such systems and how it might impact the solution. For some applications it is not necessary to have a frame-level output.\\}
-\textbf{Reply}: TODO: discussion - every algorithm has a frame level output and no post-processing procedure has been implemented, although it could be beneficial for the localization accuracy 
+\textbf{Reply}: \textcolor{red}{TODO}: discussion - every algorithm has a frame level output and no post-processing procedure has been implemented, although it could be beneficial for the localization accuracy 
 %This work was not directly addressed to a real-life application of such systems, but we want to demonstrate that a complete data-driven approach to the speaker localization with no post-processing procedure is able to obtain better performances in term of localization accuracy compared to the state of the art algorithms.
 
 \item \textit{It would be nice to have a motivation for introducing convolutional networks. Why might it be expected to improve performance? I know that it can probably only be speculations, but as it is now, it appears a bit like trial-and-error.\\}
-\textbf{Reply}: Thank you for your comment. The proposed localization algorithm is based on GCC-PHAT Patterns, originally proposed in Xiao et al., 2015 (reference 35 (\textcolor{red}{TODO: controllare che il numero rimanga lo stesso!}). As shown in Xiao et al., 2015, the GCC-PHAT Patterns matrices exhibit a significant structure that can be exploited by a localization algorithm. As done by Xiao et al., 2015, using a fully connected layer as input layer of the network requires flattening the GCC-PHAT Pattern matrix in a vector, thus loosing the structure information. By using convolutional neural networks, the GCC-PHAT Pattern matrices can be used in their original form, thus retaining the structure information. Additional, convolutional layers are well-known for their ability to capture such structure. In order to better motivate the choice of using convolutional layers, the sentence 
+\textbf{Reply}: Thank you for your comment. The proposed localization algorithm is based on GCC-PHAT Patterns, originally proposed in Xiao et al., 2015 (reference 35 (\textcolor{red}{TODO: controllare che il numero rimanga lo stesso!}). As shown in Xiao et al., 2015, the GCC-PHAT Patterns matrices exhibit a significant structure that can be exploited by a localization algorithm. Using a fully connected layer as first layer of the network as done by Xiao et al., 2015 requires flattening the feature matrix in a vector, thus loosing the structure information contained in GCC-PHAT Patterns. The motivation for using convolutional neural networks resides in their ability to directly process GCC-PHAT Pattern matrices and to capture their local correlations. In order to better motivate the choice of using convolutional layers, the sentence 
 \begin{quote}
 \textit{Several aspects of the algorithm are investigated, such as the use of different neural networks (MLP and Convolutional Neural Network (CNN)), the
 concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context.}
@@ -115,39 +115,35 @@ was replaced with the sentence:
 \textcolor{red}{The feature extraction stage calculates GCC-PHAT Patterns [35] from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speaker's position. The first is network, denoted as MLP, is composed of fully connected layers with units  ReLU activation function. The second network, denoted as CNN, is composed of convolutional and fully connected layers. The motivation behind the use of convolutional layers resides in its ability to capture the structure of GCC-PHAT Pattern matrices [35], which is lost by using fully connected layers only. Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.}
 \end{quote}
 \item \textit{When comparing the two architectures, where one considers all signals from all (both) rooms vs only signals from the room with the source, how is the room with the source determined, i.e., how do you know which rooms contains the source/speaker?\\}
-\textbf{Reply}: Thank you for your comment. A preliminary stage of the proposed speaker localization algorithm is a multi-room voice activity detector (VAD), i.e., a VAD able to discriminate between silence and speech portions as conventional VADs, and able to identify the room where the speaker is present. In this paper, the focus is on estimating the speakers' position inside the room where the VAD identifies the presence of a source, thus we assumed the presence of an Oracle multi-room VAD able to perform the task without errors. As reported also in a previous work by the authors, Vesperini et al. ``A neural network based algorithm for speaker localization in a multi-room environment,'' in Proc. of MLSP, 2016, the development of a complete system able to perform both the tasks of the multi-room VAD and of the multi-room speaker localization presented in this paper will be addressed in future works.
+\textbf{Reply}: Thank you for your comment. A preliminary stage of the proposed speaker localization algorithm is a multi-room voice activity detector (VAD) able to discriminate between silence and speech portions as conventional VADs as well as to identify the room where the speaker is present. In this paper, the focus is on estimating the speakers' position inside the room where the VAD identifies the presence of a source, thus we assumed the presence of an Oracle multi-room VAD able to perform the task without errors. As reported also in a previous work by the authors, Vesperini et al. ``A neural network based algorithm for speaker localization in a multi-room environment,'' in Proc. of MLSP, 2016, the development of a complete system able to perform both the tasks of the multi-room VAD and of the multi-room speaker localization presented in this paper will be addressed in future works.
 
-In order to clarify this aspect and better describe the architecture of the proposed approach, Fig. 1 \textcolor{red}{TODO} has been modified by including the multi-room VAD and the following sentence has been included in Section 2 (Proposed Method):
+In order to clarify this aspect and better describe the architecture of the proposed approach, Fig.~1 (\textcolor{red}{TODO}) has been modified by including the multi-room VAD and the following sentence has been included in Section 2 (Proposed Method):
 \begin{quote}
 \textcolor{red}{
-In a preliminary stage, a multi-room VAD \cite{ferronineural,vesperini2016deep} extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.}
+In a preliminary stage, a multi-room VAD [16,40] (\textcolor{red}{TODO: controllare che i numeri di ref rimangano gli stessi}) extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.}
 \end{quote}
  
 \item \textit{Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\}
 \textbf{Reply}: \textcolor{red}{TODO - In progress - PAOLO}
 
 \item \textit{Evaluation: Does the baseline methods, CSP and SRP, use any smoothing or temporal context or are they simply evaluated frame by frame? Based on my experience a simple histogram technique computed over a few seconds can improve robustness quite a lot.\\}
-\textbf{Reply}: All the methods have been evaluated frame by frame, thus a post processing technique can have beneficial effects also for the DNN. TODO - Evaluations for best cases with smoothing?
+\textbf{Reply}: All the methods have been evaluated frame by frame, thus a post processing technique can have beneficial effects also for the DNN. \textcolor{red}{TODO} - Evaluations for best cases with smoothing?
 
 \item \textit{Evaluation: How was the 500mm threshold determined?\\}
-\textbf{Reply}:  This threshold and in general the evaluation metrics were chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
+\textbf{Reply}: Thank you for your comment. This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
 \begin{quote}
-	\textit{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs.}
-\end{quote}
-
-\begin{quote}
-	\textcolor{red}{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}. These two metrics are averaged over all the available network outputs.}
+	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge [53] (TODO: controllare che il numero rimanga lo stesso!).}
 \end{quote}
 
 \item \textit{Evaluation: What was the number for $N_{TOT}$?\\}
 \textbf{Reply}: Cf. Table XX in Section 5 - Experiments
 
 \item \textit{Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\}
-\textbf{Reply}: TODO - Explain better what the box-plots show.\\
+\textbf{Reply}: \textcolor{red}{TODO} - Explain better what the box-plots show.\\
 Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item \textit{Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\}
-\textbf{Reply}: TODO - Check experiments
+\textbf{Reply}: \textcolor{red}{TODO} - Check experiments
 
 \item \textit{Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\}
 \textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
@@ -156,13 +152,13 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 \textbf{Reply}:  This was another typo. Considering that the temporal context is equal to $C\cdot s$, for the best case it results equal to 85 frames, which corresponds to 0.85\,s - cf. Section 5.2.2. The same is for the evaluations on the Real dataset, cf. Section 5.3.2.
 
 \item \textit{Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\}
-\textbf{Reply}: TODO - Check SRP code and its use of temporal context. Maybe some input frames can be aggregated??
+\textbf{Reply}: \textcolor{red}{TODO} - Check SRP code and its use of temporal context. Maybe some input frames can be aggregated??
 
 \item \textit{line 188: How are the frames containing speech found?\\}
 \textbf{Reply}: The frames containing speech are indicated to the SLOC algorithm by a multi-room VAD stage which is assumed to operate before the proposed system.
 
 \item \textit{Bullet 2 on line 321: I do not completely understand what is going on here, and it is quite difficult to understand from the text. Please elaborate and motivate it.\\}
-\textbf{Reply}: TODO - explain better (maybe just here on the reply letter)
+\textbf{Reply}: \textcolor{red}{TODO} - explain better (maybe just here on the reply letter)
 
 \item \textit{Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:\\}
 	\begin{enumerate}
@@ -171,16 +167,16 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 	\end{enumerate}
  \textbf{Reply}:
  \begin{enumerate}
- 	\item TODO - discussion: parameters of CSP (Room geometry, cepstral dereverb) and SRP ($J_0, N_0, \dots$)
+ 	\item \textcolor{red}{TODO} - discussion: parameters of CSP (Room geometry, cepstral dereverb) and SRP ($J_0, N_0, \dots$)
  	
  	 \textcolor{red}{\textbf{Reply}: \textbf{ndPAO:As reported in the conclusion section, a fine tuning of the SRP-SLOC parameters has been performed. The performance of the state-of-the-art approach depends of the reverberation and noise level, thus its parameters can not be generalized.} }
  	 
- 	\item TODO - discussion: We don't have a sufficient amount of data from DIRHA dataset to test the generalization performance of the proposed algorithm. 
+ 	\item \textcolor{red}{TODO} - discussion: We don't have a sufficient amount of data from DIRHA dataset to test the generalization performance of the proposed algorithm. 
  \end{enumerate}
 
 \item \textit{It seems like the authors put very little cost to the process of training such a system. In the current system, I believe, 64 minutes are used for training, at least for the simulated scenario. How is this expected to be handled in a commercial product, if it has to be trained specifically for that particular environment?\\}
 \textbf{Reply}:
-TODO - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
+\textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
 
 \item \textit{Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\}
 \textbf{Reply}: The sentence in Section 6 - Conclusion and Outlook has been modified as follows:
@@ -205,7 +201,7 @@ into:
 \begin{quote}
 	\textcolor{red}{\textbf{The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing.}}
 \end{quote}
-TODO - Add origin of the axes?
+\textcolor{red}{TODO} - Add origin of the axes?
 
 \item  \textbf{In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\}
 \textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
@@ -230,13 +226,13 @@ into:
 \end{quote}
 
 \item  \textbf{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
-\textbf{Reply}:  It is exactly what we have done with the CSP-SLOC. TODO - explain the algorithm
+\textbf{Reply}:  It is exactly what we have done with the CSP-SLOC. \textcolor{red}{TODO} - explain the algorithm
 
 \item  \textbf{For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\}
 \textbf{Reply}: For the comparative CSP-SLOC approach we have implemented a cepstral dereverberation procedure, in order to improve the localization accuracy according to the author's specifications. In this work we highlight that the proposed method is able to already significantly overcome the reference algorithms with pretty standard features as input and no speech enhancement process. Certainly, the suppression of noise and reverberant components can improve the localization accuracy, but it falls outside the aim of this paper.
 
 \item  \textbf{Please compare the computational complexity of these algorithms.\\}
-\textbf{Reply}: TODO - Fabio
+\textbf{Reply}: \textcolor{red}{TODO} - Fabio
 
 \end{enumerate}
 
