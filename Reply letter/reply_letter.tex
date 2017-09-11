@@ -157,6 +157,7 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 
 \item \textit{Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\}
 \textbf{Reply}: TODO - Check SRP code and its use of temporal context. Maybe some input frames can be aggregated??
+In the SRP phat algorithm we use a frame size equal to 2048 (approximately 4 frame w.r.t. the DNN inputs), which corresponds to 128 ms at 16kHz sample rate.
 
 \item \textit{line 188: How are the frames containing speech found?\\}
 \textbf{Reply}: The frames containing speech are indicated to the SLOC algorithm by a multi-room VAD stage which is assumed to operate before the proposed system.
