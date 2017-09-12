@@ -189,13 +189,16 @@ To the best of our knowledge, few studies recently investigated speaker localiza
 %The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment. 
 %%ndFAB - 1a)
 \textcolor{red}{
-The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary conditions.}
+The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary conditions. %}
 %%%
 The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms.
-In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. \textcolor{red}{The feature extraction stage calculates GCC-PHAT Patterns \cite{xiao2015learning} from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speaker's position. The first is network, denoted as MLP, is composed of fully connected layers with units  ReLU activation function. The second network, denoted as CNN, is composed of convolutional and fully connected layers. The motivation behind the use of convolutional layers resides in its ability to capture the structure of GCC-PHAT Pattern matrices \cite{xiao2015learning}, which is lost by using fully connected layers only. Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.}
+In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. %\textcolor{red}{
+The feature extraction stage calculates GCC-PHAT Patterns \cite{xiao2015learning} from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' position. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) \cite{nair2010rectified}. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices \cite{xiao2015learning}, which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones yielded the best performance, as well as the importance of using a temporal context.
+%Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.
+}
 
 %%ndFAB - 1a)
-\textcolor{red}{\textbf{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}
+%\textcolor{red}{\textbf{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}
 %%%
 
 Although diverse examples can be found in the literature on indoor acoustic source localization, rare are the cases that consider a multi-room environment. Among these, the work by Tsiami \textit{et al.} \cite{tsiami2014experiments} proposes an algorithm based on Crosspower Spectrum Phase Speaker Localization (CSP-SLOC). 
@@ -330,7 +333,7 @@ The first neural network architecture we investigate in this paper is the MLP \c
 \begin{equation}
 g(\mathbf{u}[n])=\varphi \left(\left(\begin{matrix} \sum _{ j=1 }^{ D }{w_j u_j[n] }  \end{matrix} \right) + b\right),
 \end{equation}
-where $D$ is the size of input data $\mathbf{u}[n]$, the bias $b$ is an externally applied term and $\varphi(\cdot)$ is the non-linear activation function. In this case we employ the rectified linear unit (ReLU) \cite{nair2010rectified}, defined as $\varphi(x) = \text{max}(0,x)$.
+where $D$ is the size of input data $\mathbf{u}[n]$, the bias $b$ is an externally applied term and $\varphi(\cdot)$ is the non-linear activation function. In this case we employ the ReLUs \cite{nair2010rectified}, defined as $\varphi(x) = \text{max}(0,x)$.
 Thus, the mathematical description of a one-hidden-layer MLP is a function $f:\mathbb{R}^D \rightarrow \mathbb{R}^L$, where $L$ is the size of the output vector, so:
 
 \begin{equation}
@@ -502,22 +505,21 @@ The localization accuracy has been evaluated in terms of averaged Root Mean Squa
 \begin{equation}
 \text{RMSE} = \frac{\sqrt{(\chi-\chi_{\text{ref}})^2 + (\psi-\psi_{\text{ref}})^2}}{N_{TOT}},
 \end{equation}
-where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames, \textcolor{red}{\textbf{as reported in \ref{tab:N_TOT}. }}
+where $\chi$ and $\psi$  are the network outputs, $\chi_{\text{ref}}$ and $\psi_{\text{ref}}$ are the reference Cartesian coordinates, and $N_{TOT}$ is the total number of frames, \textcolor{red}{{as reported in \tableref{tab:N_TOT}. }}
 In addition, the performance has been evaluated in terms of $P_{cor} = N_{FINE}/N_{TOT}$, where $N_{FINE}$ is the 
 number of frames with RMSE less than 500\,mm. 
 %%ndFAB
 Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm are considered correct decisions. \textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}.} These two metrics are averaged over all the available network outputs. 
 
-\begin{table}[]
+\begin{table}[t]
 \centering
-\label{tab:N_TOT}
 \begin{tabular}{cccc}
 \multicolumn{4}{c}{$N_{TOT}$}                                                                                                                                      \\ \hline
 \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Simulations\\ Dataset\end{tabular}} & \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}}Real\\ Dataset\end{tabular}} \\ \hline
 \multicolumn{1}{c|}{Kitchen}           & \multicolumn{1}{c|}{Livingroom}          & \multicolumn{1}{c|}{Kitchen}                  & Livingroom                  \\ \hline
 \multicolumn{1}{c|}{47630}             & \multicolumn{1}{c|}{44801}               & \multicolumn{1}{c|}{17580}                    & 12885                      
 \end{tabular}
-\caption{Number of speech frames ($N_{TOT}$) for the considered rooms of the two datasets.}
+\caption{Number of speech frames ($N_{TOT}$) for the considered rooms of the two datasets.}\label{tab:N_TOT}
 \end{table}
 
 The algorithm has been implemented in the Python language using Keras \cite{chollet2015keras} and Theano \cite{2016arXiv160502688short} as deep learning libraries. A total amount of 2350 experiments has been conducted on the two subsets of the DIRHA dataset.
@@ -1109,9 +1111,7 @@ Details of the best performing configurations are provided in \tableref{tab:best
 \label{sec:concl}
 
 In this paper, a DNN-based approach for single speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of obtained performance is detailed. The neural network employs GCC-PHAT Patterns as input features, which have been obtained by combining various microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
-A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N),
-%ndFAB Language revision 1) while the temporal context has been tested by means of close in time frames. 
-\textcolor{red}{\textbf{while different amounts of adjacent time frames have been concatenated to test the temporal context effect.}}
+A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. 	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 %%
 The algorithm implicitly requires an Oracle VAD in order to process only human speech. Results are evaluated on the DIRHA Dataset in comparison with two state-of-the-art algorithm, based respectively on Crosspower Spectrum Phase estimation and on Steered Response Power.
 

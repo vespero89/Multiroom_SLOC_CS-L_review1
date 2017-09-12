@@ -60,21 +60,22 @@ The Authors
 \textbf{Reply}: \textcolor{red}{TODO}: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
 
 \item \textit{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
-\textbf{Reply}: Thank you for your comment. These aspect have been clarified by
+\textbf{Reply}: Thank you for your comment. These aspect have been clarified by adding the following sentence at the end of Section 1 (Introduction):
 
- To better define the algorithm's goals we modified the Section 1.2 - Contribution as follows:
-	\begin{quote}
-		\textbf{The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment.}
-	\end{quote}
+\begin{quote}
+\textcolor{red}{
+In particular, this work addresses the task of localizing multiple and possibly moving speakers inside a home equipped with several microphones for each room. The algorithm is based on Deep Neural Networks (DNN) and it is able to efficiently use simultaneously the signals coming from the rooms of the building. The following section provides a review of the recent literature on the topic.
+}
+\end{quote}
 
-into:
+Additionally, the first paragraph of Section 1.2 (Contribution) has been modified as follows:
 	\begin{quote}
-		\textcolor{red}{{The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition.}}\\
-		$\dots$\\
-		\textcolor{red}{{We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy.}}		
+		\textcolor{red}{
+		The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary conditions. 		The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms.
+		In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. The feature extraction stage calculates GCC-PHAT Patterns \cite{xiao2015learning} from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' position. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) \cite{nair2010rectified}. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices \cite{xiao2015learning}, which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones yielded the best performance, as well as the importance of using a temporal context.
+		%Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.
+		}
 	\end{quote}
-	
-%The main contribution of this work is the development of a completely data-driven approach for a single Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary condition. We evaluated also the effect of combining source from multiple microphone pairs on the localization accuracy. 
 
 \item \textit{What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\}
 \textbf{Reply}: Thank your comment. The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) has been modified as follows:
@@ -156,20 +157,20 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 In the SRP phat algorithm we use a frame size equal to 2048 (approximately 4 frame w.r.t. the DNN inputs), which corresponds to 128 ms at 16kHz sample rate.
 
 \item \textit{line 188: How are the frames containing speech found?\\}
-\textbf{Reply}: Please refer to response number \ref{resp:vad} for a detailed discussion.
+\textbf{Reply}: Please refer to response to comment number \ref{resp:vad} for a detailed discussion.
 
 \item \textit{Bullet 2 on line 321: I do not completely understand what is going on here, and it is quite difficult to understand from the text. Please elaborate and motivate it.\\}
-\textbf{Reply}: The kitchen and the living room considered in the experiments contain multiple microphones grouped in several linear arrays and one circular array. Referring to equations 6 and 7, the final feature matrix is obtained by stacking the GCC-PHAT Patterns calculated by using the microphone pairs of the individual arrays of a room. The objective of the GCC-PHAT Patterns selection is to choose composition of the final matrix $\mathbf{X}[n]$ (equation 7), i.e., which pairs of microphones provide the best localization performance. The evaluation procedure is performed separately for each room and it starts by considering the pairs of the circular array on the ceiling. This matrix is then augmented by gradually including the GCC-PHAT Patterns of the pairs of microphones of the remaining arrays. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded. %Considering the kitchen (Fig. 5), three linear arrays are present: A=[K1R, K1L], [K3L, K3C, K3R], and [K2L, K2R]. The microphones pairs are [K1R, K1L] from array A, [K3L, K3C], [K3L, K3R], and [K3C, K3R] from array B, and [K2L, K2R] from array C. The related GCC-Patterns are gradually included in the initial feature matrix composed of the GCC-Patterns calculated from the circular array.
+\textbf{Reply}: The kitchen and the living room considered in the experiments contain multiple microphones grouped in several linear arrays and one circular array. Referring to equations 6 and 7, the final feature matrix is obtained by stacking the GCC-PHAT Patterns calculated by using the microphone pairs of the individual arrays of a room. The objective of the GCC-PHAT Patterns selection is to choose the composition of the final matrix $\mathbf{X}[n]$ (equation 7), i.e., which pairs of microphones provide the best localization performance. The evaluation procedure is performed separately for each room and it starts by considering the pairs of the circular array on the ceiling. The related matrix is then augmented by gradually including the GCC-PHAT Patterns of the pairs of microphones of the remaining arrays. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded. %Considering the kitchen (Fig. 5), three linear arrays are present: A=[K1R, K1L], [K3L, K3C, K3R], and [K2L, K2R]. The microphones pairs are [K1R, K1L] from array A, [K3L, K3C], [K3L, K3R], and [K3C, K3R] from array B, and [K2L, K2R] from array C. The related GCC-Patterns are gradually included in the initial feature matrix composed of the GCC-Patterns calculated from the circular array.
 
-This aspect has been clarified by rewriting the GCC-PHAT Patterns selection description as follows:
+This aspect has been clarified by rewriting the description of the GCC-PHAT Patterns selection procedure as follows:
 \begin{quote}
  \textcolor{red}{The objective of this stage is to find the composition of the feature matrix $\mathbf{X}[n]$ defined in Eq. 7 that provides the best localization performance. The procedure is performed separately for each room and it starts by considering the circular arrays on the ceilings: each array is composed of 6 microphones, thus, excluding the central one, the number of microphone pairs is 10 and the size of the initial feature matrix is $10 \times 50$. This matrix is then augmented by gradually including the GCC-PHAT Patterns $\mathbf{\tilde{x}}_{ab}[n]$ (see Eq. 5) related to the pairs of microphones of the remaining arrays of the room. If the inclusion of the GCC-PHAT Pattern results in a performance improvement, it is retained, otherwise it is discarded.}
 \end{quote}
 
-\item \textit{Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:\\}
+\item \textit{Conclusion: To me, the conclusion is way too optimistic and biased. Two main points to challenge are:}
 	\begin{enumerate}
-		\item  \textbf{It is true, that no tuning of parameters are needed once the network is ALREADY trained, but based on the experiments in this paper it is obvious that some tuning has been done to find the best performance. Furthermore, what are all these parameters in state-of-the art methods which need tuning? I would like to have a concrete example.}
-		\item  \textbf{The authors implicitly claim that this performance of the architectures can be generalised to all rooms when trained, however this is not demonstrated properly. An interesting experiment would be to choose test the same architecture on a set of two new rooms. This would at least give a hint to how it generalises.}
+		\item  \textit{It is true, that no tuning of parameters are needed once the network is ALREADY trained, but based on the experiments in this paper it is obvious that some tuning has been done to find the best performance. Furthermore, what are all these parameters in state-of-the art methods which need tuning? I would like to have a concrete example.}
+		\item  \textit{The authors implicitly claim that this performance of the architectures can be generalised to all rooms when trained, however this is not demonstrated properly. An interesting experiment would be to choose test the same architecture on a set of two new rooms. This would at least give a hint to how it generalises.}
 	\end{enumerate}
  \textbf{Reply}:
  \begin{enumerate}
@@ -191,7 +192,7 @@ This aspect has been clarified by rewriting the GCC-PHAT Patterns selection desc
 \end{quote}
 into:
 \begin{quote}
-	\textcolor{red}{\textbf{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different amounts of adjacent time frames have been concatenated to test the temporal context effect.}}
+	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 \end{quote}
 \end{enumerate}
 
