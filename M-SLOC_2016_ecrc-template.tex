@@ -162,15 +162,23 @@ Events localization is continuously performed by living beings through brain ela
 
 In the recent years, a special effort has been spent for acoustic source localization \cite{Dibiase2001Robust}, since it has a fundamental role in several applications, such as the study of binaural or monaural models for reproducing the human hearing system \cite{stern-et-al-2006,willert2006probabilistic,saxena2009learning}, the cocktail party problem \cite{roman2003speech, zotkin2004accelerated}, interaction between human and robots \cite{trifa2007real,li2013sound,dashuman2016human} and home assisted living \cite{asaei2009verified,Morales-cordovilla14roomlocalization,principi2015integrated}. This work focuses on the last research field, being the automated tracking of individuals inside a building an important component of any general purpose speech capture system.  This scenario is particularly challenging since it requires dealing with reverberation, overlapping speech, and background noise.
 
-\textcolor{red}{In particular, this work addresses the task of localizing multiple and possibly moving speakers inside a home equipped with several microphones for each room. The algorithm is based on Deep Neural Networks (DNN) and it is able to efficiently use simultaneously the signals coming from the rooms of the building. The following section provides a review of the recent literature on the topic.}
+\textcolor{red}{In particular, this work addresses the task of localizing multiple moving speakers inside a home equipped with several microphones for each room. The algorithm is based on Deep Neural Networks (DNN) and it is able to simultaneously use the signals coming from all the rooms of the building. The proposed approach operates on Generalized Cross Correlation-PHAse Transform (GCC-PHAT) Patterns \cite{xiao2015learning} features calculated from frames 30\,ms long and overlapped by 20\,ms, thus the speakers' positions are estimated every 10\,ms. Such a granular information can be directly exploited by algorithms that operate at the same time scale, such as beamformers \cite{Wolfel2009}. The output can be processed further in order to estimate speakers' locations at a coarser time scale, for example for being used by reasoning algorithms and dialogue managers, that need a general contextual information \cite{Augusto2013}. This aspect has not been addressed in this paper, and it will be investigated in future works. The following section provides a review of the recent literature on the topic.
+}
+
+
 
 \subsection{Related Works}
 \textcolor{red}{The challenges of localizing speakers in multi-room scenarios explain why this task has been devoted  particular attention in the last years.}  For example, in \cite{Rodomagoulakis2017} the authors developed a multi-room spoken command recognizer, while in \cite{ijcnn-vad,vesperini2016deep,Giannoulis2015,Katsamanis2014} voice activity detectors able to concurrently identify the location in time and the room of origin of speech segments have been proposed. In a previous work by the authors \cite{vesperini2016sloc}, a multi-room speaker localization algorithm based on Deep Neural Network (DNN) has been presented.
 
-Typical approaches for retrieving the source of an acoustic event in realistic environments rely on algorithms based on the 
-sound propagation fundamentals. Indeed, considering a microphone array, a sound wave reaches the microphones in different temporal instants, which are observable as phase shifts in the captured signals.  A review of state-of-the-art localization algorithms is presented in \cite{kundu2014acoustic}. In general, the main categories in which the algorithms can be grouped are: steered beamformer based locators, high resolution spectral estimation based locators and TDOA-based locators. The latter technique consists in the estimation of the time difference of arrival (TDOA) from the Generalized Cross Correlation (GCC) spectrum of the signals; successively, from TDOAs, the hyperbolic curves representing the signal direction of arrival (DOA) are determined. However, this method is subject to a severe performance degradation in noisy and reverberant conditions \cite{champagne1996performance}. In \cite{tsiami2014experiments}, the authors present a method exploiting the crosspower spectrum phase and relying on the GCC computation. In this case, advancements are obtained with the help of additional de-reverberation techniques.
-
+Typical approaches for retrieving the position of the source of an acoustic event rely on algorithms based on the 
+sound propagation fundamentals. Indeed, considering \textcolor{red}{multiple microphones}, a sound wave reaches \textcolor{red}{each sensor with different energies} and in different temporal instants, which are observable as phase shifts in the captured signals.  %A review of localization algorithms is presented in \cite{Wolfel2009,}.
+In general, the main categories in which the algorithms can be grouped are: \textcolor{red}{energy-based approaches, Steered-Response Power (SRP) \cite{brandstein1997robust}}, high resolution spectral estimation based locators, and TDOA-based locators. The latter technique consists in the estimation of the time difference of arrival (TDOA) from the Generalized Cross Correlation (GCC) spectrum of the signals; successively, from TDOAs, the hyperbolic curves representing the signal direction of arrival (DOA) are determined. However, this method is subject to a severe performance degradation in noisy and reverberant conditions \cite{champagne1996performance}. In \cite{tsiami2014experiments}, the authors present a method exploiting the crosspower spectrum phase and relying on the GCC computation. In this case, advancements are obtained with the help of additional de-reverberation techniques.
 A more robust algorithm for low Signal to Noise Ratio (SNR) scenarios is based on the Global Coherence Field (GCF), also known as Steered-Response Power (SRP) \cite{brandstein1997robust}. It is a one-stage method where the cost function represents the probability that a given point in space is the source point of the signal \cite{brutti2007classification}. The algorithm cannot operate in real-time due to its high computational burden related to the high number of local maxima in the SRP space \cite{yook2016fast}. For this reason, many strategies to optimize the global-maximum research have been proposed \cite{DoSY07,Minotto2012,Lee2016}. In particular, in \cite{DoSY07} the authors use the stochastic region contraction (SRC) to decrease the computational cost. The authors in \cite{transfeld2015acoustic} investigated a framework  suitable for acoustic event localization with a microphone array in far-field context, where a combination of GCC-PHAse Transform (GCC-PHAT) and SRP-PHAse Transform (SRP-PHAT) methods is employed. The resulting spatial likelihood function is spatially filtered and smoothed, significantly outperforming the reference algorithm, by means of an onset event detection technique. 
+
+\textcolor{red}{Energy-based approaches localize speakers by using the energy measures of the signals acquired from the acoustic sensors \cite{Cobos2017,Meng2017}. More in details, these techniques are based on the average of the signals energy calculated over several windows of the signals themselves. Energy-based methods have been gaining significant popularity in wireless acoustic sensor networks scenarios, since they do not require a precise synchronization of the sensors. Their disadvantage, however, is their inferior accuracy with respect to TDOA-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading \cite{Cobos2017}. Additionally, source position is estimated by using an averaged measure, instead of a sample-by-sample or frame-by-frame information, thus making these techniques intrinsically less precise \cite{Cobos2017}. For a survey on energy-based localization methods, the interested reader can refer to \cite{Cobos2017,Meng2017}.}
+
+%In \cite{Chen2007a,Chen2007b}, the authors estimated the positions of the participants of a meeting by using the average energies of their speech signals acquired with the microphones integrated in their laptops.  However, microphones are supposed very close to the meeting participants, thus a higher Signal-to-Noise ratio is expected with respect to distant microphones. Ampeliotis and Berberidis \cite{AMPELIOTIS2010} use the signal strength for multi-source localization, addressing in particular computational complexity problem of the alternating projection algorithm. 
+
 
 The aforementioned algorithms require a specific and accurate tuning of their system parameters, which leads to a lack of generality for the system itself. Alternatively, data-driven approaches are able to extract key features from the input signal independently from the setting of application. In sight of this, neural networks can tackle these problems as they provide an \textit{expert system} able to work with a minimal human involvement. 
 
@@ -269,7 +277,7 @@ GCC-PHAT Patterns are calculated by using only microphone pairs belonging to the
 \Delta\tau_{max} = \frac{d_{max}}{\nu} \cdot f_s \approx 24,
 \end{equation} 
 where $\nu=340$\,m/s is the sound speed.
-Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a \textcolor{red}{frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.} %ndFAB
+Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a \textcolor{red}{frame size equal to 30\,ms and a hop size equal to 10\,ms, corresponding to 480 samples and 160 samples at the sample rate of 16\,kHz.} %ndFAB
 Under such conditions, only the central $2\Delta\tau_{max} + 1$ CSPCM values contain useful information. Thus, the first 50 values of $C_{ab}(n,\tau)$ are selected to compose the GCC-PHAT Pattern $\mathbf{x}_{ab}[n]$. 
 Finally, the vectors originated by the different considered microphone pairs are standardized to have zero mean and unitary standard deviation.
 Formally: 
@@ -294,7 +302,7 @@ An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors re
 
 \begin{figure}[h]
 	\centering
-	%\includegraphics[width=0.9\columnwidth]{imgs/GCC-PHAT-PATTERN}
+	\includegraphics[width=0.9\columnwidth]{imgs/GCC-PHAT-PATTERN}
 	\caption{An example of GCC-PHAT Pattern matrix $\mathbf{X}[n]$ obtained from a combination of microphones belonging to a ceiling array. Blue tones represent maximum amplitude values of $C_{ab}(n,\tau)$ in the range of considered $\tau$.}
 	\label{fig:GCC-PATT}
 \end{figure}
@@ -314,7 +322,7 @@ The temporal context consists in the frames of the signal adjacent to the one be
 \end{array}
 \right ],
 \end{equation}
-where $C$ is the total length of the chunk, and $s$ denotes the stride, which defines the temporal extension of the chunk. \figref{fig:cxt_str} shows an example with $s=2$.
+where $C$ is the total length of the chunk, and $s$ denotes the stride, which defines the extension of the chunk.  \textcolor{red}{The total length of the chunk in seconds is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]/f_s$, where $P$ is the hop size in samples, and $L$ is the analysis frame length in samples.} \figref{fig:cxt_str} shows an example with $s=2$.
 
 In cases where the selected frames do not contain speech, the GCC-PHAT Patterns matrices related to the first or the last frame of the segment are replicated accordingly.
 %TODO sostituire ''do not contain speech'' con va fuori limite or similar...cf punto 6d dell Results discussion review
@@ -467,7 +475,7 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 %	The starting point was the circular array placed on the room ceilings, which is composed of $N = 6$ microphones. Excluding the central one, it leads to 10 possible pairs. Then, combinations of signal pairs $\mathbf{\tilde{x}}_{ab}^{(i)}[n]$ coming from the wall arrays have been gradually added to the ceiling array signals with a sequential forward selection strategy, in order to arrange the evaluated $\mathbf{X}[n]$.
 	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
-	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e. $s=\{1,3,4,5\}$, and the context dimensions, i.e. $C=\{3,7,11,13,15,17,19,21\}$.
+	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e., $s=\{1,3,4,5\}$, and the context dimensions, i.e., $C=\{3,7,11,13,15,17,19,21\}$.
 \end{enumerate}
 
 
@@ -739,7 +747,7 @@ The best localization performance has been obtained by using the CNN-SLOC having
 %by the variation of the feature set, except as previously said about stability to vary of the input microphones. %(da modificare)
 
 The results obtained at the very end of the optimization procedure show the ability of the CNN architecture to efficiently exploit the contextual information of adjacent frames, with a reduction of 42.2\% of the localization error with respect to the configuration with $(C,s)=(1,1)$, as shown in \figref{fig:cxtCNN-S}. 
-The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration approximatively equal to \textcolor{red}{0.85\,s.}
+The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration equal to \textcolor{red}{0.83\,s for both rooms. The total length of the segment is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]\cdot f_s$, where $P=160$ is the frame period in samples,  $L=480$ is the analysis frame length in samples, and $f_s=16$\,kHz is the sample rate.} 
 
 \begin{figure}[t]
 	\centering
@@ -1002,7 +1010,7 @@ As result of the third optimization stage, the best performing MLP layout in the
 As performed with the Simulated dataset, the effects of the temporal context have been studied after the third optimization stage.  The introduction of the temporal context leads to an average localization accuracy of 387\,mm with the CNN-SLOC for the 2Rx1N configuration. As highlighted in \figref{fig:cxtCNN-R}, the RMSE reduces by 37.2\% for the 1Rx1N configuration and by 37.5\% for the 2Rx1N configuration. In concordance with the results obtained with the Simulated dataset, the MLP architecture benefits from the introduction of the temporal context, with a resulting error reduction of 36\% for the 1Rx1N and of 29\% for the 2Rx1N configuration.
 
 
-For the CNN-SLOC applied in the Real dataset, the best resulting values of context and strides are $(C,s)=(19,4)$ and $(C,s)=(17,3)$ respectively for Kitchen and Living Room, corresponding to a segment of length about \textcolor{red}{0.76\,s and 0.51\,s.} 
+For the CNN-SLOC applied in the Real dataset, the best resulting values of context and strides are $(C,s)=(19,4)$ and $(C,s)=(17,3)$ respectively for Kitchen and Living Room, corresponding to segments of length \textcolor{red}{0.75\,s and 0.51\,s.} 
 
 
 \figref{ctx-str-REAL} reports the RMSE for different context sizes $C$ and strides $s$ in the case of 1Rx1N applied to the Kitchen room.
@@ -1110,7 +1118,7 @@ Details of the best performing configurations are provided in \tableref{tab:best
 \section{Conclusion and Outlook}
 \label{sec:concl}
 
-In this paper, a DNN-based approach for single speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of obtained performance is detailed. The neural network employs GCC-PHAT Patterns as input features, which have been obtained by combining various microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
+In this paper, a DNN-based approach for single localization in a multi-room domestic environment has been proposed and an extensive evaluation of obtained performance is detailed. The neural network employs GCC-PHAT Patterns as input features, which have been obtained by combining various microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
 A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. 	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 %%
 The algorithm implicitly requires an Oracle VAD in order to process only human speech. Results are evaluated on the DIRHA Dataset in comparison with two state-of-the-art algorithm, based respectively on Crosspower Spectrum Phase estimation and on Steered Response Power.
