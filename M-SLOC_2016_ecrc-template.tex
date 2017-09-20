@@ -220,7 +220,7 @@ Finally, \secref{sec:concl} concludes the manuscript.
 
 \begin{figure*}[t]
 	\centering
-	\includegraphics[width=\textwidth]{imgs/alg_2_3}
+	\includegraphics[width=\textwidth]{imgs/alg_2_2}
 	\caption{Block diagram of the proposed Deep Neural Network algorithm for Speaker Localization. 	In this figure, the full Convolutional Neural Network (CNN) architecture is depicted. \textcolor{red}{TODO: aggiungere VAD ed origine degli assi.}}
 	\label{fig:proposed_method}
 \end{figure*}
@@ -428,7 +428,8 @@ The analysis of the DNN-SLOC performance has been conducted on the DIRHA dataset
 The dataset is composed of two subsets, named \emph{Simulated} and \emph{Real}. For each of them several \textit{scenes} have been recorded, composed of typical situations observable in a domestic context. As reported in \tableref{tab:dataset}, the two subsets differ in terms of scenes and total length: in the Simulated set the scenes length is fixed to 60 seconds, while it varies in the Real set. In addition, the latter has been recorded with persons moving in the rooms and speaking towards different directions throughout the scenes, whilst the Simulated has been obtained by convolving a fixed set of measured Room Impulse Responses (RIRs) with recorded signals.
 The Simulated subset is also characterized by a lower SNR compared to the Real one and overlapping speech does not occur.
 
-Our study focuses on two rooms of the dataset, i.e.,  the Kitchen and the Living Room, due to three main aspects. First of all, these rooms consist in the area of a home-environment where most of the events take place. In addition, being the widest rooms of the apartment, the localization task is more challenging. Finally, the number of microphones are higher compared to the other rooms, and it comprises both wall and ceiling arrays.
+Our study focuses on two rooms of the dataset, i.e.,  the Kitchen and the Living Room, due to three main aspects. First of all, these rooms consist in the area of a home-environment where most of the events take place. In addition, being the widest rooms of the apartment, the localization task is more challenging. \textcolor{red}{The room dimensions are respectively $4790 \times 3800\, \left [mm\right ]$ for the Kitchen and $4790 \times 4850\, \left [mm\right ]$ for the Living Room.}
+Finally, the number of microphones are higher compared to the other rooms, and it comprises both wall and ceiling arrays.
 
 \begin{table}[t]
 	%\renewcommand{\arraystretch}{1.2}
@@ -523,7 +524,7 @@ Similarly to a classification task, $P_{cor}$ provides a measure of the localiza
 \centering
 \begin{tabular}{cccc}
 \multicolumn{4}{c}{$N_{TOT}$}                                                                                                                                      \\ \hline
-\multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Simulations\\ Dataset\end{tabular}} & \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}}Real\\ Dataset\end{tabular}} \\ \hline
+\multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}Simulated\\ Dataset\end{tabular}} & \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}}Real\\ Dataset\end{tabular}} \\ \hline
 \multicolumn{1}{c|}{Kitchen}           & \multicolumn{1}{c|}{Livingroom}          & \multicolumn{1}{c|}{Kitchen}                  & Livingroom                  \\ \hline
 \multicolumn{1}{c|}{47630}             & \multicolumn{1}{c|}{44801}               & \multicolumn{1}{c|}{17580}                    & 12885                      
 \end{tabular}
@@ -862,10 +863,10 @@ A similar behavior can be observed for different values of the stride, where a p
 	]
 	%marks = * triangle square x pentagon diamond
 	
-	\addplot [draw = CadetBlue, mark = *, CadetBlue] coordinates{(0,466.28) (1,440.11) (2,388.49) (3,383.4) (4,383.6) (5,563.75) (6,439.3) (7,379.4)};
+	\addplot [draw = CadetBlue, mark = *, CadetBlue] coordinates{(0,466.28) (1,440.11) (2,388.49) (3,383.4) (4,383.6) (5,386.43) (6,439.3) (7,379.4)};
 	\addplot [draw = Black, mark = square*, Black] coordinates{(0,426.7) (1,370.89) (2,330.41) (3,320) (4,347.24) (5,331.67) (6,338.79) (7,468.84)};
 	\addplot [draw = MidnightBlue, mark =triangle*, MidnightBlue] coordinates{(0,411.87) (1,347.91) (2,322.94) (3,322.76) (4,336.3) (5,336.04) (6,330.29) (7,308.79)};
-	\addplot [draw = Gray, mark =diamond*, Gray] coordinates{(0,412.31) (1,366.82) (2,327.48) (3,330.62) (4,310.63) (5,371.1) (6,350) (7,334.71)};
+	\addplot [draw = Gray, mark =diamond*, Gray] coordinates{(0,412.31) (1,366.82) (2,327.48) (3,330.62) (4,310.63) (5,349.32) (6,350) (7,334.71)};
 	\legend{\emph{Strides 1},\emph{Strides 3},\emph{Strides 4},\emph{Strides 5}}
 	\end{axis}
 	\end{tikzpicture}%
