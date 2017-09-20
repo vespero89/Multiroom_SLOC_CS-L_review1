@@ -169,7 +169,10 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 \textbf{Reply}: \textcolor{red}{TODO} - Check experiments
 
 \item \textit{Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\}
-\textbf{Reply}: Thank you for your comment. Quello che conta è soprattutto l'estensione temporale del constesto.
+\textbf{Reply}: Thank you for your comment. The sentence has been modified as follows:
+\begin{quote}
+\textcolor{red}{Observing the results related to the MLP-SLOC (\figref{sfig:mlp-real-context}), it can be noticed that increasing the context size $C$ up to 15 (stride equal to 3), 17 (stride equal to 5), or 19 (stride 1 and 4) reduces the RMSE. Regarding the behavior for different values of the stride, a part from the results related to stride equal to 1, the performance difference is negligible, since it amounts at most to 1.93\,mm. Similar considerations apply to the behavior of CNN-SLOC for different sizes of the temporal context and of the stride (\figref{sfig:cnn-real-context}).}
+\end{quote}
 
  %The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
 

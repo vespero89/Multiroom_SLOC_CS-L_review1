@@ -748,7 +748,7 @@ The best localization performance has been obtained by using the CNN-SLOC having
 %by the variation of the feature set, except as previously said about stability to vary of the input microphones. %(da modificare)
 
 The results obtained at the very end of the optimization procedure show the ability of the CNN architecture to efficiently exploit the contextual information of adjacent frames, with a reduction of 42.2\% of the localization error with respect to the configuration with $(C,s)=(1,1)$, as shown in \figref{fig:cxtCNN-S}. 
-The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration equal to \textcolor{red}{0.83\,s for both rooms. The total length of the segment is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]\cdot f_s$, where $P=160$ is the frame period in samples,  $L=480$ is the analysis frame length in samples, and $f_s=16$\,kHz is the sample rate.} 
+The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(17,5)$ for Kitchen and Living Room, respectively, which means processing a segment of duration equal to \textcolor{red}{0.83\,s for both rooms.} 
 
 \begin{figure}[t]
 	\centering
@@ -799,14 +799,13 @@ In this case the CNN results more effective with respect to the MLP architecture
 %ndFAB Results discussion - 6c)
 \textcolor{red}{{as we can notice from the table \tableref{tab:bestCONF_SIMU}.}}
 In particular, the CNN-2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
-Indeed, the introduction of a temporal context improves the performance also with the MLP architecture, with RMSE reduction equal to 21.5\%.
+Indeed, the introduction of a temporal context improves the performance also with the MLP architecture, with an RMSE reduction equal to 21.5\%.
+
 The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the values of the RMSE for different strides $s$ are plotted while varying the temporal context $C$. %It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
 %ndFAB Results discussion - 6c)
 %It can be noticed that a similar trend of performance with respect to temporal resolution \textcolor{red}{{(i.e., equal to $C\cdot s$)}} of the input values is registered.
 %%
-\textcolor{red}{Observing the results related to the MLP-SLOC \figref{sfig:mlp-real-context}, it can be noticed that increasing the context size up to 19 frames generally reduces the RMSE regardless the value of the stride. Similarly, increasing the value of the stride the RMSE reduces. Indeed, the differences when using stride greater than 3 are more limited. Regarding the performance of the CNN-SLOC (\figref{sfig:cnn-real-context}), the behavior is similar to the one observed for the MLP-SLOC. Here, however the performance improves up to a context of 15 frames. 
-
-A similar behavior can be observed for different values of the stride, where a part from the results related to stride equal to 1, the results are similar. }
+\textcolor{red}{Observing the results related to the MLP-SLOC (\figref{sfig:mlp-real-context}), it can be noticed that increasing the context size $C$ up to 15 (stride equal to 3), 17 (stride equal to 5), or 19 (stride 1 and 4) reduces the RMSE. Regarding the behavior for different values of the stride, a part from the results related to stride equal to 1, the performance difference is negligible, since it amounts at most to 1.93\,mm. Similar considerations apply to the behavior of CNN-SLOC for different sizes of the temporal context and of the stride (\figref{sfig:cnn-real-context}).}
 
 \begin{figure}[t] 
 	\centering
@@ -917,7 +916,7 @@ The main difference between the Real and the Simulated  dataset is the position 
 
 
 \subsubsection{Evaluation without the temporal context}
-\tableref{tab:results_REAL} reports a comparison among the evaluated algorithms with the best results obtained for each configuration. As in \tableref{tab:results_SIMU}, for the DNN-SLOC, both the the performance are reported without temporal context and at the end of the fourth stage, in which performance have been studied investigating the temporal context.
+\tableref{tab:results_REAL} reports a comparison among the evaluated algorithms with the best results obtained for each configuration. As in \tableref{tab:results_SIMU}, for the DNN-SLOC, both the performance are reported without temporal context and at the end of the fourth stage, in which performance have been studied investigating the temporal context.
 
 The localization performance obtained by the CSP-SLOC algorithm is quite similar to the one in the Simulated case study, with an average RMSE equal to 1280\,mm. The SRP-PHAT algorithm attains an averaged RMSE equal to 792\,mm. The performance achieved by the comparative methods is significantly superior than the one obtained in the Simulated case study. The motivation is the higher SNR level characterizing the audio files in the Real dataset.
 
