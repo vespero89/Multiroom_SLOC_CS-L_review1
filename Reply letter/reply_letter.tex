@@ -19,6 +19,8 @@
 \usepackage{multirow}
 \usepackage{mathtools}
 \usepackage{xcolor}
+
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
 \begin{document}
 
 
@@ -93,7 +95,7 @@ into:
 \begin{quote}
 	\textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.}
 \end{quote}
-Additionally, the origin of the coordinates system has been added to Fig. 1.}
+Additionally, the origin of the coordinates system has been added to Fig. 1.
 
 
 \item \textit{Did the authors experiment with the frame ? 480ms seems quite high to me and seems to violate the assumption of the aqcuired signal to be almost stationary within a frame. In my experience 64-128 is more appropriate.\\}
