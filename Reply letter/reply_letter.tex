@@ -169,7 +169,9 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 \textbf{Reply}: \textcolor{red}{TODO} - Check experiments
 
 \item \textit{Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\}
-\textbf{Reply}: The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
+\textbf{Reply}: Thank you for your comment. Quello che conta è soprattutto l'estensione temporale del constesto.
+
+ %The temporal resolution of the input values is equal to $C\cdot s$. Cf. Section 5.2.2 
 
 \item \textit{The best performance is found when context corresponding to 8.5\,s is considered, which in my opinion is quite a lot for some applications but for others it is acceptable. This should be addressed.\\}
 \textbf{Reply}:  Thank you for noticing this. The context size was erroneously reported as equal to 8.5\,s, however for the simulated dataset (Section 5.2.2) the actual value is 0.83\,s both for the kitchen and for the living room. For the real dataset, the actual value is 0.75\,s for the kitchen and 0.51\,s for the living room. The context size is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]/f_s$, where $C$ is the number of frames, $s$ is the stride, $P=160$ is the hop size in samples,  $L=480$ is the analysis frame length in samples, and $f_s=16$\,kHz is the sample rate. The error has been corrected in Section 5.2.2. and Section 5.3.2. Additionally, the following sentence has been added to Section 2.2 (Temporal Context)
@@ -214,11 +216,7 @@ This aspect has been clarified by rewriting the description of the GCC-PHAT Patt
 \textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
 
 \item \textit{Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\}
-\textbf{Reply}: The sentence in Section 6 - Conclusion and Outlook has been modified as follows:
-\begin{quote}
-	\textit{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while the temporal context has been tested by means of close in time frames.}
-\end{quote}
-into:
+\textbf{Reply}: Thank you for comment. The sentence in Section 6 (Conclusion and Outlook) has been modified as follows:
 \begin{quote}
 	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 \end{quote}

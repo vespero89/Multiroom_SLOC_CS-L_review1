@@ -368,7 +368,7 @@ where $\ast$ represent the convolution operation.
 The different feature maps obtained from each kernel of a convolutional layer are then summed to compose 
 the input data for the following layer.
 
-Commonly, a kernel layer is coupled with a pooling layer in order to assess more robustness against patterns shifts in the processed data. The CNN structure is completed by an MLP layer, whose task is to produce the network response - \textcolor{red}{\textbf{the estimated $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ positions in this case.}} %ndFAB
+Commonly, a kernel layer is coupled with a pooling layer in order to assess more robustness against patterns shifts in the processed data. The CNN structure is completed by an MLP layer, whose task is to produce the network response, \textcolor{red}{i.e., the estimated $\left ( \chi,\psi \right ) $ positions in millimeters in this case.} %ndFAB
 
 Although this architecture was designed for image processing, several works in the literature have employed CNNs in the audio field \cite{thomas2014analyzing,mcloughlin2015low}. In this work, we exploit a 3-D arrangement of the input data (as described in \secref{sec:TEE}), %(\textbf{ndemap: dove?})),
 inspired by what occurs in image processing with RGB channels. Thus, the CNN-SLOC is able to efficiently process adjacent frames and to exploit the temporal evolution of the audio signal \cite{wirn2016-vad}. Up to the authors' knowledge, employing CNNs for indoor speaker localization are not present in the scientific literature.
@@ -616,7 +616,7 @@ Furthermore, even if only little improvement is observable in terms of RMSE for 
 The boxplots show in terms of mean and standard deviation a narrow dispersion of results for both the CNN and MLP architectures.
 %Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room.
 %ndFAB results discussion 6a) 
-\textcolor{red}{\textbf{Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE.}}
+\textcolor{red}{{Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE.}}
 %%
 In details, the best MLP layouts for the Kitchen and Living room are two single layer networks of 256 and 1024 units, respectively. %As concerns the CNN-SLOC, the two best layouts are composed of a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by a two layers MLP with  512, 512 units and 128, 256 units respectively for Kitchen and Living Room.
 With regards to the CNN-SLOC, the two best layouts are the following: for the Kitchen, a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 512, 512 units, while for Livingroom, a single convolutional layer of 24 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 256 and 512 units.
@@ -796,17 +796,20 @@ The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(
 
 In this case the CNN results more effective with respect to the MLP architecture, and it is able to further reduce the RMSE,
 %ndFAB Results discussion - 6c)
-\textcolor{red}{\textbf{as we can notice from the table \tableref{tab:bestCONF_SIMU}.}}
+\textcolor{red}{{as we can notice from the table \tableref{tab:bestCONF_SIMU}.}}
 In particular, the CNN-2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
 Indeed, the introduction of a temporal context improves the performance also with the MLP architecture, with RMSE reduction equal to 21.5\%.
-The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the different strides $s$ are plotted while varying the temporal context $C$. %It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
+The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the values of the RMSE for different strides $s$ are plotted while varying the temporal context $C$. %It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
 %ndFAB Results discussion - 6c)
-It can be noticed that a similar trend of performance with respect to temporal resolution \textcolor{red}{\textbf{(i.e., equal to $C\cdot s$)}} of the input values is registered.
+%It can be noticed that a similar trend of performance with respect to temporal resolution \textcolor{red}{{(i.e., equal to $C\cdot s$)}} of the input values is registered.
 %%
+\textcolor{red}{Observing the results related to the MLP-SLOC \figref{sfig:mlp-real-context}, it can be noticed that increasing the context size up to 19 frames generally reduces the RMSE regardless the value of the stride. Similarly, increasing the value of the stride the RMSE reduces. Indeed, the differences when using stride greater than 3 are more limited. Regarding the performance of the CNN-SLOC (\figref{sfig:cnn-real-context}), the behavior is similar to the one observed for the MLP-SLOC. Here, however the performance improves up to a context of 15 frames. 
 
+A similar behavior can be observed for different values of the stride, where a part from the results related to stride equal to 1, the results are similar. }
 
 \begin{figure}[t] 
 	\centering
+	\begin{subfigure}{0.45\columnwidth}	
 	\pgfplotsset{
 		%legend style={legend pos=north east}
 		legend style={
@@ -814,11 +817,12 @@ It can be noticed that a similar trend of performance with respect to temporal r
 			anchor=north east,
 		},
 	}%
+	\centering
 	\begin{tikzpicture}[scale=0.68]
 	\begin{axis}[
 	xmax=7.5,xmin=-0.5,
 	ymin= 325,ymax=575,
-	title=\emph{MLP Kitchen 1Rx1N},ylabel=RMSE (mm),xlabel={Context $C$},
+	title=,ylabel=RMSE (mm),xlabel={Context $C$},
 	xtick={0,1,...,7},
 	xticklabels={3,7,11,13,15,17,19,21},
 	ytick={350,400,...,550},
@@ -833,13 +837,25 @@ It can be noticed that a similar trend of performance with respect to temporal r
 	\legend{\emph{Strides 1},\emph{Strides 3},\emph{Strides 4},\emph{Strides 5}}
 	\end{axis}
 	\end{tikzpicture}%
+		\caption{Results related to MLP-SLOC algorithm.}\label{sfig:mlp-real-context}
+	\end{subfigure}
 	%
 	%
+	\hfill
+	\begin{subfigure}{0.45\columnwidth}	
+		\pgfplotsset{
+			%legend style={legend pos=north east}
+			legend style={
+				at={(1.15,1.05)},
+				anchor=north east,
+			},
+		}%
+			\centering
 	\begin{tikzpicture}[scale=0.68]
 	\begin{axis}[
 	xmax=7.5,xmin=-0.5,
 	ymin= 275,ymax=625,
-	title=\emph{CNN Kitchen 1Rx1N},ylabel=RMSE (mm),xlabel={Context $C$},
+	title=\emph{},ylabel=RMSE (mm),xlabel={Context $C$},
 	xtick={0,1,...,7},
 	xticklabels={3,7,11,13,15,17,19,21},
 	ytick={300,350,...,600},
@@ -853,10 +869,12 @@ It can be noticed that a similar trend of performance with respect to temporal r
 	\legend{\emph{Strides 1},\emph{Strides 3},\emph{Strides 4},\emph{Strides 5}}
 	\end{axis}
 	\end{tikzpicture}%
+	\caption{Results related to CNN-SLOC algorithm.}
+		\end{subfigure}
 	%
 	%
 	%\includegraphics[width=0.8\textwidth]{imgs/cxtSIMU.png}
-	\caption{Performance trend in the Simulated dataset for different \textit{strides} at growing \textit{context}. The considered room is Kitchen with 1Rx1N configuration, the two DNN are plotted.}
+	\caption{Performance trend in the Simulated dataset for different values of the stride $s$ and context size $C$. The results are related to the Kitchen room and they have been obtained by using the 1Rx1N architecture.}\label{sfig:cnn-real-context}
 	\label{ctx-str-SIMU}
 \end{figure}
 
@@ -1131,7 +1149,7 @@ The proposed method operates in a complete autonomous way.
 Indeed, once trained, the neural network provides the coordinates of the speaker directly from the speech excerpts of the signals captured by the microphone arrays.
 
 %This allows to totally avoid the fine-tuning of parameters being generally needed by state-of-the-art approaches, which depends on the application environment and implicates a lack of generality.
-\textcolor{red}{\textbf{Differently, a lack of generality is observed in the proposed state-of-the-art approaches. For example, the CSP-SLOC requires the knowledge of the room geometry, in addition, parameters such as iterations and number of searched maxima has been fine-tuned for the SRP-SLOC.}}
+\textcolor{red}{{Differently, a lack of generality is observed in the proposed state-of-the-art approaches. For example, the CSP-SLOC requires the knowledge of the room geometry, in addition, parameters such as iterations and number of searched maxima has been fine-tuned for the SRP-SLOC.}}
 %fine-tuning phase needed by the typical approaches on varying of the application environment.
 
 Future works will be oriented on the development of a joint multi-room VAD \cite{ijcnn-vad,ijcnn2016-vad} and SLOC neural network based system, in order to obtain an integrated and fully data-driven algorithm.
