@@ -322,7 +322,7 @@ The temporal context consists in the frames of the signal adjacent to the one be
 \end{array}
 \right ],
 \end{equation}
-where $C$ is the total length of the chunk, and $s$ denotes the stride, which defines the extension of the chunk.  \textcolor{red}{The total length of the chunk in seconds is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]/f_s$, where $P$ is the hop size in samples, and $L$ is the analysis frame length in samples.} \figref{fig:cxt_str} shows an example with $s=2$.
+where $C$ is the total length of the chunk, and $s$ denotes the stride, which defines the extension of the chunk.  \textcolor{red}{The total length of the chunk in seconds is calculated as $\left [s\cdot H \cdot(C-1)+L \right ]/f_s$, where $H$ is the hop size in samples, and $L$ is the analysis frame length in samples.} \figref{fig:cxt_str} shows an example with $s=2$.
 
 In cases where the selected frames do not contain speech, the GCC-PHAT Patterns matrices related to the first or the last frame of the segment are replicated accordingly.
 %TODO sostituire ''do not contain speech'' con va fuori limite or similar...cf punto 6d dell Results discussion review
@@ -350,7 +350,21 @@ f(\mathbf{u}[n]) = 	\varphi \left( b_2 + W_2 \left( \varphi \left( b_1 + W_2 \cd
 where $W_i$ and $b_{i}$ are the respective synaptic weights and the biases of the $i$-th layer.
 The  behavior  of  this architecture  is  parametrized  by  the connection weights, which are adapted during the supervised network training, accomplished by using the Adam algorithm \cite{kingma2014adam} for the stochastic gradient-based optimization and a feature wise batch normalization \cite{ioffe2015batch}.
 
-In the feature extraction block the GCC-PHAT Patterns are arranged in 2-D or 3-D matrices, whilst the MLP accepts input data as frame-by-frame vectors. To fed the this neural network, the matrices are flattened in a vector and the input layer consists of a number of units equal to $C\cdot M$.
+In the feature extraction block the GCC-PHAT Patterns are arranged in 2-D or 3-D matrices, whilst the MLP accepts input data as frame-by-frame vectors. \textcolor{red}{Thus, the matrices are flattened in a vector and the input layer consists of a number of units equal to $50 \cdot R\cdot C$, where $R$ is the number of rows of matrix $\mathbf{X}[n]$ defined in \eqref{eq:fx_matrix}.}
+
+\textcolor{red}{Regarding the computational complexity, without taking into account the calculation of the GCC-PHAT Patterns  and considering additions and multiplications as separate operations \cite{DoSY07}, the total number of operations for each layer is given by 
+\begin{equation}
+\text{Cost}_{\text{MLP}} = \sum_{i=1}^P 2Q_{i-1}Q_i + \sum_{i=1}^{P-1} Q_i ,
+\end{equation}
+where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
+}
+
+\textcolor{red}{Regarding the computational complexity, without taking into account the calculation of the GCC-PHAT Patterns  and considering additions and multiplications as separate operations \cite{DoSY07}, the total number of operations for each layer is given by 
+\begin{equation}
+\text{Cost}_{\text{MLP}} = \sum_{i=1}^P 2Q_{i-1}Q_i + \sum_{i=1}^{P-1} Q_i ,
+\end{equation}
+where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
+}
 
 
 \subsection{Convolutional Neural Network}
@@ -408,8 +422,8 @@ As first step, a delay-and-sum beamformer is steered in the considered volume fo
 \label{eq:SRP}
 P_n(\mathbf{s}) \equiv \int_{nT}^{(n+1)T} \left| \sum_{a=1}^M w_a s_a (t -\tau (\mathbf{s},a))\right|^2 dt,
 \end{equation}
-where $s_a(t)$ is the signal from a generic microphone $a$, $w_a$ its weight, $\tau (\mathbf{s},a)$ the distance in the time domain between $\mathbf{s}$ and that microphone. Practically, \eqref{eq:SRP} is evaluated in the frequency domain, scaled by the phase transform weighting factor (PHAT). The SRC is iteratively applied: $J_0 = 5000$ points are randomly evaluated, $N_0 = 20$ points maximizing \eqref{eq:SRP} are selected and the search volume is restricted to a smaller region that contains the $N_0$ points.
-In the following, this algorithm will be referred as SRP-SLOC.
+where $s_a(t)$ is the signal from a generic microphone $a$, $w_a$ its weight, $\tau (\mathbf{s},a)$ the distance in the time domain between $\mathbf{s}$ and that microphone. Practically, \eqref{eq:SRP} is evaluated in the frequency domain, scaled by the phase transform weighting factor (PHAT). The SRC is iteratively applied: $J_0 = 5000$ points are randomly evaluated, $N_0 = 20$ points maximizing \eqref{eq:SRP} are selected and the search volume is restricted to a smaller region that contains the $N_0$ points. In the following, this algorithm will be referred as SRP-SLOC.
+
 
 
 
@@ -1132,11 +1146,13 @@ Details of the best performing configurations are provided in \tableref{tab:best
 	\label{ctx-str-REAL}
 \end{figure}
 
+\subsection{Computational complexity}
+The computational complexity of the proposed approach and of the comparative methods has been calculated taking as reference the computational complexity 
 
 \section{Conclusion and Outlook}
 \label{sec:concl}
 
-In this paper, a DNN-based approach for single localization in a multi-room domestic environment has been proposed and an extensive evaluation of obtained performance is detailed. The neural network employs GCC-PHAT Patterns as input features, which have been obtained by combining various microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
+In this paper, a DNN-based approach for speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of obtained performance has been performed. The neural network employs GCC-PHAT Patterns as input features, which have been obtained by combining various microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
 A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. 	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 %%
 The algorithm implicitly requires an Oracle VAD in order to process only human speech. Results are evaluated on the DIRHA Dataset in comparison with two state-of-the-art algorithm, based respectively on Crosspower Spectrum Phase estimation and on Steered Response Power.
