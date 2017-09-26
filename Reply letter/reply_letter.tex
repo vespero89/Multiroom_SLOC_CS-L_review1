@@ -56,17 +56,19 @@ The Authors
 \section{Answers to reviewer 1}\label{sec:rev1}
 \begin{enumerate}
 \item \textit{Given that a map of the environment is available, it would be interesting to see the performance of a ray-tracing style algorithm. It should be possible to find the intersection of all the paths given by the peaks in each microphone pair GCC-PHAT output. If it is not feasible to carry out this experiment, I would suggest a dicussion of this kind of method and refer to literature.\\}
-\textbf{Reply}: \textcolor{red}{TODO} - Fabio - looking for implementations of such algorithms - discuss in literature
+\textbf{Reply}: Thank you for your comment. It is authors' opinion that the CSP-SLOC algorithm described in Section 3.1 and considered in the comparative evaluation algorithm is a ray-tracing style  as suggested by the reviewer. CSP-SLOC (Tsiami et al. ``Experiments in acoustic source localization using sparse arrays in adverse indoors environments,'' in Proc. of EUSIPCO, 2014) belongs to the family of TDOA-based locators: it considers a room equipped with several microphone and estimates the speaker's position by calculating the intersection between the Direction of Arrivals (DOAs) curves obtained from each array. The DOAs are estimated by using the Crosspower Spectrum Phase Coherence Measure, and the ambiguity deriving from the presence of multiple intersection points is solved with a Least Squares solution that provides a Maximum Likelhood location estimate. The innovative contributions of the solution proposed by Tsiami et al. are pre-processing the input signals with a cepstral dereverberation algorithm, and the elimination of possible outliers. It is worth pointing out that Tsiami et al. evaluated their solution on the DIRHA dataset, the same used in our experiments. More in details, the Least Square estimate adopted by Tsiami et al. takes into account that in real environments the DOAs do not perfectly intersect at the same point. Please, let us know if we misinterpreted this comment as we will provide a more appropriate response. In order to clarify this aspect, the Section 1.1 (Related works) and the description of the CSP-SLOC algorithm (Section 3.1) has been modified accordingly.
+
+%\textcolor{red}{TODO} - Fabio - looking for implementations of such algorithms - discuss in literature
 
 \item \textit{Assuming that the microphones are calibrated, a simple way of determining speaker position is to used the signal strength. This would also be valuable to include in a discussion.\\}
-\textbf{Reply}: Thank you for your suggestion. Approaches based on the signal energy have been described in Section 1.1 (Related Work). 
+\textbf{Reply}: Thank you for your suggestion. Up to the authors' knowledge, approaches based on the signal strength (or signal energy) are usually adopted when wireless acoustic sensor networks (WASNs) are employed. The motivation is that in WASNs, sensors synchronization is not guaranteed, thus using TDOA and SRP-based methods is intrinsically not possible. On the contrary, energy-based approaches exploit an average energy measure and an energy decay model, thus they can be adopted when sensors are not synchronized. Their disadvantage, however, is their inferior accuracy with respect to TDOA and SRP-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading. Approaches based on the signal energy have been described in Section 1.1 (Related Work). 
 
 \begin{quote}
 \textcolor{red}{
-Energy-based approaches localize speakers by using the energy measures of the signals acquired from the acoustic sensors \cite{Cobos2017,Meng2017}. More in details, these techniques are based on the average of the signals energy calculated over several windows of the signals themselves. Energy-based methods have been gaining significant popularity in wireless acoustic sensor networks scenarios, since they do not require a precise synchronization of the sensors. Their disadvantage, however, is their inferior accuracy with respect to TDOA-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading \cite{Cobos2017}. Additionally, source position is estimated by using an averaged measure, instead of a sample-by-sample or frame-by-frame information, thus making these techniques intrinsically less precise \cite{Cobos2017}. For a survey on energy-based localization methods, the interested reader can refer to \cite{Cobos2017,Meng2017}.}
+Energy-based approaches localize speakers by using the energy measures of the signals acquired from the acoustic sensors \cite{Cobos2017,Meng2017}. More in details, these techniques are based on the average of the signals energy calculated over several windows of the signals themselves. Energy-based methods have been gaining significant popularity in wireless acoustic sensor networks scenarios, since they do not require the sensors to be precisely synchronized. Their disadvantage, however, is their inferior accuracy with respect to TDOA-based and SRP-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading \cite{Cobos2017}. Additionally, source position is estimated by using an averaged measure, instead of a sample-by-sample or frame-by-frame information, thus making these techniques intrinsically less precise \cite{Cobos2017}. For a survey on energy-based localization methods, the interested reader can refer to \cite{Cobos2017,Meng2017}.}
 \end{quote}
 
-\textcolor{red}{TODO}: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
+%\textcolor{red}{TODO}: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
 
 \item \textit{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
 \textbf{Reply}: Thank you for your comment. These aspect have been clarified by adding the following sentence at the end of Section 1 (Introduction):
@@ -147,6 +149,17 @@ In order to clarify this aspect and better describe the architecture of the prop
 \textcolor{red}{
 In a preliminary stage, a multi-room VAD [16,40] (\textcolor{red}{TODO: controllare che i numeri di ref rimangano gli stessi}) extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.}
 \end{quote}
+
+Additionally, in Section 6 (Conclusion) the sentence:
+\begin{quote}
+The algorithm implicitly requires an Oracle VAD in order to process only human
+speech.
+\end{quote}
+
+has been replaced with the sentence:
+\begin{quote}
+\textcolor{red}{The algorithm implicitly requires an Oracle multi-room VAD that identifies the time boundaries of the audio signals and the source room.}
+ \end{quote}
  
 \item \textit{Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\}
 \textbf{Reply}: \textcolor{red}{TODO - In progress - PAOLO}
@@ -161,14 +174,14 @@ In a preliminary stage, a multi-room VAD [16,40] (\textcolor{red}{TODO: controll
 \end{quote}
 
 \item \textit{Evaluation: What was the number for $N_{TOT}$?\\}
-\textbf{Reply}: Cf. Table XX in Section 5 - Experiments \textcolor{red}{TODO}
+\textbf{Reply}: Thank you for your comment. The values of $N_{TOT}$ has been reported in Table 3.
 
 \item \textit{Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\}
 \textbf{Reply}: \textcolor{red}{TODO} - Explain better what the box-plots show.\\
 Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item \textit{Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\}
-\textbf{Reply}: Thank you for your remark. Indeed, for $C=17$ and $C=19$ we erroneously reported the RMSE of an early experiment. The figure has been modified by reporting the correct values.
+\textbf{Reply}: Thank you for your remark. Indeed, for $C=17$ and $C=19$ we erroneously reported the RMSE values early experiments. The figure has been modified by reporting the correct values.
 
 \item \textit{Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\}
 \textbf{Reply}: Thank you for your comment. The sentence has been modified as follows:
@@ -182,7 +195,7 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 \textbf{Reply}:  Thank you for noticing this. The context size was erroneously reported as equal to 8.5\,s, however for the simulated dataset (Section 5.2.2) the actual value is 0.83\,s both for the kitchen and for the living room. For the real dataset, the actual value is 0.75\,s for the kitchen and 0.51\,s for the living room. The context size is calculated as $\left [s\cdot H \cdot(C-1)+L \right ]/f_s$, where $C$ is the number of frames, $s$ is the stride, $H=160$ is the hop size in samples,  $L=480$ is the analysis frame length in samples, and $f_s=16$\,kHz is the sample rate. The error has been corrected in Section 5.2.2. and Section 5.3.2. Additionally, the following sentence has been added to Section 2.2 (Temporal Context)
 
 \begin{quote}
-\textcolor{red}{The total length of the chunk in seconds is calculated as $\left [s\cdot P \cdot(C-1)+L \right ]/f_s$, where $P$ is the hop size in samples, and $L$ is the analysis frame length in samples.}
+\textcolor{red}{The total length of the chunk in seconds is calculated as $\left [s\cdot H \cdot(C-1)+L \right ]/f_s$, where $H$ is the hop size in samples, and $L$ is the analysis frame length in samples.}
 \end{quote}
 
 %This was another typo. Considering that the temporal context is equal to $C\cdot s$, for the best case it results equal to 85 frames, which corresponds to 0.85\,s - cf. Section 5.2.2. The same is for the evaluations on the Real dataset, cf. Section 5.3.2.
@@ -207,30 +220,50 @@ This aspect has been clarified by rewriting the description of the GCC-PHAT Patt
 		\item  \textit{It is true, that no tuning of parameters are needed once the network is ALREADY trained, but based on the experiments in this paper it is obvious that some tuning has been done to find the best performance. Furthermore, what are all these parameters in state-of-the art methods which need tuning? I would like to have a concrete example.}
 		\item  \textit{The authors implicitly claim that this performance of the architectures can be generalised to all rooms when trained, however this is not demonstrated properly. An interesting experiment would be to choose test the same architecture on a set of two new rooms. This would at least give a hint to how it generalises.}
 	\end{enumerate}
- \textbf{Reply}: Thank you for your comment. Regarding the first remark, the CSP-SLOC algorithm requires the knowledge of the room geometry (in particular, the distance between the microphone arrays and the opposite wall), and it requires tuning of the exponential window scaling factor $\alpha$ and of the averaging weighting coefficient $\mu$ for cepstral dereverberation. The SRP-SLOC algorithm requires the knowledge of the room geometry and of the positions of the microphones, and tuning the Stochastic Region Contraction parameters $J_0$ and $N_0$. The hyperparameters of the proposed approach are related to the architecture of the network (considering the CNN-SLOC, the number kernels, the number of layers, the number of units per layer), the context size and the stride, and the choice of the microphone pairs. Regarding the microphone pairs, as shown in Figure 6 and Figure 9, the dependence on the chosen pair is modest.
+ \textbf{Reply}: Thank you for your comment. Regarding the first remark, the purpose of the authors was to emphasize that the proposed approach is less dependent on the characteristics of the environment with respect to the comparative algorithms. Indeed, the proposed approach, as well as the comparative algorithms, require tuning of their hyperparameters in order to obtain the lowest RMSE. The CSP-SLOC algorithm depends on the values of the exponential window scaling factor $\alpha$ and the averaging weighting coefficient $\mu$ for cepstral dereverberation. The SRP-SLOC algorithm requires  tuning the Stochastic Region Contraction parameters $J_0$ and $N_0$. The proposed approach requires choosing the hyperparameters of the network (the number of layers, the number of units per layer, the number and the size of the kernels in convolutional layers), the size of the context and the stride.  However, CSP-SLOC and SRP-SLOC require respectively the positions of the microphones and the room geometry, while the proposed approach implicitly learns this information from data. The choice of the microphone pairs is a common problem of all the algorithms. %, however in the proposed approach the performance obtained by using all the microphone pairs is similar, 
+ Indeed, in order to obtain the lowest RMSE, we studied the performance of the proposed algorithm for different network topologies, and for different values of the context size and of the stride. The network topology depends mostly on the dataset available for training, in particular on its size, rather than on the characteristics of the environment. Regarding the other aspects, it is worth highlighting that in both scenarios (simulated and real), the highest RMSE of the CNN-SLOC with 2Rx1N architecture without using the temporal context and microphone selection is lower than the SRP-SLOC RMSE in both datasets. In the simulated dataset, the highest RMSE of the CNN-SLOC is 695\,mm (Fig. 6), while the RMSE of the SRP-SLOC is 981\,mm (Table 5). In the real dataset, the highest RMSE of the CNN-SLOC is 662\,mm (Fig. 9), while the RMSE of the SRP-SLOC is 793\,mm (Table 7). This shows that the microphone selection stage and the context evaluation stage are important for obtaining the best overall performance, but they are not fundamental for obtaining a significant performance improvement with respect to the comparative methods.
  
-%The proposed approach performs speaker localization directly on GCC-PHAT patterns data, and provided that enough data for 
-% Regarding the generalisation capabilities of the proposed approach,
+  %Additionally, during the experiments performed for finding the lowest RMSEs of the comparative algorithm, we registered a significant sensibility with respect to their hyperparameters, in particular of the SRP-SLOC $J_0$ and $N_0$, wit
+%  It is authors' opinion that the hyperparameters related to the network topology are mostly dependent on the size of the dataset used for training.
  
-Regarding the second remark, the main objective of the paper is to propose a multi-room speaker localization algorithm, which learns to estimate the speaker position directly from the data. As pointed out in Xiao et al, a disadvantage of state-of-the art approaches is their low performance in real environments, often due to inaccurate models. The advantage of learning-based approaches, such as the one proposed, is that they learn the model directly from data without any a-priori model, in this case a part from GCC-PHAT Patterns. Indeed, as remarked by the reviewer, the proposed speaker localization algorithm should be able to generalise to unseen buildings. However, the proposed approach has been trained and evaluated on the DIRHA dataset, that contains acoustic data related to a single building. Up to the authors' knowledge, a similar dataset for evaluating the generalisation capabilities of the algorithm is not publicly available. It is authors' opinion that this aspect deserves a specific work, since it would require creating a new dataset in a real environment. Additionally, one-shot and zero-shot learning strategies can be adopted in order to adapt the neural network model to a new environment with little or no data.
+%  As reported in the experiments (Fig....), the dependence on the microphone combination is modest, in particular for the 2Rx1N architecture. Regarding the context size, a fine tuning is surely important for achieving the best performance. It is worth pointing out, however, the specific value may depend on the environment (indeed, the best context size is different for the kitchen and the living room), however when used, it always provides lower RMSEs with respect to both CSP-SLOC and the SRP-SLOC.
+
+
+Regarding the second remark, the authors agree with the reviewer on the importance of evaluating a model on data acquired in a building that differs from the one used in the training phase. However, up to the authors' knowledge, datasets similar to DIRHA, acquired in a real environment with rooms equipped with several microphones and various noise conditions, is not publicly available, thus it is not possible to properly evaluate the generalization capabilities of the proposed approach. Due to the importance of this aspect, it is authors' opinion that it deserves a specific study, since it would require creating a new dataset. This would also give us the chance to evaluate transfer learning strategies to adapt the neural network model to a new environment with little or no data. 
+
+These remarks have been addressed by rewriting the last paragraphs of  Section 6 (Conclusion and Outlook).
+
+Additionally, in Section 1.1 (Related works) the following sentence:
+\begin{quote}
+The aforementioned algorithms require a specific and accurate tuning of their system parameters, which leads to a lack of generality for the system itself. Alternatively, data-driven approaches are able to extract key features from the input signal independently from the setting of application. In sight of this, neural networks can tackle these problems as they provide an \textit{expert system} able to work with a minimal human involvement.
+\end{quote}
+has been replaced with:
+\begin{quote}
+\textcolor{red}{The aforementioned algorithms are based on physical models of the signal propagation, and generally require specific information on the application environment. Differently, data-driven approaches are able to exploit the information contained on data itself, and can potentially achieve superior discriminative capabilities, provided that enough data is available for training.}
+\end{quote}
+
+%\begin{quote}
+%\textcolor{red}{Furthermore, due to a lack of an suitable dataset, the capabilities of the trained models to generalize on unseen environments will be evaluated, together with the evaluation of transfer learning methods \cite{Pan2010}.}
+%\end{quote}
  
+%Regarding the second remark, the main objective of the paper is to propose a multi-room speaker localization algorithm, which learns to estimate the speaker position directly from the data. As pointed out in Xiao et al, a disadvantage of state-of-the art approaches is their low performance in real environments, often due to inaccurate models. The advantage of learning-based approaches, such as the one proposed, is that they learn the model directly from data without any a-priori model, in this case a part from GCC-PHAT Patterns. Indeed, as remarked by the reviewer, the proposed speaker localization algorithm should be able to generalise to unseen buildings. However, the proposed approach has been trained and evaluated on the DIRHA dataset, that contains acoustic data related to a single building. Up to the authors' knowledge, a similar dataset for evaluating the generalisation capabilities of the algorithm is not publicly available. It is authors' opinion that this aspect deserves a specific work, since it would require creating a new dataset in a real environment. Additionally, one-shot and zero-shot learning strategies can be adopted in order to adapt the neural network model to a new environment with little or no data.
  
- \begin{enumerate}
- 	\item \textcolor{red}{TODO} - discussion: parameters of CSP (room geometry: distance between microphone array and the opposite wall), cepstral dereverb: frame size, overlap, $\alpha, \mu$) and SRP (room geometry, microphone positions, FFT frame size, Stochastic Region Contraction params = $J_0, N_0$) - Si potrebbe rimarcare il fatto che con l'algoritmo ANN based la posizione dei microfoni è ininfluente e non sono state usate tecniche di dereverb - speech enhancement.
- 	
- 	 \textcolor{red}{\textbf{Reply}: \textbf{ndPAO:As reported in the conclusion section, a fine tuning of the SRP-SLOC parameters has been performed. The performance of the state-of-the-art approach depends of the reverberation and noise level, thus its parameters can not be generalized.} }
- 	 
- 	\item \textcolor{red}{TODO} - discussion: We don't have a sufficient amount of data from DIRHA dataset to test the generalization performance of the proposed algorithm. 
- \end{enumerate}
+% 
+% \begin{enumerate}
+% 	\item \textcolor{red}{TODO} - discussion: parameters of CSP (room geometry: distance between microphone array and the opposite wall), cepstral dereverb: frame size, overlap, $\alpha, \mu$) and SRP (room geometry, microphone positions, FFT frame size, Stochastic Region Contraction params = $J_0, N_0$) - Si potrebbe rimarcare il fatto che con l'algoritmo ANN based la posizione dei microfoni è ininfluente e non sono state usate tecniche di dereverb - speech enhancement.
+% 	
+% 	 \textcolor{red}{\textbf{Reply}: ndPAO:As reported in the conclusion section, a fine tuning of the SRP-SLOC parameters has been performed. The performance of the state-of-the-art approach depends of the reverberation and noise level, thus its parameters can not be generalized.} 
+% 	 
+%% 	\item \textcolor{red}{TODO} - discussion: We don't have a sufficient amount of data from DIRHA dataset to test the generalization performance of the proposed algorithm. 
+% \end{enumerate}
 
 \item \textit{It seems like the authors put very little cost to the process of training such a system. In the current system, I believe, 64 minutes are used for training, at least for the simulated scenario. How is this expected to be handled in a commercial product, if it has to be trained specifically for that particular environment?\\}
-\textbf{Reply}:
-\textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
+\textbf{Reply}: Thank you for your comment. \textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
 
 \item \textit{Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\}
 \textbf{Reply}: Thank you for comment. The sentence in Section 6 (Conclusion and Outlook) has been modified as follows:
 \begin{quote}
-	\textcolor{red}{In details, audio coming from one or two rooms has been jointly exploited (1Rx1N, 2Rx1N), while different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
+	\textcolor{red}{In details, the capability of the network to exploit the audio coming from all the rooms has been evaluated, and different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 \end{quote}
 \end{enumerate}
 
