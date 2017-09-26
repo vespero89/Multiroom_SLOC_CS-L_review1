@@ -234,7 +234,7 @@ Finally, \secref{sec:concl} concludes the manuscript.
 \section{Proposed Method}\label{sec:ALGO}
 The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network (ANN). \textcolor{red}{In a preliminary stage, a multi-room VAD \cite{ferronineural,vesperini2016deep} extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.} The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal correlation of the data. \textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.} A block diagram of the algorithm based on a CNN is shown in \figref{fig:proposed_method}.
 %%%
-In the multi-room scenario, speakers positions are estimated by means of a feature extraction stage and a neural network per room. Two different architectures have been investigated in this contribution: in the first, each neural network is dedicated to processing the audio signals coming from a room and it estimates the position of the speaker in that room. This architecture will be denoted as 1Rx1N-SLOC in the following. In the second architecture, the neural network jointly processes audio coming from different rooms, while estimating the speaker position only in one room. This architecture will be denoted as $K$Rx1N-SLOC in the following, where $K$ denotes the number of rooms. \figref{fig:2Rx1R} shows the differences between the two architectures in the two rooms case study ($K=2$). %(\textbf{ndemap: la figura non mostra le differenze tra 2Rx1R e 1Rx1R: cambiare frase o (meglio) inserire figura 1Rx1R}).
+In the multi-room scenario, speakers positions are estimated by means of a feature extraction stage and a neural network per room. Two different architectures have been investigated in this contribution: in the first, each neural network is dedicated to processing the audio signals coming from a room and it estimates the position of the speaker in that room. This architecture will be denoted as 1Rx1N-SLOC in the following. In the second architecture, the neural network jointly processes audio coming from different rooms, while estimating the speaker position only in one room. This architecture will be denoted as $K$Rx1N-SLOC in the following, where $K$ denotes the number of rooms. \figref{fig:2Rx1R} shows the differences between the two architectures in the two rooms case study ($K=2$).
 
 \begin{figure}[t]
 	\centering
@@ -345,15 +345,16 @@ In cases where the selected frames do not contain speech, the GCC-PHAT Patterns 
 \label{sec:MLP}
 The first neural network architecture we investigate in this paper is the MLP \cite{Rumelhart86-LRB}. Indeed, it is well known that an  MLP with one or more hidden layers and a sufficient number of non-linear units (neurons) can  approximate any continuous  function  on  a  compact  input  domain  with arbitrary precision. For this reason, MLPs are said to be universal function approximators \cite{hornik1989multilayer}. A single neuron can be formally described as:
 \begin{equation}
-g(\mathbf{u}[n])=\varphi \left(\left(\begin{matrix} \sum _{ j=1 }^{ D }{w_j u_j[n] }  \end{matrix} \right) + b\right),
+%g(\mathbf{u}[n])=\varphi \left(\left(\begin{matrix} \sum _{ j=1 }^{ D }{w_j u_j[n] }  \end{matrix} \right) + b\right),
+g(\mathbf{u}[n])=\varphi \left(\sum _{ j=1 }^{ D }{w_j u_j[n] } + b\right),
 \end{equation}
-where $D$ is the size of input data $\mathbf{u}[n]$, the bias $b$ is an externally applied term and $\varphi(\cdot)$ is the non-linear activation function. In this case we employ the ReLUs \cite{nair2010rectified}, defined as $\varphi(x) = \text{max}(0,x)$.
-Thus, the mathematical description of a one-hidden-layer MLP is a function $f:\mathbb{R}^D \rightarrow \mathbb{R}^L$, where $L$ is the size of the output vector, so:
+where $\mathbf{u}[n] \in \mathbb{R}^{D\times 1}$, the bias $b$ is an externally applied term and $\varphi(\cdot)$ is the non-linear activation function. In this case we employ the ReLUs \cite{nair2010rectified}, defined as $\varphi(x) = \text{max}(0,x)$.
+Thus, the mathematical description of a one-hidden-layer MLP is a function $\mathbf{f}:\mathbb{R}^D \rightarrow \mathbb{R}^L$, where $L$ is the size of the output vector, so:
 
 \begin{equation}
-f(\mathbf{u}[n]) = 	\varphi \left( b_2 + W_2 \left( \varphi \left( b_1 + W_2 \cdot \mathbf{u}[n]\right) \right) \right),
+\mathbf{f}(\mathbf{u}[n]) = 	\varphi \left( \mathbf{b}_2 + \mathbf{W}_2 \left( \varphi \left( \mathbf{b}_1 + \mathbf{W}_2 \cdot \mathbf{u}[n]\right) \right) \right),
 \end{equation}
-where $W_i$ and $b_{i}$ are the respective synaptic weights and the biases of the $i$-th layer.
+where $\mathbf{W}_i$ and $\mathbf{b}_{i}$ are the respective synaptic weights matrix and the bias vector of the $i$-th layer.
 The  behavior  of  this architecture  is  parametrized  by  the connection weights, which are adapted during the supervised network training, accomplished by using the Adam algorithm \cite{kingma2014adam} for the stochastic gradient-based optimization and a feature wise batch normalization \cite{ioffe2015batch}.
 
 In the feature extraction block the GCC-PHAT Patterns are arranged in 2-D or 3-D matrices, whilst the MLP accepts input data as frame-by-frame vectors. \textcolor{red}{Thus, the matrices are flattened in a vector and the input layer consists of a number of units equal to $50 \cdot R\cdot C$, where $R$ is the number of rows of matrix $\mathbf{X}[n]$ defined in \eqref{eq:fx_matrix}.}
@@ -362,14 +363,7 @@ In the feature extraction block the GCC-PHAT Patterns are arranged in 2-D or 3-D
 \begin{equation}
 \text{Cost}_{\text{MLP}} = \sum_{i=1}^P 2Q_{i-1}Q_i + \sum_{i=1}^{P-1} Q_i ,
 \end{equation}
-where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
-}
-
-\textcolor{red}{Regarding the computational complexity, without taking into account the calculation of the GCC-PHAT Patterns  and considering additions and multiplications as separate operations \cite{DoSY07}, the total number of operations for each layer is given by 
-\begin{equation}
-\text{Cost}_{\text{MLP}} = \sum_{i=1}^P 2Q_{i-1}Q_i + \sum_{i=1}^{P-1} Q_i ,
-\end{equation}
-where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
+where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$, with $Q_0=50\cdot R \cdot C$ is the dimension of the input feature vector. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
 }
 
 
@@ -379,22 +373,32 @@ The birth of this kind of feed-forward neural network is related to image proces
 % Inspired by the animal visual cortex, CNN employs convolutional layers elaborating restricted area of a 2-D input. 
 As in that case, the whole input matrix is processed by repeated application of a function across its sub-regions, obtaining so-called \textit{feature maps}. Practically, this is implemented by a convolution of the input data with a linear filter, adding a bias term and then applying a non-linear function.
 
-Denoting the $m$-th feature map at a given $i$-layer as $h_{m,i}$, the $m$-th filter or \textit{kernel} is determined by the weights $W_{m,i}$ and bias $b_{m,i}$, thus:
+\textcolor{red}{
+Denoting with $\mathbf{W}_{m} \in \mathbb{R}^{K_{1m}\times K_{2m}}$ the $m$-th kernel and with $\mathbf{b}_{m}  \in \mathbb{R}^{D_1\times D_2}$ the bias vector of a generic convolutional layer, the $m$-th feature map  $\mathbf{h}_{m} \in \mathbb{R}^{D_1\times D_2}$ is given by:}
 
-\begin{equation}
-h_{m,i}=\varphi	\left((W_{m,i} \ast \mathbf{u}_j[n]) + b_{m,i} \right),
+\textcolor{red}{
+\begin{equation}\label{eq:conv_op}
+%h_{m,i}=\varphi	\left(W_{m,i} \ast \mathbf{u}_j[n] + b_{m,i} \right),
+\mathbf{h}_{m}=\varphi	\left(\sum_{d=1}^{D_3} \mathbf{W}_{m} \ast \mathbf{u}_d + \mathbf{b}_{m} \right),
 \end{equation}
-where $\ast$ represent the convolution operation.
-The different feature maps obtained from each kernel of a convolutional layer are then summed to compose 
-the input data for the following layer.
+where $\ast$ represent the convolution operation, and $\mathbf{u}_{d} \in \mathbb{R}^{D_1\times D_2} $ is a matrix of the three-dimensional input tensor $\mathbf{u} \in \mathbb{R}^{D_1\times D_2 \times D_3}$. The dimension of $\mathbf{h}_{m}$ is $ D_1\times D_2$ since here we suppose that the input is zero-padded. The dimension of the $m$-th feature map $\mathbf{h}_{m}$ depends on the zero padding of the input tensor: here, padding is performed in order to preserve the dimension of the input, i.e., $\mathbf{h}_{m} \in \mathbb{R}^{D_1\times D_2}$. Please note that for the sake of simplicity, the time frame index $n$ has been omitted.}  %The different feature maps obtained from each kernel of a convolutional layer are then summed to compose the input data for the following layer.
 
-Commonly, a kernel layer is coupled with a pooling layer in order to assess more robustness against patterns shifts in the processed data. The CNN structure is completed by an MLP layer, whose task is to produce the network response, \textcolor{red}{i.e., the estimated $\left ( \chi,\psi \right ) $ positions in millimeters in this case.} %ndFAB
+Commonly, \eqref{eq:conv_op} is followed by a pooling layer in order to be more robust against patterns shifts in the processed data. In this paper, we employed a max-pooling operator that calculates the maximum over a $\P_1 \times P_2 $ matrix. The CNN structure is completed by an MLP layer, whose task is to produce the network response, \textcolor{red}{i.e., the estimated $\left ( \chi,\psi \right ) $ positions in millimeters in this case.}
 
 Although this architecture was designed for image processing, several works in the literature have employed CNNs in the audio field \cite{thomas2014analyzing,mcloughlin2015low}. In this work, we exploit a 3-D arrangement of the input data (as described in \secref{sec:TEE}), %(\textbf{ndemap: dove?})),
 inspired by what occurs in image processing with RGB channels. Thus, the CNN-SLOC is able to efficiently process adjacent frames and to exploit the temporal evolution of the audio signal \cite{wirn2016-vad}. Up to the authors' knowledge, employing CNNs for indoor speaker localization are not present in the scientific literature.
 
 According to that, the network first convolutional layer could respectively have 2-D or 3-D kernels: when a context size $C > 1$ is considered, the input features are organized in a 3-D tensor where the third axis represents the temporal index (as shown in \figref{fig:cxt_str}). In the degenerate case where $C$ is equal to 1, the tensor reduces to a bi-dimensional matrix.
 
+\textcolor{red}{The computational complexity of the CNN-SLOC algorithm is given by the sum of the computational complexity of the convolutional layers and of the fully connected layers. The complexity of convolutional layers can be obtained from \eqref{eq:conv_op} and from the number of operations of the max-pooling operator. Regarding the former, supposing square kernels, i.e., $K_{1m} = K_{1m} = K_m$, the number of operations required for calculating the feature map $\mathbf{h}_{m}$ is
+\begin{equation}\label{eq:cost_fmap}
+\text{Cost}_{\text{Per-Feature-Map}} =2K_m^2D_1D_2+D_1D_2,
+\end{equation}
+where the first term considers the number of operations required for the convolution and the sum with the bias term, and the second term the operations for the ReLU activation function. As aforementioned, the max-pooling operator calculates the maximum over a $P_1 \times P_2 $ matrix. Supposing that the maximum operation is calculated pair by pair, the max-pooling operator requires the following number of operations
+\begin{equation}\label{eq:cost_mp}
+\text{Cost}_{\text{Max-Pooling}}=(P_1P_2-1)(D_1-P_1+1)(D_1-P_2+1).
+\end{equation}
+The total number of operations per layer can be calculated by multiplying the expressions in \eqref{eq:cost_fmap} and \eqref{eq:cost_mp} by the number of kernels and summing the contributions. Finally, the total number of operations of the CNN-SLOC algorithm can be obtained by summing the individual contributions of the convolutional layers and of the fully connected layers.}
 
 \section{Comparative Methods}
 \label{sec:comp_meth}
