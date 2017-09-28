@@ -164,8 +164,10 @@ has been replaced with the sentence:
 \item \textit{Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\}
 \textbf{Reply}: \textcolor{red}{TODO - In progress - PAOLO}
 
-\item \textit{Evaluation: Does the baseline methods, CSP and SRP, use any smoothing or temporal context or are they simply evaluated frame by frame? Based on my experience a simple histogram technique computed over a few seconds can improve robustness quite a lot.\\}
-\textbf{Reply}: All the methods have been evaluated frame by frame, thus a post processing technique can have beneficial effects also for the DNN. \textcolor{red}{TODO} - Evaluations for best cases with smoothing?
+\item \textit{Evaluation: Does the baseline methods, CSP and SRP, use any smoothing or temporal context or are they simply evaluated frame by frame? Based on my experience a simple histogram technique computed over a few seconds can improve robustness quite a lot.\\} \label{resp:smooth}
+\textbf{Reply}: Thank you for your suggestion. In the original implementation, no localization method adopted a technique for smoothing the estimated positions. However, SRP-SLOC operates on a wider temporal context with respect to CSP-SLOC and the proposed approaches without temporal context, since speaker localization is performed on frames composed of 2048 samples, about 4 frames of the DNN-based algorithm. As suggested by the reviewer, we investigated two smoothing methods as a final processing step of CSP-SLOC, SRP-SLOC, and the proposed approach: median filter and moving average filter. For the sake of conciseness we included only the XX filter, since it resulted the most performing technique. Additionally, the smoothing technique has been evaluated only on the most performing of the DNN-based approaches, i.e., CNN-SLOC 1Rx1N with temporal context in the simulated scenario and CNN-SLOC 2Rx1N with temporal context in the real scenario.
+
+The smoothing technique has been described in Section 2.5 (Smoothing), and the related results included in Table 5 and Table 7, and discussed in Section 5 (Experiments).
 
 \item \textit{Evaluation: How was the 500mm threshold determined?\\}
 \textbf{Reply}: Thank you for your comment. This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
@@ -181,7 +183,7 @@ has been replaced with the sentence:
 Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item \textit{Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\}
-\textbf{Reply}: Thank you for your remark. Indeed, for $C=17$ and $C=19$ we erroneously reported the RMSE values early experiments. The figure has been modified by reporting the correct values.
+\textbf{Reply}: Thank you for your remark. Indeed, for $C=17$ and $C=19$ we erroneously reported the RMSE values obtained in early experiments. The figure has been modified by reporting the correct values.
 
 \item \textit{Line 395: From what figure/numbers can I deduce this? It seems unclear, and what is temporal resolution in this case? Equal to C?\\}
 \textbf{Reply}: Thank you for your comment. The sentence has been modified as follows:
@@ -201,8 +203,10 @@ Indeed, by using the audio from both rooms reduces the dependence on the microph
 %This was another typo. Considering that the temporal context is equal to $C\cdot s$, for the best case it results equal to 85 frames, which corresponds to 0.85\,s - cf. Section 5.2.2. The same is for the evaluations on the Real dataset, cf. Section 5.3.2.
 
 \item \textit{Evaluation: In the case of real environment (Tab. 6) SRP performs equally well with the proposed methods when not considering temporal context. Could a simple extension of the SRP with maybe a histogram approach be considered? I would expect it to yield an improvement.\\}
-\textbf{Reply}: \textcolor{red}{TODO} - Check SRP code and its use of temporal context. Maybe some input frames can be aggregated??
-In the SRP phat algorithm we use a frame size equal to  (approximately 4 frame w.r.t. the DNN inputs), which corresponds to 128 ms at 16kHz sample rate.
+\textbf{Reply}: Thank you for your suggestion. As suggested by the reviewer, we integrated a smoothing technique in the comparative algorithms and in the proposed approach in order to exploit the information contained in multiple adjacent frames. Please refer to comment nr.\ \ref{resp:smooth} for a detailed response.
+
+% \textcolor{red}{TODO} - Check SRP code and its use of temporal context. Maybe some input frames can be aggregated??
+%In the SRP phat algorithm we use a frame size equal to  (approximately 4 frame w.r.t. the DNN inputs), which corresponds to 128 ms at 16kHz sample rate.
 
 \item \textit{line 188: How are the frames containing speech found?\\}
 \textbf{Reply}: Please refer to response to comment number \ref{resp:vad} for a detailed discussion.
@@ -258,7 +262,9 @@ has been replaced with:
 % \end{enumerate}
 
 \item \textit{It seems like the authors put very little cost to the process of training such a system. In the current system, I believe, 64 minutes are used for training, at least for the simulated scenario. How is this expected to be handled in a commercial product, if it has to be trained specifically for that particular environment?\\}
-\textbf{Reply}: Thank you for your comment. \textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
+\textbf{Reply}: Thank you for your comment. Considering only the segments of the signals containing voice, the size of the training set in the simulated scenario is about 32 minutes, while in the real scenario  is about 3 minutes. Despite not being a very large amount of data, the authors agree with the reviewer that in a commercial product the acquisition and labelling of new data can be difficult to handle, thus it should be minimized or totally avoided. However, as reported also in the previous reply, due to the lack of a suitable dataset, it was not possible to evaluate the proposed approach on data acquired in a building the differs from the one used in the trained set. This aspect will be addressed in future works, where a suitable dataset will be created, and the generalization capabilities of the algorithm evaluated. Additionally,  transfer learning strategies for adapting the trained models on new environments with a minimum amount of new data will be considered.
+
+%\textcolor{red}{TODO} - discussion: some procedures, like transfer learning or pre-training of the networks can be implemented in a real world application, but necessarily the network have to be fine-tuned on the data taken from the target operation environment.
 
 \item \textit{Minor comments: Line 454: ".. by means of close in time frames". I understand, but it is not proper English.\\}
 \textbf{Reply}: Thank you for comment. The sentence in Section 6 (Conclusion and Outlook) has been modified as follows:

@@ -305,13 +305,20 @@ Finally, considering all the $M$ arrays located in the environment, the input ma
 \end{equation}
 An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors represent the amplitude of $C_{ab}(n,\tau)$, and orange tones denote the lowest values and blue tones the highest values in the range of $\tau$ considered. In the exposed case, the matrix $\mathbf{X}[n]$ is composed of 10 GCC-PHAT Patterns, belonging to a subset of the possible pairs originated from a circular ceiling array. It is possible to note that the maximum arrival time difference is equal to 9 samples (corresponding to about 0.2\,s), observed in the GCC-PHAT Pattern of the fourth microphone pair.
 
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\columnwidth]{imgs/GCC-PHAT-PATTERN}
 	\caption{An example of GCC-PHAT Pattern matrix $\mathbf{X}[n]$ obtained from a combination of microphones belonging to a ceiling array. Blue tones represent maximum amplitude values of $C_{ab}(n,\tau)$ in the range of considered $\tau$.}
 	\label{fig:GCC-PATT}
 \end{figure}
+
+
+\textcolor{red}{The computational cost of the GCC-PHAT Patterns extraction stage has been calculated in \cite{DoSY07}, and it is now reported here. In terms of total number of operations, the computational cost is given by the following processing steps:
+\begin{itemize}
+\item one real FFT per microphone: $\frac{5}{2} L \log L$;
+\item calculation of equation \eqref{eq:CSPCM} for each microphone pair: $10\cdot L$;
+\item one inverse FFT per microphone pair:  $ \frac{5}{2} L \log L$.
+\end{itemize}}
 
 \subsection{Temporal Context}\label{sec:TEE}
 The temporal context consists in the frames of the signal adjacent to the one being processed. In order to exploit this information, the input of the neural network  is augmented with $(C-1)/2$ GCC-PHAT Patterns preceding and following the current GCC-PHAT Pattern matrix $\mathbf{X}[n]$. The network, thus, estimates the speaker position by employing a \textit{chunk} of feature matrices defined as follows:
@@ -341,6 +348,8 @@ In cases where the selected frames do not contain speech, the GCC-PHAT Patterns 
 	\label{fig:cxt_str}
 \end{figure} 
 
+
+
 \subsection{Multi Layer Perceptron Neural Network}
 \label{sec:MLP}
 The first neural network architecture we investigate in this paper is the MLP \cite{Rumelhart86-LRB}. Indeed, it is well known that an  MLP with one or more hidden layers and a sufficient number of non-linear units (neurons) can  approximate any continuous  function  on  a  compact  input  domain  with arbitrary precision. For this reason, MLPs are said to be universal function approximators \cite{hornik1989multilayer}. A single neuron can be formally described as:
@@ -359,13 +368,12 @@ The  behavior  of  this architecture  is  parametrized  by  the connection weigh
 
 In the feature extraction block the GCC-PHAT Patterns are arranged in 2-D or 3-D matrices, whilst the MLP accepts input data as frame-by-frame vectors. \textcolor{red}{Thus, the matrices are flattened in a vector and the input layer consists of a number of units equal to $50 \cdot R\cdot C$, where $R$ is the number of rows of matrix $\mathbf{X}[n]$ defined in \eqref{eq:fx_matrix}.}
 
-\textcolor{red}{Regarding the computational complexity, without taking into account the calculation of the GCC-PHAT Patterns  and considering additions and multiplications as separate operations \cite{DoSY07}, the total number of operations for each layer is given by 
+\textcolor{red}{Regarding the computational complexity, without taking into account the calculation of the GCC-PHAT Patterns and considering additions and multiplications as separate operations \cite{DoSY07}, the total number of operations for each layer is given by 
 \begin{equation}
 \text{Cost}_{\text{MLP}} = \sum_{i=1}^P 2Q_{i-1}Q_i + \sum_{i=1}^{P-1} Q_i ,
 \end{equation}
-where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$, with $Q_0=50\cdot R \cdot C$ is the dimension of the input feature vector. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function. The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
+where $P$ is the number of layers, and $Q_i$ denotes the number of units of layer $i$, with $Q_0=50\cdot R \cdot C$ being the dimension of the input feature vector. The first term, considers the number of operations for a linear unit, while the second term considers the operations required by the ReLU activation function (i.e., the maximum operation). The upper bound of the second summation is $P-1$ since the last layer uses a linear activation function.
 }
-
 
 \subsection{Convolutional Neural Network}
 \label{sec:CNN}
@@ -400,6 +408,8 @@ where the first term considers the number of operations required for the convolu
 \end{equation}
 The total number of operations per layer can be calculated by multiplying the expressions in \eqref{eq:cost_fmap} and \eqref{eq:cost_mp} by the number of kernels and summing the contributions. Finally, the total number of operations of the CNN-SLOC algorithm can be obtained by summing the individual contributions of the convolutional layers and of the fully connected layers.}
 
+\subsection{Smoothing}
+
 \section{Comparative Methods}
 \label{sec:comp_meth}
 The proposed localization algorithm has been compared with two state-of-the art methods described in the remainder of this section.
@@ -409,7 +419,7 @@ The first algorithm taken as reference is the Crosspower Spectrum Phase speaker 
 
 \textcolor{red}{More in details, the algorithm is evaluated separately for each room. Considering a set of microphone pairs, the first step consists in 
 estimating the DOA angle ($\theta$) from the TDOA defined in \eqref{eq:tdoa} and the CSPCM defined in \eqref{eq:CSPCM}:}
-\begin{equation}
+\begin{equation}\label{eq:doa}
 \frac{d \cos \theta}{\nu} = \Delta\tau_{ab}  \Rightarrow \theta = \cos^{-1}  \left( \frac{\nu \Delta\tau_{ab} }{d} \right), 
 \end{equation}
 where $d$ is the distance between the microphones.
@@ -417,13 +427,15 @@ where $d$ is the distance between the microphones.
 \textcolor{red}{After that, a Least Square algorithm is applied for resolving the ambiguity deriving from multiple intersection points of the DOA lines.  Considering, a random point $\mathbf{p}$ and its projection on the $j$-th DOA line $\mathbf{p}_{proj_j}$, the position $\hat{\mathbf{p}}$ is obtained by minimizing the error defined as the sum of the squared distances $D^2_j(\mathbf{p}) = \|\mathbf{p}-\mathbf{p}_{proj_j}\|^2$ between $\mathbf{p}$ and the $j$-th DOA:}
 \begin{align}
 E(\mathbf{p}) &= \sum_{j=1}^M D^2_j (\mathbf{p}),\\
-\hat{\mathbf{p}} & =  \underset{\mathbf{p}} {\arg \min} \,E(\mathbf{p}), 
+\hat{\mathbf{p}} & =  \underset{\mathbf{p}} {\arg \min} \,E(\mathbf{p}), \label{eq:ls}
 \end{align}
 where $M$ is the number of DOA lines.
 
 Several physical aspects affect the accuracy of the CSP-SLOC, such as the orientation of the speaker, the noise level and reverberation. In order to increase CSP-SLOC performance, the authors in \cite{tsiami2014experiments} adopted the pre-processing cepstral filtering technique described in \cite{stephenne1997new}. 
 
 In this paper, the cepstral dereverberation algorithm uses frames of 2048 samples without overlap, with an exponential window having a scaling factor $\alpha = 0.9985$ and an averaging weighting coefficient $\mu=10^{-4}$. To be coherent with the proposed method, we computed the TDOAs with a rate of 100 frames/second and a frame overlap equal to 66\%.
+
+\textcolor{red}{The computational cost of the CSP-SLOC algorithm can be derived by summing the cost of the CSPCM defined \eqref{eq:CSPCM}, the DOA in \eqref{eq:doa}, and the minimization problem defined in \eqref{eq:ls}. }
 
 
 \subsection{Steered Response Power Using the Phase Transform}
@@ -435,9 +447,7 @@ As first step, a delay-and-sum beamformer is steered in the considered volume fo
 \label{eq:SRP}
 P_n(\mathbf{s}) \equiv \int_{nT}^{(n+1)T} \left| \sum_{a=1}^M w_a s_a (t -\tau (\mathbf{s},a))\right|^2 dt,
 \end{equation}
-where $s_a(t)$ is the signal from a generic microphone $a$, $w_a$ its weight, $\tau (\mathbf{s},a)$ the distance in the time domain between $\mathbf{s}$ and that microphone. Practically, \eqref{eq:SRP} is evaluated in the frequency domain, scaled by the phase transform weighting factor (PHAT). The SRC is iteratively applied: $J_0 = 5000$ points are randomly evaluated, $N_0 = 20$ points maximizing \eqref{eq:SRP} are selected and the search volume is restricted to a smaller region that contains the $N_0$ points. In the following, this algorithm will be referred as SRP-SLOC.
-
-
+where $s_a(t)$ is the signal from a generic microphone $a$, $w_a$ its weight, $\tau (\mathbf{s},a)$ the distance in the time domain between $\mathbf{s}$ and that microphone. Practically, \eqref{eq:SRP} is evaluated in the frequency domain, scaled by the phase transform weighting factor (PHAT). The SRC is iteratively applied: $J_0 = 5000$ points are randomly evaluated, $N_0 = 20$ points maximizing \eqref{eq:SRP} are selected and the search volume is restricted to a smaller region that contains the $N_0$ points. In the following, this algorithm will be referred as SRP-SLOC. \textcolor{red}{The computational cost of the SRP-SLOC algorithm has been calculated in \cite{DoSY07}, and it is not reported here for the sake of conciseness.}
 
 
 \section{The DIRHA Dataset}
@@ -549,6 +559,7 @@ Similarly to a classification task, $P_{cor}$ provides a measure of the localiza
 
 \begin{table}[t]
 \centering
+\caption{Number of speech frames ($N_{TOT}$) for the considered rooms of the two datasets.}\label{tab:N_TOT}
 \begin{tabular}{cccc}
 \hline
 \multicolumn{2}{c|}{\textbf{Simulated Dataset}} & \multicolumn{2}{c}{\textbf{Real Dataset}} \\ \hline
@@ -556,7 +567,7 @@ Similarly to a classification task, $P_{cor}$ provides a measure of the localiza
 \multicolumn{1}{c|}{47630}             & \multicolumn{1}{c|}{44801}               & \multicolumn{1}{c|}{17580}                    & 12885  \\
 \hline                    
 \end{tabular}
-\caption{Number of speech frames ($N_{TOT}$) for the considered rooms of the two datasets.}\label{tab:N_TOT}
+
 \end{table}
 
 The algorithm has been implemented in the Python language using Keras \cite{chollet2015keras} and Theano \cite{2016arXiv160502688short} as deep learning libraries. A total amount of 2350 experiments has been conducted on the two subsets of the DIRHA dataset.
@@ -1160,8 +1171,30 @@ Details of the best performing configurations are provided in \tableref{tab:best
 	\label{ctx-str-REAL}
 \end{figure}
 
+
 \subsection{Computational complexity}
-The computational complexity of the proposed approach and of the comparative methods has been calculated taking as reference the computational complexity 
+\textcolor{red}{
+The computational complexity of the evaluated algorithms is reported in \tableref{tab:comp_cost}. Regarding the proposed approach, here we report only the cost of the CNN-SLOC algorithm, since it obtained the lowest localization error. The computational cost has been calculated by summing the cost of the GCC-PHAT Patterns extraction phase, and the cost of the CNN-SLOC algorithm derived in \secref{sec:CNN}. The computational cost is related to the network topologies reported in \tableref{tab:bestCONF_SIMU} for the Simulated dataset and in \tableref{tab:bestCONF_REAL} for the Real dataset.
+}
+
+
+\begin{table}[t]
+\centering
+\caption{Computational complexity of the evaluated algorithms.}\label{tab:comp_cost}
+\begin{tabular}{c | c | c | c | c}
+\hline
+ & \multicolumn{2}{c|}{Simulated} & \multicolumn{2}{c}{Real} \\
+\hline
+Algorithm          &  Kitchen & Living Room & Kitchen & Living Room \\
+\hline
+CNN-SLOC &   & &          &      \\
+CSP-SLOC  &   & &          &      \\
+SRP-SLOC &   & &          &      \\
+\hline
+\end{tabular}
+\end{table}
+
+\textcolor{red}{TODO: Discussion.}
 
 \section{Conclusion and Outlook}
 \label{sec:concl}
