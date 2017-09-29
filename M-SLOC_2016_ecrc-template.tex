@@ -1176,14 +1176,14 @@ As result of the third optimization stage, the best performing MLP layout in the
 			\hline
 			
 			
-			\multirow{4}{*}{Kitchen}                    & \multirow{4}{*}{2Rx1N}         & \multirow{4}{*}{19 - 4}  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (K)\end{tabular}}  & K1R,K1L; K3L,K3C              & \multirow{4}{*}{24}                     & \multirow{4}{*}{$5\times5$}                 & \multirow{4}{*}{256} & \multirow{4}{*}{256} & \multirow{4}{*}{425} & \multirow{4}{*}{72} \\
+			\multirow{4}{*}{Kitchen}                    & \multirow{4}{*}{2Rx1N}         & \multirow{4}{*}{19 - 4}  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (K)\end{tabular}}  & K1R,K1L; K3L,K3C;              & \multirow{4}{*}{24}                     & \multirow{4}{*}{$5\times5$}                 & \multirow{4}{*}{256} & \multirow{4}{*}{256} & \multirow{4}{*}{425} & \multirow{4}{*}{72} \\
 			&                                &                          &                                                                            & K3L,K3C                                    &                                         &                                             &                      &                      &                      &                     \\
-			&                                &                          & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (L)\end{tabular}} & L1C,L1L; L2L,L2R                                     &                                         &                                             &                      &                      &                      &                     \\
+			&                                &                          & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (L)\end{tabular}} & L1C,L1L; L2L,L2R;                                     &                                         &                                             &                      &                      &                      &                     \\
 			&                                &                          &                                                                            &   L3L,L3R                                 &                                         &                                             &                      &                      &                      &                     \\
 			 \hline
-			\multirow{4}{*}{Living Room}                & \multirow{4}{*}{2Rx1N}         & \multirow{4}{*}{17 - 3}  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular\\ Array (K)\end{tabular}}  & \multicolumn{1}{l|}{K2L,K2R; K1R,K1L}               & \multirow{4}{*}{24}                     & \multirow{4}{*}{$5\times5$}                 & \multirow{4}{*}{256} & \multirow{4}{*}{512} & \multirow{4}{*}{350} & \multirow{4}{*}{75} \\
+			\multirow{4}{*}{Living Room}                & \multirow{4}{*}{2Rx1N}         & \multirow{4}{*}{17 - 3}  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular\\ Array (K)\end{tabular}}  & \multicolumn{1}{l|}{K2L,K2R; K1R,K1L;}               & \multirow{4}{*}{24}                     & \multirow{4}{*}{$5\times5$}                 & \multirow{4}{*}{256} & \multirow{4}{*}{512} & \multirow{4}{*}{350} & \multirow{4}{*}{75} \\
 			&                                &                          &                                                                                & K3L,K3C; K3C,K3R                                    &                                         &                                             &                      &                      &                      &                     \\
-			&                                &                          & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (L)\end{tabular}} & L2L,L2R; L4L,L4R                                   &                                         &                                             &                      &                      &                      &                     \\
+			&                                &                          & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (L)\end{tabular}} & L2L,L2R; L4L,L4R;                                   &                                         &                                             &                      &                      &                      &                     \\
 			&                                &                          &                                                                                & L1R,L1C; L1C,L1L; L3L,L3R                                    &                                       &                                             &                        &                      &                      &                    
 		\end{tabular}
 	}
@@ -1307,19 +1307,24 @@ The computational complexity of the evaluated algorithms is reported in \tablere
 
 \begin{table}[t]
 \centering
-\caption{Computational complexity of the evaluated algorithms.}\label{tab:comp_cost}
+\caption{Computational complexity of the evaluated algorithms in term of FLOPs.}\label{tab:comp_cost}
 \begin{tabular}{c | c | c | c | c}
 \hline
  & \multicolumn{2}{c|}{Simulated} & \multicolumn{2}{c}{Real} \\
 \hline
 Algorithm          &  Kitchen & Living Room & Kitchen & Living Room \\
 \hline
-CNN-SLOC &   & &          &      \\
-CSP-SLOC  &   & &          &      \\
-SRP-SLOC &   & &          &      \\
-\hline
+CNN-SLOC & $1.67 \cdot 10^9$  &   $0.90 \cdot 10^9$  & $1.49  \cdot 10^9$    & $1.52\cdot 10^9$     \\
+CSP-SLOC  &  $1.84 \cdot 10^4$  & $2.14 \cdot 10^4$ &   $1.84 \cdot 10^4$        &  $2.14 \cdot 10^4$    \\
+SRP-SLOC & $4.42 \cdot 10^9$  & $5.70 \cdot 10^9 $ &  $4.42 \cdot 10^9$ &  $5.70 \cdot 10^9 $ \\    \hline
 \end{tabular}
 \end{table}
+
+%	SIMULATED		REAL	
+%	Kitchen	Living Room	Kitchen	Living Room
+%	CNN	1,67E+09	8,97E+08	1,49E+09	1,52E+09
+%	CSP	1,84E+04	2,14E+04	1,84E+04	2,14E+04
+%	SRP	4,42E+09	5,70E+09	4,42E+09	5,70E+09
 
 \textcolor{red}{TODO: Discussion.}
 
