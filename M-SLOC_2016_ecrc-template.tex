@@ -1291,19 +1291,24 @@ The computational complexity of the evaluated algorithms is reported in \tablere
 
 \begin{table}[t]
 \centering
-\caption{Computational complexity of the evaluated algorithms.}\label{tab:comp_cost}
+\caption{Computational complexity of the evaluated algorithms in term of FLOPs.}\label{tab:comp_cost}
 \begin{tabular}{c | c | c | c | c}
 \hline
  & \multicolumn{2}{c|}{Simulated} & \multicolumn{2}{c}{Real} \\
 \hline
 Algorithm          &  Kitchen & Living Room & Kitchen & Living Room \\
 \hline
-CNN-SLOC &   & &          &      \\
-CSP-SLOC  &   & &          &      \\
-SRP-SLOC &   & &          &      \\
-\hline
+CNN-SLOC & $1.67 \cdot 10^9$  &   $0.90 \cdot 10^9$  & $1.49  \cdot 10^9$    & $1.52\cdot 10^9$     \\
+CSP-SLOC  &  $1.84 \cdot 10^4$  & $2.14 \cdot 10^4$ &   $1.84 \cdot 10^4$        &  $2.14 \cdot 10^4$    \\
+SRP-SLOC & $4.42 \cdot 10^9$  & $5.70 \cdot 10^9 $ &  $4.42 \cdot 10^9$ &  $5.70 \cdot 10^9 $ \\    \hline
 \end{tabular}
 \end{table}
+
+%	SIMULATED		REAL	
+%	Kitchen	Living Room	Kitchen	Living Room
+%	CNN	1,67E+09	8,97E+08	1,49E+09	1,52E+09
+%	CSP	1,84E+04	2,14E+04	1,84E+04	2,14E+04
+%	SRP	4,42E+09	5,70E+09	4,42E+09	5,70E+09
 
 \textcolor{red}{TODO: Discussion.}
 
