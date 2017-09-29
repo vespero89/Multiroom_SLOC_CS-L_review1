@@ -179,7 +179,18 @@ The smoothing technique has been described in Section 2.5 (Smoothing), and the r
 \textbf{Reply}: Thank you for your comment. The values of $N_{TOT}$ has been reported in Table 3.
 
 \item \textit{Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\}
-\textbf{Reply}: \textcolor{red}{TODO} - Explain better what the box-plots show.\\
+\textbf{Reply}: Thank you for your comment. In the boxplots included in the original version of the paper,  the minimum and maximum values of the colored box represented respectively the mean value minus half the standard deviation and the mean value plus half the standard deviation, and the horizontal line represented the mean value. The lower and upper whiskers represented respectively the lowest RMSE and highest RMSE. In this revised version, we changed the boxplots in order to be more compliant with their common definition: now the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile.
+
+Additionally, in Section 5.2.1 (Evaluation without the temporal context) the results related to the boxplots have been discussed by including the following paragraph:
+\begin{quote}
+\textcolor{red}{It is interesting to analyze the behavior of the CNN-SLOC and MLP-SLOC algorithms in the two architecture variants for different number of microphone pairs, i.e., at the end of the GCC-PHAT Patterns selection stage. \figref{fig:boxplot_simu-mlp} shows a box plot describing the overall results at the end of this stage for the Living Room: the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile. The marks represent values outside the whiskers range. % The boxplots show a certain robustness of the 2Rx1N architecture to the increased number of microphone pairs. Indeed, in the 1Rx1N architecture, the total number of microphone pairs
+% dispersion of results for both the CNN and MLP architectures. 
+Observing the results related to the MLP-SLOC algorithm, additionally to a reduction of the RMSE, the 2Rx1N architecture reduces also the dependence on the microphones pairs inside the room. Indeed, the standard deviation of the 1Rx1N is equal to 26.08\,mm, while for the 2Rx1N it reduces to 18.52\,mm. In the CNN-SLOC algorithm, the performance improvement is more consistent, since using the 2Rx1N reduces the RMSE by 15.56\,mm. The statistical behavior, however, is different from the one observed for the MLP-SLOC algorithm: in this case, the standard deviation increases by 9.51\,mm with respect to the 1Rx1N architecture.}
+\end{quote}
+
+
+
+\textcolor{red}{TODO} - Explain better what the box-plots show.\\
 Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE. Cf. Section 5.2.1 - Evaluation without the temporal context
 
 \item \textit{Evaluation: Fig. 8b (Kitchen), What happens at C=17? This seems very strange.\\}

@@ -651,15 +651,15 @@ The parameters of the training optimizer (i.e., Adam, batch normalization \cite{
 \subsubsection{Evaluation without the temporal context}
 The results obtained by the different addressed algorithms in the Simulated case study are reported in \tableref{tab:results_SIMU}, both with and without the temporal context (i.e., respectively at the end of the third and the fourth optimization stage).
 
-Focusing on the performance obtained without temporal context, the best DNN configuration is the 2Rx1N MLP-SLOC. In particular, both in the 1Rx1N and  2Rx1N configurations, the MLP performs slightly better than the CNN.
+Focusing on the performance obtained without temporal context, the best DNN configuration is the 2Rx1N MLP-SLOC. In particular, both in the 1Rx1N and  2Rx1N configurations, the MLP performs slightly better than the CNN. \textcolor{red}{ In the case of the MLP-SLOC, the 2Rx1N architecture reduces the RMSE by 2.48\%  with respect to the 1Rx1N architecture. Differently, for the CNN-SLOC algorithm, using the microphones of both rooms results in a negligible performance difference.}
 
-\textcolor{red}{
-In the case of the MLP-SLOC, the 2Rx1N architecture reduces the RMSE by 2.48\%  with respect to the 1Rx1N architecture. Differently, for the CNN-SLOC algorithm using the microphones of both rooms results in a negligible performance difference. It is interesting to analyze the  behavior of the two architectures for different number of microphone pairs, i.e., at the end of the GCC-PHAT Patterns selection stage. \figref{fig:boxplot_simu-mlp} shows a box plot describing the behavior for different pairs of microphones. The minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile and the highest RMSE within the 1.5 interquartile range of the upper quartile. 
-}
+\textcolor{red}{It is interesting to analyze the behavior of the CNN-SLOC and MLP-SLOC algorithms in the two architecture variants for different number of microphone pairs, i.e., at the end of the GCC-PHAT Patterns selection stage. \figref{fig:boxplot_simu-mlp} shows a box plot describing the overall results at the end of this stage for the Living Room: the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile. The marks represent values outside the whiskers range. % The boxplots show a certain robustness of the 2Rx1N architecture to the increased number of microphone pairs. Indeed, in the 1Rx1N architecture, the total number of microphone pairs
+% dispersion of results for both the CNN and MLP architectures. 
+Observing the results related to the MLP-SLOC algorithm, additionally to a reduction of the RMSE, the 2Rx1N architecture reduces also the dependence on the microphones pairs inside the room. Indeed, the standard deviation of the 1Rx1N is equal to 26.08\,mm, while for the 2Rx1N it reduces to 18.52\,mm. In the CNN-SLOC algorithm, the performance improvement is more consistent, since using the 2Rx1N reduces the RMSE by 15.56\,mm. The statistical behavior, however, is different from the one observed for the MLP-SLOC algorithm: in this case, the standard deviation increases by 9.51\,mm with respect to the 1Rx1N architecture.}
 
-%Furthermore, even if only little improvement is observable in terms of RMSE for the 2Rx1N case, the advantage of this setting lies in the statistical behavior, as reported in \figref{fig:boxplot_simu-mlp}. 
-The boxplots show in terms of mean and standard deviation a narrow dispersion of results for both the CNN and MLP architectures.
-\textcolor{red}{{Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE.}}
+
+
+%\textcolor{red}{{Indeed, by using the audio from both rooms reduces the dependence on the microphones location inside the room as it is proved by a reduced area between the mean plus variance and mean less variance values. In particular, in the case of the MLP there is also an absolute reduction of the error by comparing the minimum and maximum values of the RMSE.}}
 %%
 In details, the best MLP layouts for the Kitchen and Living room are two single layer networks of 256 and 1024 units, respectively. %As concerns the CNN-SLOC, the two best layouts are composed of a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by a two layers MLP with  512, 512 units and 128, 256 units respectively for Kitchen and Living Room.
 With regards to the CNN-SLOC, the two best layouts are the following: for the Kitchen, a single convolutional layer of 48 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 512, 512 units, while for Livingroom, a single convolutional layer of 24 kernels of size 5$\times$5 with no pooling, followed by two feed-forward layers with 256 and 512 units.
@@ -702,7 +702,7 @@ The CSP-SLOC and the SRP-SLOC algorithms obtain a lower localization performance
 			xtick={1.5,3.5},
 			xticklabels={CNN, MLP},
 			ylabel={RMSE (\%)},
-			ytick={},ymin=515,ymax=730],
+			ytick={},ymin=550,ymax=730],
 		
 						
 			\addplot+ [boxplot,fill=BoxCol,draw=BoxCol,fill opacity=0.8]
@@ -1063,7 +1063,7 @@ The localization performance obtained by the CSP-SLOC algorithm is quite similar
 	\begin{axis}[
 	%legend entries = {1Rx1N, 2Rx1N},
 	% legend to name={legend},
-	title = Real Dataset - GCC SELECTION,
+%	title = Real Dataset - GCC SELECTION,
 	boxplot/draw direction=y,
 	x axis line style={opacity=0},
 	axis x line*=bottom,
@@ -1106,17 +1106,17 @@ The localization performance obtained by the CSP-SLOC algorithm is quite similar
 	% \node [above left]  at (rel axis cs:0.9,0.2) {\ref{legend}};
 	\end{axis}
 	
-	\begin{customlegend}[legend entries={1Rx1N, 2Rx1N}, legend style={at={(2.5,5.4)}} ]
+	\begin{customlegend}[legend entries={1Rx1N, 2Rx1N}, legend style={at={(7.75,5.4)}} ]
 	\addlegendimage{BoxCol,fill=BoxCol,fill opacity=0.8,area legend}
 	\addlegendimage{BoxCol1,fill=BoxCol1,fill opacity=0.8,area legend}
 	\end{customlegend}
 	
 	\end{tikzpicture}
 	
-	\caption{Boxplot for the Real dataset, for MLP and CNN neural network, comparing 1Rx1N and 2Rx1N setups. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC Patterns configurations. The results are averaged over the two target rooms.}
+	\caption{Boxplot for the Real dataset, for MLP and CNN neural network, comparing 1Rx1N and 2Rx1N setups. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC Patterns configurations. The results are related to the Living Room.}
 	\label{fig:boxplot_real-mlp}
 \end{figure}
-As shown in \figref{fig:boxplot_real-mlp}, in this case the 2Rx1N architecture produces a more significant improvement of performance both for the MLP-SLOC and the CNN-SLOC, and consistently with what observed for the Simulated dataset, the variance with the microphone position decreases.
+As shown in \figref{fig:boxplot_real-mlp}, in this case the 2Rx1N architecture produces a more significant improvement of performance both for the MLP-SLOC and the CNN-SLOC, and now the variance with the microphone pairs decreases for both the algorithms.
 As result of the third optimization stage, the best performing MLP layout in the 2Rx1N case is composed of a single layer of 16 units  both for the Kitchen and the Living Room. Regarding the CNN-SLOC,  the most performing configuration is composed of a convolutional layer with 24 $5\times5$ kernels without pooling, followed by a two layers MLP with respectively 256, 256 units and 256, 512 units for Kitchen and Living Room.
 
 \begin{table}[t]
