@@ -13,6 +13,8 @@
 \usetikzlibrary{arrows,positioning,fit,petri,backgrounds,decorations.pathmorphing}
 \usepackage{pgfplots}
 \usepgfplotslibrary{statistics}
+\usepackage{tikzscale}
+
 
 \usepackage{picins}
 \usepackage[dvipsnames]{xcolor}
@@ -878,6 +880,8 @@ The CSP-SLOC and the SRP-SLOC algorithms obtain a lower localization performance
 \end{table}
 
 \subsubsection{Evaluation including the temporal context}
+
+
 The effect of temporal context is considered in the final optimization stage, in which the network size determined after the third stage is kept fixed. %This last stage is compared to the previous in order to highlight the decisive effect of the exploitation of an audio excerpt.  
 
 The best localization performance has been obtained by using the CNN-SLOC having as input the microphone signals coming only from the target room. The resulting averaged RMSE is equal to 333\,mm and the highest $P_{cor}$ is 77\%. The details of the configuration parameters for the best performing setups on the Simulated subset are shown in \tableref{tab:bestCONF_SIMU}. The performance improvement at this stage is evident, whereas the employment of multiple room audio features does not seem to have a beneficial effect for CNN based algorithms. 
@@ -1015,7 +1019,19 @@ The  results obtained in the investigation of the audio excerpt are reported in 
 \end{figure}
 
 
-
+\subsection{Smoothing}
+\begin{figure}[t]
+\centering
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen_Labels.tikz}
+\caption{Distribution of the speaker's positions in the ground truth.}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen.tikz}
+\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}
+\end{subfigure}
+\caption{Distribution of the speaker's positions in the Kitchen Room.}
+\end{figure}
 
 \subsection{Results on the Real Dataset} 
 The main difference between the Real and the Simulated  dataset is the position of the speaker, which is not fixed during the scene. Thus, the speaker moves within the room while pronouncing the sentence. Furthermore, in this dataset overlapping events are not present.
