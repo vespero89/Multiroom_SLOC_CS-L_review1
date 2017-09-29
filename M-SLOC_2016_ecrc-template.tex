@@ -1019,18 +1019,18 @@ The  results obtained in the investigation of the audio excerpt are reported in 
 \end{figure}
 
 
-\subsection{Smoothing}
+\subsubsection{Smoothing}
 \begin{figure}[t]
 \centering
-\begin{subfigure}{0.45\textwidth}
+\begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen_Labels.tikz}
 \caption{Distribution of the speaker's positions in the ground truth.}
 \end{subfigure}
-\begin{subfigure}{0.45\textwidth}
+\begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen.tikz}
 \caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}
 \end{subfigure}
-\caption{Distribution of the speaker's positions in the Kitchen Room.}
+\caption{Distributions of the speaker's positions in the Kitchen Room. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}
 \end{figure}
 
 \subsection{Results on the Real Dataset} 
@@ -1298,16 +1298,33 @@ Details of the best performing configurations are provided in \tableref{tab:best
 	\label{ctx-str-REAL}
 \end{figure}
 
+\subsubsection{Smoothing}
+\begin{figure}[t]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+\includegraphics[width=\textwidth]{imgs/REALCNN1N1RLivRoom_Labels.tikz}
+\caption{Distribution of the speaker's positions in the ground truth.}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+\includegraphics[width=\textwidth]{imgs/REALCNN1N1RLivRoom_Predictions.tikz}
+\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}
+\end{subfigure}
+\caption{Distributions of the speaker's positions in the Kitchen Room related to the Real dataset. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}
+\end{figure}
+
 
 \subsection{Computational complexity}
 \textcolor{red}{
-The computational complexity of the evaluated algorithms is reported in \tableref{tab:comp_cost}. Regarding the proposed approach, here we report only the cost of the CNN-SLOC algorithm, since it obtained the lowest localization error. The computational cost has been calculated by summing the cost of the GCC-PHAT Patterns extraction phase, and the cost of the CNN-SLOC algorithm derived in \secref{sec:CNN}. The computational cost is related to the network topologies reported in \tableref{tab:bestCONF_SIMU} for the Simulated dataset and in \tableref{tab:bestCONF_REAL} for the Real dataset.
+The computational complexity of the evaluated algorithms is reported in \tableref{tab:comp_cost}. Regarding the proposed approach, here we report only the cost of the CNN-SLOC algorithm, since it obtained the lowest localization error. The computational cost has been calculated by summing the cost of the GCC-PHAT Patterns extraction phase, and the cost of the CNN-SLOC algorithm derived in \secref{sec:CNN}, and it is related to the network topologies reported in \tableref{tab:bestCONF_SIMU} for the Simulated dataset and in \tableref{tab:bestCONF_REAL} for the Real dataset.}
+
+\textcolor{red}{
+As shown in the table, the highest demanding algorithm is SRP-SLOC, with a number of floating point operations per second (FLOPS) in the order of $10^9$. The algorithm with the lowest computational burden is the CSP-SLOC, with about $10^4$ FLOPS. The computational complexity of the CNN-SLOC algorithm varies with the room and the dataset, since the topology of the network and the number of microphone pairs are different for each case. In general, the complexity of CNN-SLOC is in the same order of the SRP-SLOC, but ranging from $2.65$ times lower in the Simulated scenario (Kitchen Room) to $6.33$ times lower Simulated scenario (Living Room).
 }
 
 
 \begin{table}[t]
 \centering
-\caption{Computational complexity of the evaluated algorithms in term of FLOPs.}\label{tab:comp_cost}
+\caption{Computational complexity of the evaluated algorithms in term of FLOPS.}\label{tab:comp_cost}
 \begin{tabular}{c | c | c | c | c}
 \hline
  & \multicolumn{2}{c|}{Simulated} & \multicolumn{2}{c}{Real} \\
@@ -1319,14 +1336,6 @@ CSP-SLOC  &  $1.84 \cdot 10^4$  & $2.14 \cdot 10^4$ &   $1.84 \cdot 10^4$       
 SRP-SLOC & $4.42 \cdot 10^9$  & $5.70 \cdot 10^9 $ &  $4.42 \cdot 10^9$ &  $5.70 \cdot 10^9 $ \\    \hline
 \end{tabular}
 \end{table}
-
-%	SIMULATED		REAL	
-%	Kitchen	Living Room	Kitchen	Living Room
-%	CNN	1,67E+09	8,97E+08	1,49E+09	1,52E+09
-%	CSP	1,84E+04	2,14E+04	1,84E+04	2,14E+04
-%	SRP	4,42E+09	5,70E+09	4,42E+09	5,70E+09
-
-\textcolor{red}{TODO: Discussion.}
 
 \section{Conclusion and Outlook}
 \label{sec:concl}
