@@ -412,6 +412,11 @@ The total number of operations per layer can be calculated by multiplying the ex
 
 \subsection{Smoothing}
 
+As final stage of the algorithm a smoothing technique has been implemented in order to reduce excessive time-varying predictions of the speaker location. In fact, according to a dynamical model that could be used to represent the movement a person in typical room \cite{vermaak2001nonlinear}, the localization accuracy can be improved discarding outliers predictions from chunk of adjacent frames. In addition, for the Simulated case of study, the speaker is stationary and the only movements allowed are those between fixed positions inside the target room. 
+ 
+Hence, to reduce the location prediction fluctuations, a median filter on each of the Cartesian coordinates (assumed to be independent \cite{vermaak2001nonlinear}) was used as smoothing technique and different local window size have been evaluated for the best performing setups of the different methods.
+
+
 \section{Comparative Methods}
 \label{sec:comp_meth}
 The proposed localization algorithm has been compared with two state-of-the art methods described in the remainder of this section.
@@ -516,6 +521,7 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
 	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e., $s=\{1,3,4,5\}$, and the context dimensions, i.e., $C=\{3,7,11,13,15,17,19,21\}$.
+	\item{\textbf{Smoothing.}} For the best performing configurations obtained from the aforementioned stages the median filtering technique was employed as final refinement varying the windows size dimension $w=\{3,7,11,15\}$.
 \end{enumerate}
 
 
@@ -882,7 +888,7 @@ The CSP-SLOC and the SRP-SLOC algorithms obtain a lower localization performance
 \subsubsection{Evaluation including the temporal context}
 
 
-The effect of temporal context is considered in the final optimization stage, in which the network size determined after the third stage is kept fixed. %This last stage is compared to the previous in order to highlight the decisive effect of the exploitation of an audio excerpt.  
+The effect of temporal context is considered in the fourth optimization stage, in which the network size determined after the third stage is kept fixed. %This last stage is compared to the previous in order to highlight the decisive effect of the exploitation of an audio excerpt.   
 
 The best localization performance has been obtained by using the CNN-SLOC having as input the microphone signals coming only from the target room. The resulting averaged RMSE is equal to 333\,mm and the highest $P_{cor}$ is 77\%. The details of the configuration parameters for the best performing setups on the Simulated subset are shown in \tableref{tab:bestCONF_SIMU}. The performance improvement at this stage is evident, whereas the employment of multiple room audio features does not seem to have a beneficial effect for CNN based algorithms. 
 %by the variation of the feature set, except as previously said about stability to vary of the input microphones. %(da modificare)
@@ -1020,6 +1026,8 @@ The  results obtained in the investigation of the audio excerpt are reported in 
 
 
 \subsubsection{Smoothing}
+In the following 
+
 \begin{figure}[t]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
@@ -1341,7 +1349,7 @@ SRP-SLOC & $5.09 \cdot 10^9$  & $6.59 \cdot 10^9 $ &  $5.09 \cdot 10^9$ &  $6.59
 \section{Conclusion and Outlook}
 \label{sec:concl}
 
-In this paper, a DNN-based approach for speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of the performance has been performed. The neural network employs GCC-PHAT Patterns as input features, obtained by combining the signals acquired with several microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach.
+In this paper, a DNN-based approach for speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of the performance has been performed. The neural network employs GCC-PHAT Patterns as input features, obtained by combining the signals acquired with several microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach. \textbf{ndFab: Cambiare questa frase considerando lo smoothing}
 A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. \textcolor{red}{In details, the capability of the network to exploit the audio coming from all the rooms has been evaluated, and different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 %%
 \textcolor{red}{The algorithm implicitly requires an Oracle multi-room VAD that identifies the time boundaries of the audio signals and the source room.} The performance have been evaluated on the DIRHA Dataset and compared to two state-of-the-art algorithm, based respectively on Crosspower Spectrum Phase estimation (CSP-SLOC) and on Steered Response Power (SRP-SLOC).
