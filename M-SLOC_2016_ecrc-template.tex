@@ -1177,7 +1177,7 @@ As result of the third optimization stage, the best performing MLP layout in the
 			
 			
 			\multirow{4}{*}{Kitchen}                    & \multirow{4}{*}{2Rx1N}         & \multirow{4}{*}{19 - 4}  & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (K)\end{tabular}}  & K1R,K1L; K3L,K3C;              & \multirow{4}{*}{24}                     & \multirow{4}{*}{$5\times5$}                 & \multirow{4}{*}{256} & \multirow{4}{*}{256} & \multirow{4}{*}{425} & \multirow{4}{*}{72} \\
-			&                                &                          &                                                                            & K3L,K3C                                    &                                         &                                             &                      &                      &                      &                     \\
+			&                                &                          &                                                                            & K3C,K3R                                    &                                         &                                             &                      &                      &                      &                     \\
 			&                                &                          & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Circular \\ Array (L)\end{tabular}} & L1C,L1L; L2L,L2R;                                     &                                         &                                             &                      &                      &                      &                     \\
 			&                                &                          &                                                                            &   L3L,L3R                                 &                                         &                                             &                      &                      &                      &                     \\
 			 \hline
@@ -1331,11 +1331,12 @@ As shown in the table, the highest demanding algorithm is SRP-SLOC, with a numbe
 \hline
 Algorithm          &  Kitchen & Living Room & Kitchen & Living Room \\
 \hline
-CNN-SLOC & $1.67 \cdot 10^9$  &   $0.90 \cdot 10^9$  & $1.49  \cdot 10^9$    & $1.52\cdot 10^9$     \\
-CSP-SLOC  &  $1.84 \cdot 10^4$  & $2.14 \cdot 10^4$ &   $1.84 \cdot 10^4$        &  $2.14 \cdot 10^4$    \\
-SRP-SLOC & $4.42 \cdot 10^9$  & $5.70 \cdot 10^9 $ &  $4.42 \cdot 10^9$ &  $5.70 \cdot 10^9 $ \\    \hline
+CNN-SLOC & $1.70 \cdot 10^9$  &   $0.93 \cdot 10^9$  & $1.55  \cdot 10^9$    & $1.59\cdot 10^9$     \\
+CSP-SLOC  &  $2.01 \cdot 10^7$  & $2.38 \cdot 10^7$ &   $2.01 \cdot 10^7$        &  $2.38 \cdot 10^7$    \\
+SRP-SLOC & $5.09 \cdot 10^9$  & $6.59 \cdot 10^9 $ &  $5.09 \cdot 10^9$ &  $6.59 \cdot 10^9 $ \\    \hline
 \end{tabular}
 \end{table}
+
 
 \section{Conclusion and Outlook}
 \label{sec:concl}
