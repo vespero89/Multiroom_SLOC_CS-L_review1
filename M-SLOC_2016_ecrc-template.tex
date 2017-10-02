@@ -411,18 +411,19 @@ where the first term considers the number of operations required for the convolu
 The total number of operations per layer can be calculated by multiplying the expressions in \eqref{eq:cost_fmap} and \eqref{eq:cost_mp} by the number of kernels and summing the contributions. Finally, the total number of operations of the CNN-SLOC algorithm can be obtained by summing the individual contributions of the convolutional layers and of the fully connected layers.}
 
 \subsection{Smoothing}
-
-As final stage of the algorithm a smoothing technique has been implemented in order to reduce excessive time-varying predictions of the speaker location. In fact, according to a dynamical model that could be used to represent the movement a person in typical room \cite{vermaak2001nonlinear}, the localization accuracy can be improved discarding outliers predictions from chunk of adjacent frames. In addition, for the Simulated case of study, the speaker is stationary and the only movements allowed are those between fixed positions inside the target room. 
- 
-Hence, to reduce the location prediction fluctuations, a median filter on each of the Cartesian coordinates (assumed to be independent \cite{vermaak2001nonlinear}) was used as smoothing technique and different local window size have been evaluated for the best performing setups of the different methods.
-
+\textcolor{red}{
+As final stage of the algorithm a smoothing technique has been implemented in order to reduce excessive time-varying predictions of the speaker location. In fact, according to a dynamical model that could be used to represent the movement a person in typical room \cite{vermaak2001nonlinear}, the localization accuracy can be improved by discarding outliers predictions from chunk of adjacent frames. 
+}
+\textcolor{red}{
+Hence, in order to reduce the fluctuations of location predictions, a median filter on each of the Cartesian coordinates (assumed to be independent \cite{vermaak2001nonlinear}) has been used as smoothing technique. % and different window size have been evaluated for the best performing setups of the different methods.
+}
 
 \section{Comparative Methods}
 \label{sec:comp_meth}
 The proposed localization algorithm has been compared with two state-of-the art methods described in the remainder of this section.
 
 \subsection{Crosspower Spectrum Phase Speaker Localization}\label{sec:soa_met}
-The first algorithm taken as reference is the Crosspower Spectrum Phase speaker localization algorithm (CSP-SLOC) \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers.}
+The first algorithm taken as reference is the Crosspower Spectrum Phase speaker localization algorithm (CSP-SLOC) \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers. In this paper, the outlier elimination algorithm has not been implemented since  the authors in \cite{tsiami2014experiments} showed that it does not provide significant performance improvements.}
 
 \textcolor{red}{More in details, the algorithm is evaluated separately for each room. Considering a set of microphone pairs, the first step consists in 
 estimating the DOA angle ($\theta$) from the TDOA defined in \eqref{eq:tdoa} and the CSPCM defined in \eqref{eq:CSPCM}:}
@@ -431,18 +432,22 @@ estimating the DOA angle ($\theta$) from the TDOA defined in \eqref{eq:tdoa} and
 \end{equation}
 where $d$ is the distance between the microphones.
 
-\textcolor{red}{After that, a Least Square algorithm is applied for resolving the ambiguity deriving from multiple intersection points of the DOA lines.  Considering, a random point $\mathbf{p}$ and its projection on the $j$-th DOA line $\mathbf{p}_{proj_j}$, the position $\hat{\mathbf{p}}$ is obtained by minimizing the error defined as the sum of the squared distances $D^2_j(\mathbf{p}) = \|\mathbf{p}-\mathbf{p}_{proj_j}\|^2$ between $\mathbf{p}$ and the $j$-th DOA:}
+\textcolor{red}{After that, a Least Square algorithm is applied for resolving the ambiguity deriving from multiple intersection points of the DOA lines.  Considering, a random point $\mathbf{p}$ and its projection on the $j$-th DOA line $\mathbf{p}_{proj_j}$, the position $\hat{\mathbf{p}}$ is obtained by minimizing the error defined as the sum of the squared distances $D^2_j(\mathbf{p}) = \|\mathbf{p}-\mathbf{p}_{proj_j}\|^2$ between $\mathbf{p}$ and the $j$-th DOA:
 \begin{align}
 E(\mathbf{p}) &= \sum_{j=1}^M D^2_j (\mathbf{p}),\\
 \hat{\mathbf{p}} & =  \underset{\mathbf{p}} {\arg \min} \,E(\mathbf{p}), \label{eq:ls}
 \end{align}
-where $M$ is the number of DOA lines.
+where $M$ is the number of DOA lines. The equation has a closed-form solution given by:
+\begin{equation}\label{eq:csp_sol}
+\hat{\mathbf{p}} = \mathbf{A}^{-1} \sum_{i=1}^M (\mathbf{A}_i\mathbf{x}_i), \quad \mathbf{A} = \sum_{i=1}^M\mathbf{A}_i, \quad \mathbf{A}_i=\mathbf{I}-\mathbf{r}_i \mathbf{r}_i^T,
+\end{equation}
+where $\mathbf{r}_i$ is the unitary vector in the DOA direction $i$.}
 
 Several physical aspects affect the accuracy of the CSP-SLOC, such as the orientation of the speaker, the noise level and reverberation. In order to increase CSP-SLOC performance, the authors in \cite{tsiami2014experiments} adopted the pre-processing cepstral filtering technique described in \cite{stephenne1997new}. 
 
 In this paper, the cepstral dereverberation algorithm uses frames of 2048 samples without overlap, with an exponential window having a scaling factor $\alpha = 0.9985$ and an averaging weighting coefficient $\mu=10^{-4}$. To be coherent with the proposed method, we computed the TDOAs with a rate of 100 frames/second and a frame overlap equal to 66\%.
 
-\textcolor{red}{The computational cost of the CSP-SLOC algorithm can be derived by summing the cost of the CSPCM defined \eqref{eq:CSPCM}, the DOA in \eqref{eq:doa}, and the minimization problem defined in \eqref{eq:ls}. }
+\textcolor{red}{The computational cost of the CSP-SLOC algorithm can be derived by summing the cost of the CSPCM defined \eqref{eq:CSPCM}, the DOA in \eqref{eq:doa}, and the solution in \eqref{eq:csp_sol}.}
 
 
 \subsection{Steered Response Power Using the Phase Transform}
@@ -521,7 +526,7 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
 	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e., $s=\{1,3,4,5\}$, and the context dimensions, i.e., $C=\{3,7,11,13,15,17,19,21\}$.
-	\item{\textbf{Smoothing.}} For the best performing configurations obtained from the aforementioned stages the median filtering technique was employed as final refinement varying the windows size dimension $w=\{3,7,11,15\}$.
+	\item{\textbf{Smoothing.}} For the best performing configurations obtained from the aforementioned stages, the median filtering smoothing technique has been employed as final refinement. The window size has been varied in the range $w=\{3,7,11,15\}$.
 \end{enumerate}
 
 
@@ -1025,20 +1030,36 @@ The  results obtained in the investigation of the audio excerpt are reported in 
 \end{figure}
 
 
-\subsubsection{Smoothing}
-In the following 
+\subsubsection{The effect of smoothing}
+\textcolor{red}{
+The effect of smoothing the positions predicted by the proposed approach as well as by the comparative algorithms is shown in \tableref{tab:smooth_sim}. For each method, the results are related to the smoothing window that provided the lowest RMSE. As shown in \tableref{tab:smooth_sim}, applying a median filter improves the performance of all the methods. The most significant error reduction is observed for SRP-SLOC, with a 15.88\% lower RMSE, showing that a consistent part of the localization error obtained without smoothing was due to inconsistent predictions in adjacent frames. On the contrary, on CSP-SLOC the median filter reduces the error only by 1.70\%, showing that the errors of the method do not present significant frame-by-frame variabilities. Similar considerations can be made for CNN-SLOC, where the error reduces by 2.67\%: being the most performing algorithm, this also demonstrate a certain robustness of CNN-SLOC against inter-frame variabilities that in the SRP-SLOC produce higher errors and are reduced only by applying the median filter.}
+
+\begin{table}[t]
+\centering
+\caption{Results obtained by applying a median filter for smoothing the predicted positions in the Simulated scenario.}\label{tab:smooth_sim}
+\begin{tabular}{c | c | c | c}
+  	 				& RMSE (mm) & Relative difference (\%) & Window size \\
+\hline
+CNN-SLOC    & 324 & -2.67  &\\
+CSP-SLOC    & 1441 & -1.70 &\\
+SRP-SLOC    & 850 & -15.88 &\\
+\end{tabular}
+\end{table}
+
+\textcolor{red}{
+Better insights on the results of the CNN-SLOC algorithm can be obtained by analyzing the distribution of the predicted positions. \figref{fig:distr_simu} shows a bi-dimensional histogram obtained by dividing the plane of the Kitchen Room in a $30 \times 30$ grid and counting the occurrences of the positions that fall in each bin. Bins with higher number of occurrences are shown with a darker color, and the abscissa $\bar{\chi}$ and the ordinate $\bar{\psi}$ represent normalized positions. \figref{fig:distr_simu_gt} shows the distribution of the ground truth: the number of colored bins corresponds to the positions shown in \figref{fig:DIRHA_map}, since in the Simulated scenario speaker's positions are fixed. The highest occurring bins in the ground truth are related to positions A, C, G, J, K, and P. Observing the predicted positions distributions in \figref{fig:distr_simu_pred}, it can be noted that the highest occurring positions are indeed located near the locations of the ground truth, as a further confirm of the results shown in \tableref{tab:smooth_sim}.}
 
 \begin{figure}[t]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen_Labels.tikz}
-\caption{Distribution of the speaker's positions in the ground truth.}
+\caption{Distribution of the speaker's positions in the ground truth.}\label{fig:distr_simu_gt}
 \end{subfigure}
 \begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/SimuCNN1N1RKitchen.tikz}
-\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}
+\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}\label{fig:distr_simu_pred}
 \end{subfigure}
-\caption{Distributions of the speaker's positions in the Kitchen Room. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}
+\caption{Distributions of the speaker's positions in the Kitchen Room. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}\label{fig:distr_simu}
 \end{figure}
 
 \subsection{Results on the Real Dataset} 
@@ -1306,18 +1327,39 @@ Details of the best performing configurations are provided in \tableref{tab:best
 	\label{ctx-str-REAL}
 \end{figure}
 
-\subsubsection{Smoothing}
+\subsubsection{The effect of smoothing}
+\textcolor{red}{
+As in the Simulated scenario, the proposed approach and the comparative algorithms have been evaluated after applying a median filter for smoothing the estimated positions. The results in \tableref{tab:smooth_sim} show that the algorithms behavior is similar to the one noted in the Simulated scenario. The highest performance improvement is observed for the SRP-SLOC algorithm, while in this case, the CSP-SLOC RMSE is essentially unchanged, since it increases by 3\,mm (0.26\% relative). SRP-SLOC and CNN-SLOC reduce the RMSE respectively by 19.29\% and 5.27\%, thus confirming what remarked in the Simulated scenario.
+}
+
+\begin{table}[t]
+\centering
+\caption{Results obtained by applying a median filter for smoothing the predicted positions in the Real scenario.}\label{tab:smooth_real}
+\begin{tabular}{c | c | c | c}
+  	 				& RMSE (mm) & Relative difference (\%) & Window size \\
+\hline
+CNN-SLOC    & 367 & -5.27 &\\
+CSP-SLOC    & 1283 & 0.26 &\\
+SRP-SLOC    & 640 & -19.29 &\\
+\end{tabular}
+\end{table}
+
+\textcolor{red}{
+\figref{fig:distr_real} shows the distribution of the positions estimated by the CNN-SLOC algorithm. As in the Simulated scenario, the figure has been obtained by dividing the plane of the Kitchen Room in a $30 \times 30$ grid. The ground truth distribution in \figref{fig:distr_real_gt} show that the most occurring speaker positions are located in the central area of the room, in particular in the rectangle with upper left corner $(0.25, 0.35)$ and lower right corner $(0.75, 0.75)$. The positions estimated by the CNN-SLOC algorithm shown in \figref{fig:distr_real_pred} are consistently more concentrated in a rectangle similar to the one defined in the ground truth. However, the algorithm tends to cluster the estimated positions on a smaller area and to underestimate the presence of the speaker in left portion of the room.
+}
+
+
 \begin{figure}[t]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/REALCNN1N1RLivRoom_Labels.tikz}
-\caption{Distribution of the speaker's positions in the ground truth.}
+\caption{Distribution of the speaker's positions in the ground truth.}\label{fig:distr_real_gt}
 \end{subfigure}
 \begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/REALCNN1N1RLivRoom_Predictions.tikz}
-\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}
+\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}\label{fig:distr_real_pred}
 \end{subfigure}
-\caption{Distributions of the speaker's positions in the Kitchen Room related to the Real dataset. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}
+\caption{Distributions of the speaker's positions in the Kitchen Room related to the Real dataset. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}\label{fig:distr_real}
 \end{figure}
 
 
@@ -1326,7 +1368,7 @@ Details of the best performing configurations are provided in \tableref{tab:best
 The computational complexity of the evaluated algorithms is reported in \tableref{tab:comp_cost}. Regarding the proposed approach, here we report only the cost of the CNN-SLOC algorithm, since it obtained the lowest localization error. The computational cost has been calculated by summing the cost of the GCC-PHAT Patterns extraction phase, and the cost of the CNN-SLOC algorithm derived in \secref{sec:CNN}, and it is related to the network topologies reported in \tableref{tab:bestCONF_SIMU} for the Simulated dataset and in \tableref{tab:bestCONF_REAL} for the Real dataset.}
 
 \textcolor{red}{
-As shown in the table, the highest demanding algorithm is SRP-SLOC, with a number of floating point operations per second (FLOPS) in the order of $10^9$. The algorithm with the lowest computational burden is the CSP-SLOC, with about $10^4$ FLOPS. The computational complexity of the CNN-SLOC algorithm varies with the room and the dataset, since the topology of the network and the number of microphone pairs are different for each case. In general, the complexity of CNN-SLOC is in the same order of the SRP-SLOC, but ranging from $2.65$ times lower in the Simulated scenario (Kitchen Room) to $6.33$ times lower Simulated scenario (Living Room).
+As shown in the table, the highest demanding algorithm is SRP-SLOC, with a number of floating point operations per second (FLOPS) in the order of $10^9$. The algorithm with the lowest computational burden is the CSP-SLOC, with about $10^7$ FLOPS. The computational complexity of the CNN-SLOC algorithm varies with the room and the dataset, since the topology of the network and the number of microphone pairs are different for each case. In general, the complexity of CNN-SLOC is in the same order of the SRP-SLOC, but ranging from $2.99$ times lower in the Simulated scenario (Kitchen Room) to $7.09$ times lower int Simulated scenario (Living Room).
 }
 
 

@@ -18,6 +18,7 @@ every x tick/.append style={black},
 xmin=0.05,
 xmax=1,
 xlabel={$\bar{\chi}$},
+x label style={at={(axis description cs:0.5,1.18)},anchor=north},
 every outer y axis line/.append style={black},
 every y tick label/.append style={font=\color{black}},
 every y tick/.append style={black},
@@ -436,5 +437,27 @@ x	y	c\\
 1	0.95	0\\
 1	1	0\\
 };
+\node at (axis cs:0.225,0.125) {A};
+\node at (axis cs:0.425,0.125) {B};
+\node at (axis cs:0.625,0.125) {C};
+\node at (axis cs:0.825,0.125) {D};
+
+\node at (axis cs:0.225,0.275) {E};
+\node at (axis cs:0.425,0.275) {F};
+\node at (axis cs:0.625,0.275) {G};
+\node at (axis cs:0.825,0.275) {H};
+
+\node at (axis cs:0.225,0.475) {I};
+\node at (axis cs:0.425,0.475) {J};
+\node at (axis cs:0.625,0.475) {K};
+\node at (axis cs:0.825,0.475) {L};
+
+\node at (axis cs:0.225,0.625) {M};
+\node at (axis cs:0.425,0.625) {N};
+\node at (axis cs:0.625,0.625) {O};
+\node at (axis cs:0.825,0.625) {P};
 \end{axis}
+
+
+
 \end{tikzpicture}%
