@@ -423,7 +423,7 @@ Hence, in order to reduce the fluctuations of location predictions, a median fil
 The proposed localization algorithm has been compared with two state-of-the art methods described in the remainder of this section.
 
 \subsection{Crosspower Spectrum Phase Speaker Localization}\label{sec:soa_met}
-The first algorithm taken as reference is the Crosspower Spectrum Phase speaker localization algorithm (CSP-SLOC) \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers. In this paper, the outlier elimination algorithm has not been implemented since  the authors in \cite{tsiami2014experiments} showed that it does not provide significant performance improvements.}
+The first algorithm taken as reference is the Crosspower Spectrum Phase speaker localization algorithm (CSP-SLOC) \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers. In this paper, the outlier elimination algorithm has not been implemented since  the authors in \cite{tsiami2014experiments} showed that it does not provide significant performance improvements .For the same reason the cepstral dereverberation has not been employed in the Real case of study.}
 
 \textcolor{red}{More in details, the algorithm is evaluated separately for each room. Considering a set of microphone pairs, the first step consists in 
 estimating the DOA angle ($\theta$) from the TDOA defined in \eqref{eq:tdoa} and the CSPCM defined in \eqref{eq:CSPCM}:}
@@ -1044,9 +1044,9 @@ The effect of smoothing the positions predicted by the proposed approach as well
 \begin{tabular}{c | c | c | c}
   	 				& RMSE (mm) & Relative difference (\%) & Window size \\
 \hline
-CNN-SLOC    & 324 & -2.67  &\\
-CSP-SLOC    & 1441 & -1.70 &\\
-SRP-SLOC    & 850 & -15.88 &\\
+CNN-SLOC    & 324 & -2.67  & 11\\
+CSP-SLOC    & 1441 & -1.70 & 15\\
+SRP-SLOC    & 850 & -15.88 & 15\\
 \end{tabular}
 \end{table}
 
@@ -1092,7 +1092,7 @@ The main difference between the Real and the Simulated  dataset is the position 
 			CNN 1Rx1N & 21 - 3                      & 460                      & 64                            & 15 - 5                      & 349                      & 78                            & 405                     & 71                            \\ \hline
 			CNN 2Rx1N & /                          & 687                      & 40                            & /                          & 552                      & 54                            & 620                     & 61                            \\
 			CNN 2Rx1N & 19 - 4                      & 425                      & 72                            & 17 - 3                      & 350                      & 75                            & 387                      & 74                            \\ \hline
-			CSP-SLOC  & /                          & 1394                     & 9                             & /                          & 1166                     & 11                            & 1280                     & 10                            \\ \hline
+			CSP-SLOC  & /                          & 1415                     & 9                             & /                          & 1154                     & 11                            & 1285                     & 10                            \\ \hline
 			SRP-SLOC  & /                          & 895                      & 30                            & /                          & 690                      & 53                            & 793                      & 42                                                  
 			
 		\end{tabular}
@@ -1333,7 +1333,7 @@ Details of the best performing configurations are provided in \tableref{tab:best
 
 \subsubsection{The effect of smoothing}
 \textcolor{red}{
-As in the Simulated scenario, the proposed approach and the comparative algorithms have been evaluated after applying a median filter for smoothing the estimated positions. The results in \tableref{tab:smooth_sim} show that the algorithms behavior is similar to the one noted in the Simulated scenario. The highest performance improvement is observed for the SRP-SLOC algorithm, while in this case, the CSP-SLOC RMSE is essentially unchanged, since it increases by 3\,mm (0.26\% relative). SRP-SLOC and CNN-SLOC reduce the RMSE respectively by 19.29\% and 5.27\%, thus confirming what remarked in the Simulated scenario.
+As in the Simulated scenario, the proposed approach and the comparative algorithms have been evaluated after applying a median filter for smoothing the estimated positions. The results in \tableref{tab:smooth_sim} show that the algorithms behavior is similar to the one noted in the Simulated scenario. The highest performance improvement is observed for the SRP-SLOC algorithm, while in this case, the CSP-SLOC RMSE is essentially unchanged, since it reduced by 9\,mm (-0.63\% relative). SRP-SLOC and CNN-SLOC reduce the RMSE respectively by 19.29\% and 5.27\%, thus confirming what remarked in the Simulated scenario.
 }
 
 \begin{table}[t]
@@ -1342,9 +1342,9 @@ As in the Simulated scenario, the proposed approach and the comparative algorith
 \begin{tabular}{c | c | c | c}
   	 				& RMSE (mm) & Relative difference (\%) & Window size \\
 \hline
-CNN-SLOC    & 367 & -5.27 &\\
-CSP-SLOC    & 1283 & 0.26 &\\
-SRP-SLOC    & 640 & -19.29 &\\
+CNN-SLOC    & 367 & -5.27 & 15 \\
+CSP-SLOC    & 1275 & -0.63 & 11\\
+SRP-SLOC    & 640 & -19.29 & 15\\
 \end{tabular}
 \end{table}
 
