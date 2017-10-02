@@ -101,7 +101,7 @@ Additionally, the origin of the coordinates system has been added to Fig. 1.
 
 
 \item \textit{Did the authors experiment with the frame ? 480ms seems quite high to me and seems to violate the assumption of the aqcuired signal to be almost stationary within a frame. In my experience 64-128 is more appropriate.\\}
-\textbf{Reply}: Thank you for your remark. The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2 (Features based on GCC-PHAT Patterns) as follows:
+\textbf{Reply}: Thank you for your remark. The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2.1 (Features based on GCC-PHAT Patterns) as follows:
 
 \begin{quote}
 	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
@@ -150,7 +150,7 @@ In order to clarify this aspect and better describe the architecture of the prop
 In a preliminary stage, a multi-room VAD [43, 60] extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.}
 \end{quote}
 
-Additionally, in Section 6 (Conclusion) the sentence:
+Additionally, in Section 6 (Conclusion and Outlook) the sentence:
 \begin{quote}
 The algorithm implicitly requires an Oracle VAD in order to process only human
 speech.
