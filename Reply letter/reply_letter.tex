@@ -176,7 +176,7 @@ The smoothing technique has been described in Section 2.5 (Smoothing). The relat
 \end{quote}
 
 \item \textit{Evaluation: What was the number for $N_{TOT}$?\\}
-\textbf{Reply}: Thank you for your comment. The values of $N_{TOT}$ has been reported in Table 3.
+\textbf{Reply}: Thank you for your comment. The values of $N_{TOT}$ have been reported in Table 3.
 
 \item \textit{Evaluation: Line 358: The explanation about the boxplot could be expanded to explain things better\\}
 \textbf{Reply}: Thank you for your comment. In the boxplots included in the original version of the paper,  the minimum and maximum values of the colored box represented respectively the mean value minus half the standard deviation and the mean value plus half the standard deviation, and the horizontal line represented the mean value. The lower and upper whiskers represented respectively the lowest RMSE and highest RMSE. In this revised version, we changed the boxplots in order to be more compliant with their common definition: now the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile.
@@ -288,40 +288,44 @@ has been replaced with:
 \section{Answers to reviewer 2}\label{sec:rev2}
 \begin{enumerate}
 \item \textit{In page 7, line 134. "the coordinates $(\chi,\phi)$, i.e.," It is unclear what $\chi$ and $\phi$ represent. Please define the two symbols clearly and give their units. It seems very important due to that Eq. (15) defines the RMSE, and the unit of RMSE is millimeter (mm). $\phi$ is often denoted as angle.\\}
-\textbf{Reply}:  The output of the algorithms are the Cartesian coordinates of the speaker position inside the room. We have modified Section 2 - Proposed Method as follows:
+\textbf{Reply}: Thank your comment. A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
+
+ The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) has been modified as follows:
 \begin{quote}
-	\textit{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $()\chi,\psi)$ i.e., the position of the speaker inside the target room.}
+	\textbf{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
 \end{quote}
 into:
 \begin{quote}
-	\textcolor{red}{\textbf{The output of the algorithm are the Cartesian coordinates $\left \langle \chi,\psi \right \rangle \left [mm\right ]$ of the speaker inside the target room. The target positions are scaled between 0 and 1, thus the linear output of the ANN produces always positive values in this range which are simply unscaled to the $\left [mm\right ]$ values at the end of the processing.}}
+	\textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.}
 \end{quote}
-\textcolor{red}{TODO} - Add origin of the axes?
+Additionally, the origin of the coordinates system has been added to Fig. 1.
 
 \item  \textbf{In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\}
-\textbf{Reply}:  It was a typo. We used a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz. We have modified Section 2 - Features based on GCC-PHAT Patterns as follows:
+\textbf{Reply}: Thank you for your comment. A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
+
+The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2 (Features based on GCC-PHAT Patterns) as follows:
 
 \begin{quote}
-	\textit{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms.}
+	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
 \end{quote}
 into:
 \begin{quote}
-	\textcolor{red}{\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}}
+	\textcolor{red}{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}
 \end{quote}
 
 
 \item  \textbf{It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\}
-\textbf{Reply}: This threshold and in general the evaluation metrics were chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details ad the respective reference in Section 5.1 - Experimental Setup.
-\begin{quote}
-	\textit{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions. These two metrics are averaged over all the available network outputs.}
-\end{quote}
+\textbf{Reply}: Thank you for your comment.  A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
 
+This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
 \begin{quote}
-	\textcolor{red}{\textbf{Similarly to a classification task, $P_{cor}$ provides a measure of the localization accuracy, since the estimated positions with an RMSE less than 500\,mm represent the correct decisions, according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014)\footnote{http://dirha.fbk.eu/SASLODOM2014} task of the EVALITA 2014 challenge \cite{basili2014proceedings}. These two metrics are averaged over all the available network outputs.}}
+	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014) task of the EVALITA 2014 challenge [53] (TODO: controllare che il numero rimanga lo stesso!).}
 \end{quote}
 
 \item  \textbf{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
-\textbf{Reply}:  It is exactly what we have done with the CSP-SLOC. \textcolor{red}{TODO} - explain the algorithm
+\textbf{Reply}: Thank you for your comment. It is authors' opinion that the CSP-SLOC algorithm described in Section 3.1 and considered in the comparative evaluation algorithm is a GCC-PHAT-based localization as suggested by the reviewer. The CSP-SLOC algorithm proposed in ``Tsiami et al. Experiments in acoustic source localization using sparse arrays in adverse indoors environments, in Proc. of EUSIPCO, 2014'' is based on the calculation of the GCC with PHAT normalization as reported in Equation 1, and the speaker's position is estimated by finding the point that minimizes the sum of the squared distances from the estimated DOA lines. The innovations introduced by Tsiami and colleagues are the cepstral dereverberation algorithm and the outlier elimination procedure, however the localization algirithm is still based on GCC-PHAT.
+
+In order to clarify this aspect, the Section 1.1 (Related works) and the description of the CSP-SLOC algorithm (Section 3.1) has been modified accordingly.
 
 \item  \textbf{For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\}
 \textbf{Reply}: Thank you for your suggestion. The authors agree with the reviewer on the potential performance improvement that can be obtained by pre-processing the acquired signals with noise suppression and dereverberation algorithms. However, the general idea of the presented experiments is to compare the proposed approach with reference speaker localization algorithms whose results can be easily reproduced by the scientific community. Indeed, the CSP-SLOC algorithm proposed in  ``Tsiami, A., et al (2014). Experiments in acoustic source localization using sparse arrays in adverse indoors environments. In Proc. of European Signal Processing Conference (pp.\ 2390-2394)'' and implemented in this work includes a cepstral dereverberation algorithm. Regarding the SRP-SLOC, we implemented the algorithm described in ``Do, H., et al. (2007). A real-time SRP-PHAT source location implementation using stochastic region contraction (SRC) on a large-aperture microphone array. In Proc. of ICASSP (Vol. 1, pp. 121-124)'' without adding additional processing. As suggested by the reviewer, pre-processing the microphone signals with noise suppression and dereverberation algorithms would almost certainly improve the localization performance. However it is authors' opinion that this would fall outside the objective of this paper, that is demonstrating that the proposed approach outperforms reference localization algorithms without additional processing.  %Moreover, the purpose of the experiments is to show the performance of the different algorithm implemented as described in their original work and without additional processing.
