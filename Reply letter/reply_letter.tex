@@ -61,7 +61,8 @@ The Authors
 %\textcolor{red}{TODO} - Fabio - looking for implementations of such algorithms - discuss in literature
 
 \item \textit{Assuming that the microphones are calibrated, a simple way of determining speaker position is to used the signal strength. This would also be valuable to include in a discussion.\\}
-\textbf{Reply}: Thank you for your suggestion. Up to the authors' knowledge, approaches based on the signal strength (or signal energy) are usually adopted when wireless acoustic sensor networks (WASNs) are employed. The motivation is that in WASNs, sensors synchronization is not guaranteed, thus using TDOA and SRP-based methods is intrinsically not possible. On the contrary, energy-based approaches exploit an average energy measure and an energy decay model, thus they can be adopted when sensors are not synchronized. Their disadvantage, however, is their inferior accuracy with respect to TDOA and SRP-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading. Approaches based on the signal energy have been described in Section 1.1 (Related Work). 
+\textbf{Reply}: %Thank you for your suggestion. 
+Up to the authors' knowledge, approaches based on the signal strength (or signal energy) are usually adopted when wireless acoustic sensor networks (WASNs) are employed. The motivation is that in WASNs, sensors synchronization is not guaranteed, thus using TDOA and SRP-based methods is intrinsically not possible. On the contrary, energy-based approaches exploit an average energy measure and an energy decay model, thus they can be adopted when sensors are not synchronized. Their disadvantage, however, is their inferior accuracy with respect to TDOA and SRP-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading. Approaches based on the signal energy have been described in Section 1.1 (Related Work). 
 
 \begin{quote}
 \textcolor{red}{
@@ -71,7 +72,8 @@ Energy-based approaches localize speakers by using the energy measures of the si
 %\textcolor{red}{TODO}: Discussion about the use of energy as feature for the DNN (maybe for the M-VAD), the direct use of signal strength is quite inapplicable due to the not-regular disposition of the microphones
 
 \item \textit{It would be nice to have the problem more clearly defined earlier in the paper, e.g., single- or multi-speaker localization, moving or stationary, are signals from all rooms used simultaneously, are there more than one microphone pair etc.\\}
-\textbf{Reply}: Thank you for your comment. These aspect have been clarified by adding the following sentence at the end of Section 1 (Introduction):
+\textbf{Reply}: % Thank you for your comment. 
+ These aspects have been clarified by adding the following sentence at the end of Section 1 (Introduction):
 
 \begin{quote}
 \textcolor{red}{
@@ -83,17 +85,17 @@ Additionally, the first paragraph of Section 1.2 (Contribution) has been modifie
 	\begin{quote}
 		\textcolor{red}{
 		The main contribution of this work is the development of a completely data-driven approach for Speaker Localization (SLOC) in a multi-room environment, considering both the moving and the stationary conditions. 		The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms.
-		In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. The feature extraction stage calculates GCC-PHAT Patterns [14] from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' position. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) [41]. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices [14], which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones yielded the best performance, as well as the importance of using a temporal context.
+		In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. The feature extraction stage calculates GCC-PHAT Patterns [14] from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' position. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) [41]. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices [14], which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones yielded the best performance, as well as the importance of temporal context.
 		%Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.
 		}
 	\end{quote}
 
 \item \textit{What are the outputs of the algorithms? Coordinates? How to make sure, that only valid coordinates are chosen?\\}
 \textbf{Reply}: Thank your comment. The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) has been modified as follows:
-\begin{quote}
-	\textbf{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
-\end{quote}
-into:
+%\begin{quote}
+%	\text{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
+%\end{quote}
+%into:
 \begin{quote}
 	\textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.}
 \end{quote}
@@ -103,10 +105,10 @@ Additionally, the origin of the coordinates system has been added to Fig. 1.
 \item \textit{Did the authors experiment with the frame ? 480ms seems quite high to me and seems to violate the assumption of the aqcuired signal to be almost stationary within a frame. In my experience 64-128 is more appropriate.\\}
 \textbf{Reply}: Thank you for your remark. The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2.1 (Features based on GCC-PHAT Patterns) as follows:
 
-\begin{quote}
-	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
-\end{quote}
-into:
+%\begin{quote}
+%	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
+%\end{quote}
+%into:
 \begin{quote}
 	\textcolor{red}{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}
 \end{quote}
@@ -286,30 +288,30 @@ has been replaced with:
 \textbf{Reply}: Thank your comment. A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
 
  The outputs of the algorithms are the Cartesian coordinates of the speaker position inside the room. They are originally expressed in millimeters, but for training and testing they are normalized in the range $[0,1]$. During the localization phase, the actual predicted position in millimeters is calculated by reversing the normalization procedure. The origin of the Cartesian coordinate system is located in the upper left corner of a room. Regarding the validity of the coordinates, during our experiment the network predicted always values in the range $[0,1]$. However, in order to ensure that only valid predictions are considered, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$.  In order to clarify this aspect, Section 2 (Proposed Method) has been modified as follows:
-\begin{quote}
-	\textbf{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
-\end{quote}
-into:
+%\begin{quote}
+%	\textbf{Hence, the artificial neural network is trained on labelled data to estimate the coordinates $(\chi,\psi)$ i.e., the position of the speaker inside the target room.}
+%\end{quote}
+%into:
 \begin{quote}
 	\textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.}
 \end{quote}
 Additionally, the origin of the coordinates system has been added to Fig. 1.
 
-\item  \textbf{In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\}
+\item  \textit{In page 9, "for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480 ms and 160 ms." I doubt about the frame and the hop here, it is not common to compute the CSPCM using a half-second long data segment. There are several reasons for this. First, the speech is only quasi-stationary. Second, it is unnecessary to use so long data segment to obtain the GCC-PHAT pattern since the maximum delay is only 24 samples as pointed out in Eq. (3). Third, the tracking capability will reduce dramatically when using so long data segment.\\}
 \textbf{Reply}: Thank you for your comment. A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
 
 The frame size was erroneously reported as 480\,ms, however the actual value is 30\,ms and the hop size is 10\,ms. Considering that the sample rate is 16\,kHz, they are respectively equal to 480 samples and 160 samples. We have modified Section 2 (Features based on GCC-PHAT Patterns) as follows:
 
-\begin{quote}
-	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
-\end{quote}
-into:
+%\begin{quote}
+%	\textbf{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame and a hop respectively equal to 480\,ms and 160\,ms.}
+%\end{quote}
+%into:
 \begin{quote}
 	\textcolor{red}{Hence, the GCC-PHAT Patterns are extracted as follows: for each considered microphone pair the CSPCM is computed with a frame size of 30\,ms and a hop size of 10\,ms respectively equal to 480 samples and 160 samples at the sample rate of 16\,kHz.}
 \end{quote}
 
 
-\item  \textbf{It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\}
+\item  \textit{It is unclear why 500mm is chosen as a threshold. Why not other values, like 1000mm?\\}
 \textbf{Reply}: Thank you for your comment.  A similar remark was made by Reviewer nr.\ 1, and the related reply is reported below.
 
 This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
@@ -317,17 +319,17 @@ This threshold and in general the evaluation metrics have been chosen according 
 	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014) task of the EVALITA 2014 challenge [56].}
 \end{quote}
 
-\item  \textbf{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
+\item  \textit{GCC-PHAT can also be applied to speaker localization directly, why not compare the proposed algorithm with the GCC-PHAT-based localization. \\}
 \textbf{Reply}: Thank you for your comment. It is authors' opinion that the CSP-SLOC algorithm described in Section 3.1 and considered in the comparative evaluation algorithm is a GCC-PHAT-based localization as suggested by the reviewer. The CSP-SLOC algorithm proposed in ``Tsiami et al. Experiments in acoustic source localization using sparse arrays in adverse indoors environments, in Proc. of EUSIPCO, 2014'' is based on the calculation of the GCC with PHAT normalization as reported in Equation 1, and the speaker's position is estimated by finding the point that minimizes the sum of the squared distances from the estimated DOA lines. The innovations introduced by Tsiami and colleagues are the cepstral dereverberation algorithm and the outlier elimination procedure, however the localization algirithm is still based on GCC-PHAT.
 
 In order to clarify this aspect, the Section 1.1 (Related works) and the description of the CSP-SLOC algorithm (Section 3.1) has been modified accordingly.
 
-\item  \textbf{For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\}
+\item  \textit{For the reverberant and noisy environments, it is common to suppress the noise and the reverberant components beforehand to improve the localization accuracy. Moreover, as we know, if we properly choose some time-frequency bins that have high CDR or SNR values, the localization accuracy can also be improved dramatically.\\}
 \textbf{Reply}: Thank you for your suggestion. The authors agree with the reviewer on the potential performance improvement that can be obtained by pre-processing the acquired signals with noise suppression and dereverberation algorithms. However, the general idea of the presented experiments is to compare the proposed approach with reference speaker localization algorithms whose results can be easily reproduced by the scientific community. Indeed, the CSP-SLOC algorithm proposed in  ``Tsiami, A., et al (2014). Experiments in acoustic source localization using sparse arrays in adverse indoors environments. In Proc. of European Signal Processing Conference (pp.\ 2390-2394)'' and implemented in this work includes a cepstral dereverberation algorithm. Regarding the SRP-SLOC, we implemented the algorithm described in ``Do, H., et al. (2007). A real-time SRP-PHAT source location implementation using stochastic region contraction (SRC) on a large-aperture microphone array. In Proc. of ICASSP (Vol. 1, pp. 121-124)'' without adding additional processing. As suggested by the reviewer, pre-processing the microphone signals with noise suppression and dereverberation algorithms would almost certainly improve the localization performance. However it is authors' opinion that this would fall outside the objective of this paper, that is demonstrating that the proposed approach outperforms reference localization algorithms without additional processing.  %Moreover, the purpose of the experiments is to show the performance of the different algorithm implemented as described in their original work and without additional processing.
 
 % we have implemented a cepstral dereverberation procedure, in order to improve the localization accuracy according to the author's specifications. In this work we highlight that the proposed method is able to already significantly overcome the reference algorithms with pretty standard features as input and no speech enhancement process. Certainly, the suppression of noise and reverberant components can improve the localization accuracy, but it falls outside the aim of this paper.
 
-\item  \textbf{Please compare the computational complexity of these algorithms.\\}
+\item  \textit{Please compare the computational complexity of these algorithms.\\}
 \textbf{Reply}: Thank you for your suggestion. The computational complexity of the proposed approach and of the comparative algorithms has been reported in the related sections. Additionally, we added Section 5.4 (Computational complexity) to Section 5 (Experiments) where the actual complexities are reported and discussed.
 
 \end{enumerate}
