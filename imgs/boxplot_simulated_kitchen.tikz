@@ -1,0 +1,56 @@
+\begin{tikzpicture}[scale=0.65]
+						\begin{axis}[
+						%legend entries = {1Rx1N, 2Rx1N},
+						% legend to name={legend},
+			%			title = Simulated Dataset - GCC SELECTION,
+						boxplot/draw direction=y, 
+									x axis line style={opacity=0},
+						axis x line*=bottom,
+						axis y line=left,
+						enlarge y limits,
+						ymajorgrids,
+						%xtick={1,3,5,7},
+						%xticklabel style = {font=\tiny},
+						xtick={1.5,3.5},
+						xticklabels={CNN, MLP},
+						ylabel={RMSE (mm)},
+						ytick={},ymin=450,ymax=650],
+					
+									
+						\addplot+ [boxplot,fill=BoxCol,draw=BoxCol,fill opacity=0.8]
+							table [row sep=\\,y index=0] {
+							data\\
+							593.36\\ 559.89\\ 564.87\\ 570.45\\ 573.73\\ 562.05\\ 564.15\\ 555.99\\ 540.74\\ 535.44\\ 556.29\\ 542.79\\ 542.13\\ 557.39\\
+							}				
+							;
+			
+						\addplot+[
+						boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8
+						] table [row sep=\\,y index=0] {
+										data\\
+										560.69\\ 560.31\\ 555.07\\ 603.75\\ 555.75\\ 551.91\\ 567.75\\ 559.76\\ 570.49\\ 557.79\\ 562.10\\ 553.82\\ 557.14\\ 558.41\\ 550.90\\ 549.55\\ 553.60\\ 581.50\\ 560.54\\ 559.51\\ 545.96\\ 544.87\\ 536.73\\ 574.36\\ 567.11\\ 558.69\\ 570.97\\ 549.53\\ 550.39\\ 562.26\\ 528.06\\ 535.59\\ 538.82\\ 543.18\\ 521.80\\ 533.22\\ 539.84\\ 532.65\\ 537.82\\ 527.68\\ 543.15\\
+										};
+										
+						\addplot+[
+							boxplot, fill=BoxCol,draw=BoxCol,fill opacity=0.8
+							] table [row sep=\\,y index=0] {
+														data\\
+														474.924\\ 483.334\\ 503.265\\ 507.382\\ 508.163\\ 511.708\\ 512.510\\ 512.600\\ 513.386\\ 513.760\\ 515.737\\ 517.749\\ 519.411\\ 519.942\\ 521.050\\ 522.803\\ 524.638\\ 525.646\\ 525.844\\ 528.869\\
+														};
+														
+						\addplot+[
+							boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8
+							] table [row sep=\\,y index=0] {
+																		data\\
+																		502.570\\ 512.170\\ 502.990\\ 506.630\\ 505.260\\ 494.080\\ 491.920\\ 500.190\\ 483.170\\ 502.190\\ 498.250\\ 489.920\\ 500.990\\ 495.190\\ 485.480\\ 513.170\\ 501.220\\ 497.490\\ 519.090\\ 503.640\\ 506.4\\ 495.75\\ 480.21\\ 492.58\\ 479.73\\ 503.72\\ 491.31\\ 512.4\\ 506.65\\ 483.54\\ 528.92\\ 512.61\\ 506.8\\ 490.59\\ 483.94\\ 488.42\\ 486.96\\ 493.54\\ 468.42\\ 473.38\\ 489.2\\
+																		};
+						
+						\end{axis}
+						\begin{customlegend}[legend entries={1Rx1N, 2Rx1N}, legend style={at={(7.6,6.2)}} ]
+									% \node (rel axis cs:0.9,0.2);
+									
+									\addlegendimage{BoxCol,fill=BoxCol,fill opacity=0.8,area legend}
+									\addlegendimage{BoxCol1,fill=BoxCol1,fill opacity=0.8,area legend}
+									\end{customlegend}	
+					
+					\end{tikzpicture}

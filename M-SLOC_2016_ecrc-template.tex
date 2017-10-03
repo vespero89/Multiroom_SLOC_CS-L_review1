@@ -132,12 +132,12 @@
 \address{Department of Information Engineering, Universit\`a Politecnica delle Marche, Via Brecce Bianche, 60131, Ancona, Italy}
 
 \begin{abstract}
-In the field of human speech capturing systems, a fundamental role is played by the source localization algorithms. In this paper a Speaker Localization algorithm (SLOC) based on Deep Neural Networks (DNN) is evaluated and compared with state-of-the art approaches. The speaker position in the room under analysis is directly determined by the DNN, leading the proposed algorithm to be fully data-driven. Two different neural network architectures are investigated: the Multi Layer Perceptron (MLP) and Convolutional Neural Networks (CNN). GCC-PHAT (Generalized Cross Correlation Phase Transform) Patterns, computed from the audio signals captured by the microphone  are used as input features for the DNN.  
+In the field of human speech capturing systems, a fundamental role is played by the source localization algorithms. In this paper a Speaker Localization algorithm (SLOC) based on Deep Neural Networks (DNN) is evaluated and compared with state-of-the art approaches. The speaker position in the room under analysis is directly determined by the DNN, leading the proposed algorithm to be fully data-driven. Two different neural network architectures are investigated: the Multi Layer Perceptron (MLP) and Convolutional Neural Networks (CNN). GCC-PHAT (Generalized Cross Correlation-PHAse Transform) Patterns, computed from the audio signals captured by the microphone  are used as input features for the DNN.  
 In particular, a multi-room case study is dealt with, where the acoustic scene of each room is influenced by sounds emitted in the other rooms.
 The algorithm is tested by means of the home recorded DIRHA dataset, characterized by multiple wall and ceiling microphone signals for each room. In detail, the focus goes to speaker localization task in two distinct neighbouring rooms.%%
 
 As term of comparison, two algorithms proposed in literature for the addressed applicative context are evaluated,  the Crosspower Spectrum Phase Speaker Localization (CSP-SLOC) and the Steered Response Power using the Phase Transform speaker localization (SRP-SLOC).
-Besides providing an extensive analysis of the proposed method, the article shows how DNN-based algorithm significantly outperforms the state-of-the-art approaches evaluated on the DIRHA dataset, providing an average localization error, expressed in terms of Root Mean Square Error (RMSE), equal to 330\,mm and 390\,mm respectively for the Simulated and the Real subsets.
+Besides providing an extensive analysis of the proposed method, the article shows how DNN-based algorithm significantly outperforms the state-of-the-art approaches evaluated on the DIRHA dataset, providing an average localization error, expressed in terms of Root Mean Square Error (RMSE), equal to 324\,mm and 367\,mm respectively for the Simulated and the Real subsets.
 \end{abstract}
 
 \begin{keyword}
@@ -164,7 +164,7 @@ Events localization is continuously performed by living beings through brain ela
 
 In the recent years, a special effort has been spent for acoustic source localization \cite{Dibiase2001Robust}, since it has a fundamental role in several applications, such as the study of binaural or monaural models for reproducing the human hearing system \cite{stern-et-al-2006,willert2006probabilistic,saxena2009learning}, the cocktail party problem \cite{roman2003speech, zotkin2004accelerated}, interaction between human and robots \cite{trifa2007real,li2013sound,dashuman2016human} and home assisted living \cite{asaei2009verified,Morales-cordovilla14roomlocalization,principi2015integrated}. This work focuses on the last research field, being the automated tracking of individuals inside a building an important component of any general purpose speech capture system.  This scenario is particularly challenging since it requires dealing with reverberation, overlapping speech, and background noise.
 
-\textcolor{red}{In particular, this work addresses the task of localizing multiple moving speakers inside a home equipped with several microphones for each room. The algorithm is based on Deep Neural Networks (DNN) and it is able to simultaneously use the signals coming from all the rooms of the building. The proposed approach operates on Generalized Cross Correlation-PHAse Transform (GCC-PHAT) Patterns \cite{xiao2015learning} features calculated from frames 30\,ms long and overlapped by 20\,ms, thus the speakers' positions are estimated every 10\,ms. Such a granular information can be directly exploited by algorithms that operate at the same time scale, such as beamformers \cite{Wolfel2009}. The output can be processed further in order to estimate speakers' locations at a coarser time scale, for example for being used by reasoning algorithms and dialogue managers, that need a general contextual information \cite{Augusto2013}. This aspect has not been addressed in this paper, and it will be investigated in future works. The following section provides a review of the recent literature on the topic.
+\textcolor{red}{In particular, this work addresses the task of localizing multiple moving speakers inside a home equipped with several microphones for each room. The algorithm is based on Deep Neural Networks (DNN) and it is able to simultaneously use the signals coming from all the rooms of the building. The proposed approach operates on Generalized Cross Correlation-PHAse Transform (GCC-PHAT) Patterns \cite{xiao2015learning} features calculated from frames 30\,ms long and overlapped by 20\,ms. The speakers' positions are estimated every 10\,ms, and such a granular information can be directly exploited by algorithms that operate at the same time scale, such as beamformers \cite{Wolfel2009}. The output can be processed further in order to estimate speakers' locations at a coarser time scale, for example for being used by reasoning algorithms and dialogue managers, that need a general contextual information \cite{Augusto2013}. This aspect has not been addressed in this paper, and it will be investigated in future works. The following section provides a review of the recent literature on the topic.
 }
 
 
@@ -178,10 +178,10 @@ In general, main categories in which the algorithms can be grouped are \cite{Cob
 
 \textcolor{red}{Energy-based approaches localize speakers by using the energy measures of the signals acquired from the acoustic sensors \cite{Cobos2017,Meng2017}. More in details, these techniques are based on the average of the signals energy calculated over several windows of the signals themselves. Energy-based methods have been gaining significant popularity in wireless acoustic sensor networks scenarios, since they do not require the sensors to be precisely synchronized. Their disadvantage, however, is their inferior accuracy with respect to TDOA-based and SRP-based methods, mainly due to the multiple propagation paths of the sound waves, and to channel fading \cite{Cobos2017}. Additionally, source position is estimated by using an averaged measure, instead of a sample-by-sample or frame-by-frame information, thus making these techniques intrinsically less precise \cite{Cobos2017}. For a survey on energy-based localization methods, the interested reader can refer to \cite{Cobos2017,Meng2017}.}
 
-TDOA-based locators estimate the time difference of arrival of an acoustic wave from the Generalized Cross Correlation (GCC) spectrum of the signals; successively, from the TDOAs and \textcolor{red}{the knowledge of microphone positions}, the hyperbolic curves representing the signal direction of arrival (DOA) are determined. \textcolor{red}{Ideally, the final position is obtained by intersecting the DOA curves. In real scenarios, DOA curves intersect in multiple points, thus, in order to resolve the ambiguity, the final position is estimated by using a Maximum Likelihood criterion.}  This method is subject to a severe performance degradation in noisy and reverberant conditions \cite{champagne1996performance}. In \cite{tsiami2014experiments}, the authors \textcolor{red}{improved the robustness of the algorithm by pre-processing the microphone signals with a cepstral dereverberation algorithm and by using an outlier elimination strategy.}
+TDOA-based locators estimate the time difference of arrival of an acoustic wave from the Generalized Cross Correlation (GCC) spectrum of the signals; successively, from the TDOAs and \textcolor{red}{the knowledge of microphone positions}, the hyperbolic curves representing the signal direction of arrival (DOA) are determined. \textcolor{red}{Ideally, the final position is obtained by intersecting the DOA curves. In real scenarios, DOA curves intersect in multiple points, thus the ambiguity is resolved by estimating the final position with a Maximum Likelihood criterion.}  This method is subject to a severe performance degradation in noisy and reverberant conditions \cite{champagne1996performance}. In \cite{tsiami2014experiments}, the authors \textcolor{red}{improved the robustness of the algorithm by pre-processing the microphone signals with a cepstral dereverberation algorithm and by using an outlier elimination strategy.}
 
 \textcolor{red}{
-SRP-based locators have been proven more robust than TDOA-based locators in low Signal to Noise Ratio (SNR) scenarios \cite{Dibiase2001Robust}}. This class of algorithm operates on a single stage and a one-stage method where the cost function represents the probability that a given point in space is the source point of the signal \cite{brutti2007classification}. The algorithm cannot operate in real-time due to its high computational burden related to the high number of local maxima in the SRP space \cite{yook2016fast}. For this reason, many strategies to optimize the global-maximum research have been proposed \cite{DoSY07,Minotto2012,Lee2016}. In particular, in \cite{DoSY07} the authors use the stochastic region contraction (SRC) to decrease the computational cost. The authors in \cite{transfeld2015acoustic} investigated a framework  suitable for acoustic event localization with a microphone array in far-field context, where a combination of GCC-PHAse Transform (GCC-PHAT) and SRP-PHAse Transform (SRP-PHAT) methods is employed. The resulting spatial likelihood function is spatially filtered and smoothed, significantly outperforming the reference algorithm, by means of an onset event detection technique. 
+SRP-based locators have been proven more robust than TDOA-based locators in low Signal to Noise Ratio (SNR) scenarios \cite{Dibiase2001Robust}}. This class of algorithm operates on a single stage where the cost function represents the probability that a given point in space is the source point of the signal \cite{brutti2007classification}. The algorithm cannot operate in real-time due to its high computational burden related to the high number of local maxima in the SRP space \cite{yook2016fast}. For this reason, many strategies to optimize the global-maximum research have been proposed \cite{DoSY07,Minotto2012,Lee2016}. In particular, in \cite{DoSY07} the authors use the stochastic region contraction (SRC) to decrease the computational cost. The authors in \cite{transfeld2015acoustic} investigated a framework  suitable for acoustic event localization with a microphone array in far-field context, where a combination of GCC-PHAse Transform (GCC-PHAT) and SRP-PHAse Transform (SRP-PHAT) methods is employed. The resulting spatial likelihood function is spatially filtered and smoothed, significantly outperforming the reference algorithm, by means of an onset event detection technique. 
 
 
 %In \cite{Chen2007a,Chen2007b}, the authors estimated the positions of the participants of a meeting by using the average energies of their speech signals acquired with the microphones integrated in their laptops.  However, microphones are supposed very close to the meeting participants, thus a higher Signal-to-Noise ratio is expected with respect to distant microphones. Ampeliotis and Berberidis \cite{AMPELIOTIS2010} use the signal strength for multi-source localization, addressing in particular computational complexity problem of the alternating projection algorithm. 
@@ -209,7 +209,7 @@ The main contribution of this work is the development of a completely data-drive
 %%%
 %The purpose of the data-driven strategy is to avoid a dedicated fine-tuning of parameters, which is typical and highly specific for the state of the art algorithms.
 In details, the proposed algorithm is composed of a feature extraction stage and an artificial neural network, composing together the DNN-SLOC. %\textcolor{red}{
-The feature extraction stage calculates GCC-PHAT Patterns \cite{xiao2015learning} from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' position. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) \cite{nair2010rectified}. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices \cite{xiao2015learning}, which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first architecture, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones obtained the best performance, as well as the importance of using a temporal context.
+The feature extraction stage calculates GCC-PHAT Patterns \cite{xiao2015learning} from pairs of microphone signals, and two different neural networks architectures are evaluated for estimating the speakers' positions. The first network, denoted as MLP-SLOC, is composed of fully connected layers with rectified linear units (ReLU) \cite{nair2010rectified}. The second network, denoted as CNN-SLOC, is composed of convolutional layers followed by fully connected layers with ReLUs. The motivation behind the use of convolutional layers resides in their ability to capture the intrinsic structure of GCC-PHAT Pattern matrices \cite{xiao2015learning}, which is lost by using fully connected layers only. Additionally, two different algorithm architectures are evaluated: in the first architecture, localization in a room is performed by using only the signals acquired with the microphones present in that room. The second architecture uses the signals acquired with the microphones of all rooms. In the experiments, we investigated which combination of microphones obtained the best performance, as well as the importance of the temporal context.
 %Additionally to investigating different network architectures, the concurrent processing of one or more room audio data, the dependence on the microphone position and the importance of a temporal context are also investigated.
 }
 
@@ -234,9 +234,9 @@ Finally, \secref{sec:concl} concludes the manuscript.
 \end{figure*}
 
 \section{Proposed Method}\label{sec:ALGO}
-The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network (ANN). \textcolor{red}{In a preliminary stage, a multi-room VAD \cite{ferronineural,ijcnn2016-vad} extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal, and the development of an algorithm able to perform both tasks simultaneously will be addressed in future works.} The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal correlation of the data. \textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is unscaled to obtain the coordinate in millimeters.} A block diagram of the algorithm based on a CNN is shown in \figref{fig:proposed_method}.
+The proposed multi-room speaker localization algorithm is composed of a features extraction stage and an artificial neural network. \textcolor{red}{In a preliminary stage, a multi-room VAD \cite{ferronineural,ijcnn2016-vad} extracts the speech portions of the signals and identifies the room where the speakers are located. Here, the multi-room VAD is supposed ideal: the development of a single algorithm able to perform both tasks simultaneously will be addressed in future works.} The first stage extracts GCC-PHAT Patterns features from each input frame by using pairs of microphone signals. Successively, the feature matrices related to adjacent frames are joined in a chunk  with the purpose of exploiting the temporal correlation of the data. \textcolor{red}{Hence, the artificial neural network is trained on labeled data to estimate the Cartesian coordinates $\left ( \chi,\psi \right )$, i.e., the position of the speaker inside the target room, with the origin of the coordinates system located in the upper left corner of a room. The target positions are originally expressed in millimeters and they are then scaled in the range $[0,1]$ for training and testing. In order to ensure that only valid predictions are produced, the final coordinate is calculated as $\tilde{x} =\max(0, \min(1, x))$, where $x$ can represent the abscissa $\chi$ or the ordinate $\psi$. Finally, the output is scaled back to obtain the coordinate in millimeters.} A block diagram of the algorithm based on a CNN is shown in \figref{fig:proposed_method}.
 %%%
-In the multi-room scenario, speakers positions are estimated by means of a feature extraction stage and a neural network per room. Two different architectures have been investigated in this contribution: in the first, each neural network is dedicated to processing the audio signals coming from a room and it estimates the position of the speaker in that room. This architecture will be denoted as 1Rx1N-SLOC in the following. In the second architecture, the neural network jointly processes audio coming from different rooms, while estimating the speaker position only in one room. This architecture will be denoted as $K$Rx1N-SLOC in the following, where $K$ denotes the number of rooms. \figref{fig:2Rx1R} shows the differences between the two architectures in the two rooms case study ($K=2$).
+In the multi-room scenario, speakers positions are estimated by means of a feature extraction stage and a neural network per room. Two different architectures have been investigated in this contribution: in the first, each neural network is dedicated to processing the audio signals coming from a room and it estimates the position of the speaker in that room. This architecture will be denoted as 1Rx1N in the following. In the second architecture, the neural network jointly processes audio coming from different rooms, while estimating the speaker position only in one room. This architecture will be denoted as $K$Rx1N in the following, where $K$ denotes the number of rooms. \figref{fig:2Rx1R} shows the differences between the two architectures in the two rooms case study ($K=2$).
 
 \begin{figure}[t]
 	\centering
@@ -276,7 +276,7 @@ Successively, it is possible to calculate the DOA of the sound event for each mi
 In good acoustic conditions, with low reverberation time and sufficiently high SNR, this method gives an adequate DOA estimation \cite{zhang2008Phat}.
 Nevertheless, due the numerous reflective surfaces and the variety of noises present in a multi-room domestic scenario these conditions are usually not satisfied.
 
-Regarding to the proposed approach, preliminary experiments demonstrated that the simple TDOA estimation is not sufficiently reliable as input feature, thus we make use of GCC-PHAT Patterns, which have been previously employed in \cite{xiao2015learning}.
+Regarding the proposed approach, preliminary experiments demonstrated that the simple TDOA estimation is not sufficiently reliable as input feature, thus we make use of GCC-PHAT Patterns, which have been previously employed in \cite{xiao2015learning}.
 %Therefore the use GCC-Patterns compared to the TDOAs is more reliable and contains all the information required for the localization, so they are used as input features for the Neural Network \cite{xiao2015learning}. 
 
 GCC-PHAT Patterns are calculated by using only microphone pairs belonging to the same array. Here, we suppose that the maximum distance $d_{max}$ between two sensors is equal to  50\,cm and that the sample rate $f_s$ is equal to 16\,kHz. Thus, the maximum time delay (in samples) between 2 microphones is:
@@ -317,9 +317,9 @@ An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors re
 
 \textcolor{red}{The computational cost of the GCC-PHAT Patterns extraction stage has been calculated in \cite{DoSY07}, and it is now reported here. In terms of total number of operations, the computational cost is given by the following processing steps:
 \begin{itemize}
-\item one real FFT per microphone: $\frac{5}{2} L \log L$;
-\item calculation of equation \eqref{eq:CSPCM} for each microphone pair: $10\cdot L$;
-\item one inverse FFT per microphone pair:  $ \frac{5}{2} L \log L$.
+\item one real FFT per microphone: $\frac{5}{2} N_{FFT} \log N_{FFT}$;
+\item calculation of equation \eqref{eq:CSPCM} for each microphone pair: $10\cdot N_{FFT}$;
+\item one inverse FFT per microphone pair:  $ \frac{5}{2} N_{FFT} \log N_{FFT}$.
 \end{itemize}}
 
 \subsection{Temporal Context}\label{sec:TEE}
@@ -342,7 +342,7 @@ where $C$ is the total length of the chunk, and $s$ denotes the stride, which de
 In cases where the selected frames do not contain speech, the GCC-PHAT Patterns matrices related to the first or the last frame of the segment are replicated accordingly.
 %TODO sostituire ''do not contain speech'' con va fuori limite or similar...cf punto 6d dell Results discussion review
 
-\begin{figure}[h] 
+\begin{figure}[t] 
 	\centering
 	\includegraphics[width=0.65\columnwidth]{imgs/cxt_str}
 	\caption{A scheme showing the GCC-PHAT Patterns matrices composing the temporal context. The GCC-PHAT Patterns matrix of current frame $\mathbf{X}[n]$ is shown in red ,the matrices included in the final chunk are shown in blue while the white matrices are those not considered as a result of the stride. The value of the stride $s$ is 2.}
@@ -391,12 +391,12 @@ Denoting with $\mathbf{W}_{m} \in \mathbb{R}^{K_{1m}\times K_{2m}}$ the $m$-th k
 %h_{m,i}=\varphi	\left(W_{m,i} \ast \mathbf{u}_j[n] + b_{m,i} \right),
 \mathbf{h}_{m}=\varphi	\left(\sum_{d=1}^{D_3} \mathbf{W}_{m} \ast \mathbf{u}_d + \mathbf{b}_{m} \right),
 \end{equation}
-where $\ast$ represent the convolution operation, and $\mathbf{u}_{d} \in \mathbb{R}^{D_1\times D_2} $ is a matrix of the three-dimensional input tensor $\mathbf{u} \in \mathbb{R}^{D_1\times D_2 \times D_3}$. The dimension of $\mathbf{h}_{m}$ is $ D_1\times D_2$ since here we suppose that the input is zero-padded. The dimension of the $m$-th feature map $\mathbf{h}_{m}$ depends on the zero padding of the input tensor: here, padding is performed in order to preserve the dimension of the input, i.e., $\mathbf{h}_{m} \in \mathbb{R}^{D_1\times D_2}$. Please note that for the sake of simplicity, the time frame index $n$ has been omitted.}  %The different feature maps obtained from each kernel of a convolutional layer are then summed to compose the input data for the following layer.
+where $\ast$ represent the convolution operation, and $\mathbf{u}_{d} \in \mathbb{R}^{D_1\times D_2} $ is a matrix of the three-dimensional input tensor $\mathbf{u} \in \mathbb{R}^{D_1\times D_2 \times D_3}$. The dimension of the $m$-th feature map $\mathbf{h}_{m}$ depends on the zero padding of the input tensor: here, padding is performed in order to preserve the dimension of the input, i.e., $\mathbf{h}_{m} \in \mathbb{R}^{D_1\times D_2}$. Please note that for the sake of simplicity, the time frame index $n$ has been omitted.}  %The different feature maps obtained from each kernel of a convolutional layer are then summed to compose the input data for the following layer.
 
 Commonly, \eqref{eq:conv_op} is followed by a pooling layer in order to be more robust against patterns shifts in the processed data. In this paper, we employed a max-pooling operator that calculates the maximum over a $P_1 \times P_2 $ matrix. The CNN structure is completed by an MLP layer, whose task is to produce the network response, \textcolor{red}{i.e., the estimated $\left ( \chi,\psi \right ) $ positions in millimeters in this case.}
 
-Although this architecture was designed for image processing, several works in the literature have employed CNNs in the audio field \cite{thomas2014analyzing,mcloughlin2015low}. In this work, we exploit a 3-D arrangement of the input data (as described in \secref{sec:TEE}), %(\textbf{ndemap: dove?})),
-inspired by what occurs in image processing with RGB channels. Thus, the CNN-SLOC is able to efficiently process adjacent frames and to exploit the temporal evolution of the audio signal \cite{wirn2016-vad}. Up to the authors' knowledge, employing CNNs for indoor speaker localization are not present in the scientific literature.
+Although this architecture was designed for image processing, several works in the literature have employed CNNs in the audio field \cite{thomas2014analyzing,mcloughlin2015low}. In this work, we arrange the input data as a 3-D tensor (as described in \secref{sec:TEE}), %(\textbf{ndemap: dove?})),
+inspired by what occurs in image processing with RGB channels. Thus, the CNN-SLOC is able to efficiently process adjacent frames and to exploit the temporal evolution of the audio signal \cite{wirn2016-vad}. Up to the authors' knowledge, CNNs have never been employed for indoor speaker localization. % in the scientific literature.
 
 According to that, the network first convolutional layer could respectively have 2-D or 3-D kernels: when a context size $C > 1$ is considered, the input features are organized in a 3-D tensor where the third axis represents the temporal index (as shown in \figref{fig:cxt_str}). In the degenerate case where $C$ is equal to 1, the tensor reduces to a bi-dimensional matrix. Referring to equation \eqref{eq:conv_op}, this means that $D_3 = C$.
 
@@ -404,7 +404,7 @@ According to that, the network first convolutional layer could respectively have
 \begin{equation}\label{eq:cost_fmap}
 \text{Cost}_{\text{Per-Feature-Map}} =2K_m^2D_1D_2D_3+D_1D_2(D_3-1),
 \end{equation}
-where the first term considers the number of operations required for the convolution and the sum with the bias term, and the second term the operations for the ReLU activation function. As aforementioned, the max-pooling operator calculates the maximum over a $P_1 \times P_2 $ matrix. Supposing that the maximum operation is calculated pair by pair, the max-pooling operator requires the following number of operations
+where the first term of the sum considers the number of operations required for the convolution and the sum with the bias term, and the second term the operations for the ReLU activation function. As aforementioned, the max-pooling operator calculates the maximum over a $P_1 \times P_2 $ matrix. Supposing that the maximum operation is calculated pair by pair, the max-pooling operator requires the following number of operations
 \begin{equation}\label{eq:cost_mp}
 \text{Cost}_{\text{Max-Pooling}}=(P_1P_2-1)(D_1-P_1+1)(D_1-P_2+1).
 \end{equation}
@@ -412,10 +412,8 @@ The total number of operations per layer can be calculated by multiplying the ex
 
 \subsection{Smoothing}
 \textcolor{red}{
-As final stage of the algorithm a smoothing technique has been implemented in order to reduce excessive time-varying predictions of the speaker location. In fact, according to a dynamical model that could be used to represent the movement a person in typical room \cite{vermaak2001nonlinear}, the localization accuracy can be improved by discarding outliers predictions from chunk of adjacent frames. 
-}
-\textcolor{red}{
-Hence, in order to reduce the fluctuations of location predictions, a median filter on each of the Cartesian coordinates (assumed to be independent \cite{vermaak2001nonlinear}) has been used as smoothing technique. % and different window size have been evaluated for the best performing setups of the different methods.
+As final stage of the algorithm, a smoothing filter has been applied in order to reduce excessive time-varying predictions of the speaker location. In fact, according to a dynamical model that could be used to represent the movement a person in typical room \cite{vermaak2001nonlinear}, the localization accuracy can be improved by discarding outliers predictions from chunk of adjacent frames. Popular approaches for smoothing a time series are the moving average filter and the median filter. Here the estimated positions are smoothed by using a median filter, since preliminary experiments showed that it reduces the localization error by a greater amount compared to the moving average filter.
+%In this work, the estimated Cartesian coordinates are smoothed by using a median filter. The coordinates are smoothed separately since they are assumed independent \cite{vermaak2001nonlinear}. % and different window size have been evaluated for the best performing setups of the different methods.
 }
 
 \section{Comparative Methods}
@@ -423,7 +421,7 @@ Hence, in order to reduce the fluctuations of location predictions, a median fil
 The proposed localization algorithm has been compared with two state-of-the art methods described in the remainder of this section.
 
 \subsection{Crosspower Spectrum Phase Speaker Localization}\label{sec:soa_met}
-The first algorithm taken as reference is the Crosspower Spectrum Phase speaker localization algorithm (CSP-SLOC) \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers. In this paper, the outlier elimination algorithm has not been implemented since  the authors in \cite{tsiami2014experiments} showed that it does not provide significant performance improvements .For the same reason the cepstral dereverberation has not been employed in the Real case of study.}
+The first method taken as reference is the CSP-SLOC algorithm proposed in  \cite{tsiami2014experiments}. \textcolor{red}{CSP-SLOC supposes that microphones and sources lie on the same plane, and it operates by calculating the intersection points of the DOA curves obtained from each pair of microphones. Ideally, all the curves should intersect at the same point, but since in reality this does not happen, a Maximum Likelihood obtained minimizing a least squares error criterion is performed. Tsiami \textit{et al.} \cite{tsiami2014experiments} improved the robustness of the estimate by pre-processing the microphone signals with a cepstral dereverberation algorithm  and by eliminating possible outliers. In this paper, the outlier elimination algorithm has not been implemented since  the authors in \cite{tsiami2014experiments} showed that it does not provide significant performance improvements.}
 
 \textcolor{red}{More in details, the algorithm is evaluated separately for each room. Considering a set of microphone pairs, the first step consists in 
 estimating the DOA angle ($\theta$) from the TDOA defined in \eqref{eq:tdoa} and the CSPCM defined in \eqref{eq:CSPCM}:}
@@ -447,10 +445,11 @@ Several physical aspects affect the accuracy of the CSP-SLOC, such as the orient
 
 In this paper, the cepstral dereverberation algorithm uses frames of 2048 samples without overlap, with an exponential window having a scaling factor $\alpha = 0.9985$ and an averaging weighting coefficient $\mu=10^{-4}$. To be coherent with the proposed method, we computed the TDOAs with a rate of 100 frames/second and a frame overlap equal to 66\%.
 
-\textcolor{red}{The computational cost of the CSP-SLOC algorithm can be derived by summing the cost of the CSPCM defined \eqref{eq:CSPCM}, the DOA in \eqref{eq:doa}, and the cost of the solution in \eqref{eq:csp_sol}.
+\textcolor{red}{The computational cost of the CSP-SLOC algorithm can be derived by summing the cost of the CSPCM defined \eqref{eq:CSPCM}, the DOA in \eqref{eq:doa}, and the cost of the solution in \eqref{eq:csp_sol}:
 \begin{equation}\label{eq:cost_csp}
 \text{Cost}_{\text{CSP-SLOC}}= \text{Cost}_{\text{CSPCM}} + M\cdot10 + M\cdot20 + 64.
 \end{equation}
+where $M\cdot10$ is the cost of calculating the DOA, and  $M\cdot20 + 64$ is the cost of \eqref{eq:csp_sol}.
 }
 
 
@@ -481,8 +480,8 @@ The analysis of the DNN-SLOC performance has been conducted on the DIRHA dataset
 The dataset is composed of two subsets, named \emph{Simulated} and \emph{Real}. For each of them several \textit{scenes} have been recorded, composed of typical situations observable in a domestic context. As reported in \tableref{tab:dataset}, the two subsets differ in terms of scenes and total length: in the Simulated set the scenes length is fixed to 60 seconds, while it varies in the Real set. In addition, the latter has been recorded with persons moving in the rooms and speaking towards different directions throughout the scenes, whilst the Simulated has been obtained by convolving a fixed set of measured Room Impulse Responses (RIRs) with recorded signals.
 The Simulated subset is also characterized by a lower SNR compared to the Real one and overlapping speech does not occur.
 
-Our study focuses on two rooms of the dataset, i.e.,  the Kitchen and the Living Room, due to three main aspects. First of all, these rooms consist in the area of a home-environment where most of the events take place. In addition, being the widest rooms of the apartment, the localization task is more challenging. \textcolor{red}{The room dimensions are respectively $4790 \times 3800\, \left [mm\right ]$ for the Kitchen and $4790 \times 4850\, \left [mm\right ]$ for the Living Room.}
-Finally, the number of microphones are higher compared to the other rooms, and it comprises both wall and ceiling arrays.
+Our study focuses on two rooms of the dataset, i.e.,  the Kitchen and the Living Room, due to three main aspects. First of all, these rooms consist in the area of a home-environment where most of the events take place. In addition, being the widest rooms of the apartment, the localization task is more challenging. \textcolor{red}{The room dimensions are respectively $4.79$\,m~$\times$~$3.80$\,m for the Kitchen and $4.79$\,m~$\times$~$4.85$\,m for the Living Room.}
+Finally, the number of microphones are higher compared to the other rooms, and they comprise both wall and ceiling arrays.
 
 \begin{table}[t]
 	%\renewcommand{\arraystretch}{1.2}
@@ -513,9 +512,9 @@ In this section the experimental procedure is presented and the obtained results
 
 \subsection{Experimental setup}
 The performance of the two proposed methods, 1Rx1N-SLOC and 2Rx1N-SLOC described in \secref{sec:ALGO}, are investigated in the two DIRHA subsets.
-Both architectures have been evaluated by using MLP and CNN. The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals.
+Both architectures have been evaluated by using MLP and CNN. The experiments have been performed by assuming the presence of an Oracle multi-room Voice Activity Detector (VAD), which selects only the speech portions of the audio signals and identifies the room where the source is located.
 
-The experiments have been conducted by means of a $k$-fold cross-validation technique in order to reduce the performance variance, and an early-stopping training strategy has been employed to prevent overfitting. In the \textit{Simulated} dataset $k$ is equal to 10, thus 64-8-8 scenes respectively compose the training, validation and test sets. In the \textit{Real} dataset, due to the total absence of speech in some scenes, only 11 of them were suitable for each room. Thus, a leave-2-out cross validation has been adopted, where 7 scenes compose the training set, 2 the validation set and 2 the test set.
+The experiments have been conducted by using a $k$-fold cross-validation technique in order to reduce the performance variance, and an early-stopping training strategy has been employed to prevent overfitting. In the \textit{Simulated} dataset $k$ is equal to 10, thus 64-8-8 scenes respectively compose the training, validation and test sets. In the \textit{Real} dataset, due to the total absence of speech in some scenes, only 11 of them were suitable for each room. Thus, a leave-2-out cross validation has been adopted, where 7 scenes compose the training set, 2 the validation set and 2 the test set.
 
 The selection of the most performing DNN-SLOC architecture has been carried out by means of a four-stage optimization strategy, described as follow:
 
@@ -530,7 +529,8 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	%TODO cf. punto 6e) modifiche al testo
 	\item{\textbf{Network Size Selection.}} Another network size selection is then performed, having as input features the set of GCC-PHAT Patterns providing the best results in the previous step. 
 	\item{\textbf{Temporal Context Selection.}} Here the objective is evaluating the effects of the temporal context, by varying the strides values, i.e., $s=\{1,3,4,5\}$, and the context dimensions, i.e., $C=\{3,7,11,13,15,17,19,21\}$.
-	\item{\textbf{Smoothing.}} For the best performing configurations obtained from the aforementioned stages, the median filtering smoothing technique has been employed as final refinement. The window size has been varied in the range $w=\{3,7,11,15\}$.
+	
+	\item \textcolor{red}{{\textbf{Smoothing.}} For the best performing configurations obtained from the aforementioned stages, the median filtering smoothing technique has been employed as final refinement. The window size has been varied in the range $w=\{3,7,11,15\}$.}
 \end{enumerate}
 
 
@@ -539,7 +539,7 @@ The selection of the most performing DNN-SLOC architecture has been carried out 
 	%\setlength{\tabcolsep}{2.pt}
 	\small
 	%\renewcommand{\arraystretch}{1.1}
-	\caption{Network topology parameter explored during the optimization stages.}
+	\caption{Parameters explored during the optimization stages.}
 	\label{tab:CNNs}
 	\resizebox{.8\columnwidth}{!}{%
 	\begin{tabular} { c|c|c|c|c|c|c|c}
@@ -670,9 +670,9 @@ The results obtained by the different addressed algorithms in the Simulated case
 
 Focusing on the performance obtained without temporal context, the best DNN configuration is the 2Rx1N MLP-SLOC. In particular, both in the 1Rx1N and  2Rx1N configurations, the MLP performs slightly better than the CNN. \textcolor{red}{ In the case of the MLP-SLOC, the 2Rx1N architecture reduces the RMSE by 2.48\%  with respect to the 1Rx1N architecture. Differently, for the CNN-SLOC algorithm, using the microphones of both rooms results in a negligible performance difference.}
 
-\textcolor{red}{It is interesting to analyze the behavior of the CNN-SLOC and MLP-SLOC algorithms in the two architecture variants for different number of microphone pairs, i.e., at the end of the GCC-PHAT Patterns selection stage. \figref{fig:boxplot_simu-mlp} shows a box plot describing the overall results at the end of this stage for the Living Room: the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile. The marks represent values outside the whiskers range. % The boxplots show a certain robustness of the 2Rx1N architecture to the increased number of microphone pairs. Indeed, in the 1Rx1N architecture, the total number of microphone pairs
+\textcolor{red}{It is interesting to analyze the behavior of the CNN-SLOC and MLP-SLOC algorithms in the two architecture variants for different number of microphone pairs, i.e., at the end of the GCC-PHAT Patterns selection stage. \figref{fig:boxplot_simu-mlp} shows a box plot describing the overall results at the end of this stage: the minimum and maximum values of the colored box represent respectively the first and the third quartile, while the horizontal line represents the median value. The lower and upper whiskers represent respectively the lowest RMSE within the 1.5 interquartile range of the lower quartile, and the highest RMSE within the 1.5 interquartile range of the upper quartile. The marks represent values outside the whiskers range. % The boxplots show a certain robustness of the 2Rx1N architecture to the increased number of microphone pairs. Indeed, in the 1Rx1N architecture, the total number of microphone pairs
 % dispersion of results for both the CNN and MLP architectures. 
-Observing the results related to the MLP-SLOC algorithm, additionally to a reduction of the RMSE, the 2Rx1N architecture reduces also the dependence on the microphones pairs inside the room. Indeed, the standard deviation of the 1Rx1N is equal to 26.08\,mm, while for the 2Rx1N it reduces to 18.52\,mm. In the CNN-SLOC algorithm, the performance improvement is more consistent, since using the 2Rx1N reduces the RMSE by 15.56\,mm. The statistical behavior, however, is different from the one observed for the MLP-SLOC algorithm: in this case, the standard deviation increases by 9.51\,mm with respect to the 1Rx1N architecture.}
+Observing the results related to the MLP-SLOC algorithm in the Living Room, additionally to a reduction of the RMSE, the 2Rx1N architecture reduces also the dependence on the microphones pairs inside the room. Indeed, the standard deviation of the 1Rx1N is equal to 26.08\,mm, while for the 2Rx1N it reduces to 18.52\,mm. In the CNN-SLOC algorithm, the performance improvement is more consistent, since using the 2Rx1N reduces the RMSE by 15.56\,mm. The statistical behavior, however, is different from the one observed for the MLP-SLOC algorithm: in this case, the standard deviation increases by 9.51\,mm with respect to the 1Rx1N architecture. Similar considerations apply to the results related to the Kitchen (\figref{fig:boxplot_simu-kitchen}), where the lowest RMSEs are obtained by using the 2Rx1N architectures.}
 
 
 
@@ -703,99 +703,22 @@ The CSP-SLOC and the SRP-SLOC algorithms obtain a lower localization performance
 
 \begin{figure}[t]
 	\centering
-		\begin{tikzpicture}[scale=0.75]
-			\begin{axis}[
-			%legend entries = {1Rx1N, 2Rx1N},
-			% legend to name={legend},
-%			title = Simulated Dataset - GCC SELECTION,
-			boxplot/draw direction=y, 
-						x axis line style={opacity=0},
-			axis x line*=bottom,
-			axis y line=left,
-			enlarge y limits,
-			ymajorgrids,
-			%xtick={1,3,5,7},
-			%xticklabel style = {font=\tiny},
-			xtick={1.5,3.5},
-			xticklabels={CNN, MLP},
-			ylabel={RMSE (\%)},
-			ytick={},ymin=550,ymax=730],
-		
-						
-			\addplot+ [boxplot,fill=BoxCol,draw=BoxCol,fill opacity=0.8]
-				table [row sep=\\,y index=0] {
-				data\\
-				707.99\\ 677.65\\ 676.3\\ 689.5\\ 681.65\\ 689.01\\ 699.23\\ 668.7\\ 673.8\\ 668.01\\ 671.48\\ 702.08\\ 676.69\\ 675.32\\ 661.1\\ 664.43\\ 675.44\\ 677.32\\ 696.19\\ 704.77\\ 711.92\\ 689.28\\ 679.14\\ 698.86\\ 695.48\\
-				}				
-%				[above]
-%				node at
-%				(boxplot box cs: \boxplotvalue{lower whisker},1)
-%				{\pgfmathprintnumber{\boxplotvalue{lower whisker}}}
-%				node at
-%				(boxplot box cs: \boxplotvalue{lower quartile},1)
-%				{\pgfmathprintnumber{\boxplotvalue{lower quartile}}}
-%				node[left] at
-%				(boxplot box cs: \boxplotvalue{median},0.5)
-%				{\pgfmathprintnumber{\boxplotvalue{median}}}
-%				node at
-%				(boxplot box cs: \boxplotvalue{upper quartile},1)
-%				{\pgfmathprintnumber{\boxplotvalue{upper quartile}}}
-%				node at
-%				(boxplot box cs: \boxplotvalue{upper whisker},1)
-%				{\pgfmathprintnumber{\boxplotvalue{upper whisker}}}
-				;
+	\begin{subfigure}[t]{0.5\textwidth}
 
-			\addplot+[
-			boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8
-			] table [row sep=\\,y index=0] {
-							data\\
-							786.17\\ 683.07\\ 697.94\\ 701.83\\ 682.99\\ 688.72\\ 683.11\\ 711.57\\ 714.65\\ 692.43\\ 662.64\\ 679.13\\ 707.78\\ 686.89\\ 693.99\\ 670.07\\ 721.62\\ 680.81\\ 709.27\\ 699.04\\ 673.46\\ 682.57\\ 694.22\\ 674.66\\ 681.22\\ 671.75\\ 679.09\\ 672.38\\ 674.01\\ 676.44\\ 709.85\\ 700.41\\ 683.71\\ 670.20\\ 645.54\\ 655.69\\ 654.10\\ 671.69\\ 666.01\\ 671.74\\ 654.83\\
-							}
-%											[above]
-%											node at
-%											(boxplot box cs: \boxplotvalue{lower whisker},1)
-%											{\pgfmathprintnumber{\boxplotvalue{lower whisker}}}
-%											node at
-%											(boxplot box cs: \boxplotvalue{lower quartile},1)
-%											{\pgfmathprintnumber{\boxplotvalue{lower quartile}}}
-%											node[left] at
-%											(boxplot box cs: \boxplotvalue{median},0.5)
-%											{\pgfmathprintnumber{\boxplotvalue{median}}}
-%											node at
-%											(boxplot box cs: \boxplotvalue{upper quartile},1)
-%											{\pgfmathprintnumber{\boxplotvalue{upper quartile}}}
-%											node at
-%											(boxplot box cs: \boxplotvalue{upper whisker},1)
-%											{\pgfmathprintnumber{\boxplotvalue{upper whisker}}}
-							;
-							
-			\addplot+[
-				boxplot, fill=BoxCol,draw=BoxCol,fill opacity=0.8
-				] table [row sep=\\,y index=0] {
-											data\\
-											579.907\\ 582.843\\ 583.105\\ 604.342\\ 626.872\\ 630.582\\ 634.624\\ 638.139\\ 643.259\\ 643.362\\ 649.430\\ 650.733\\ 650.905\\ 651.036\\ 652.201\\ 652.851\\ 653.167\\ 653.698\\ 654.598\\ 656.646\\ 656.954\\ 661.684\\ 662.096\\ 662.319\\ 666.262\\ 667.018\\ 667.854\\ 669.834\\ 677.935\\
-											};
-											
-			\addplot+[
-				boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8
-				] table [row sep=\\,y index=0] {
-															data\\
-															626.790\\ 658.090\\ 627.830\\ 613.890\\ 627.520\\ 618.830\\ 629.040\\ 627.390\\ 614.590\\ 614.580\\ 613.710\\ 621.880\\ 621.530\\ 624.580\\ 598.630\\ 619.620\\ 627.680\\ 630.800\\ 641.680\\ 624.600\\ 648.330\\ 624.980\\ 631.490\\ 635.130\\ 610.620\\ 650.000\\ 601.290\\ 577.200\\ 582.000\\ 590.54\\ 616.39\\ 661.23\\ 601.1\\ 619.86\\ 589.88\\ 593.91\\ 625.71\\ 609.58\\ 609.23\\ 609.37\\ 620.97\\
-															};
-			
-			\end{axis}
-			\begin{customlegend}[legend entries={1Rx1N, 2Rx1N}, legend style={at={(7.6,6.2)}} ]
-						% \node (rel axis cs:0.9,0.2);
-						
-						\addlegendimage{BoxCol,fill=BoxCol,fill opacity=0.8,area legend}
-						\addlegendimage{BoxCol1,fill=BoxCol1,fill opacity=0.8,area legend}
-						\end{customlegend}	
+					\includegraphics{imgs/boxplot_simulated_living.tikz}
+	
+		\caption{Living Room.}\label{fig:boxplot_simu-living}
+ 	 \end{subfigure}%
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering
+					\includegraphics{imgs/boxplot_simulated_kitchen.tikz}
+							\caption{Kitchen.}				\label{fig:boxplot_simu-kitchen}
+		\end{subfigure}
 		
-		\end{tikzpicture}
-				\caption{Boxplot for the Simulated dataset, for MLP-SLOC and CNN-SLOC algorithm, comparing 1Rx1N and 2Rx1N architectures. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC Patterns configurations. The results are related to the Living Room.}
+				\caption{Boxplot for the Simulated dataset, for MLP-SLOC and CNN-SLOC algorithm, comparing 1Rx1N and 2Rx1N architectures. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC-PHAT Patterns configurations.}
 				\label{fig:boxplot_simu-mlp}
 	\end{figure}
-
+	
 
 %\begin{figure}[t]
 %	\centering
@@ -952,8 +875,8 @@ The best resulting values of context and strides are $(C,s)=(21,4)$ and $(C,s)=(
 
 In this case the CNN results more effective with respect to the MLP architecture, and it is able to further reduce the RMSE,
 %ndFAB Results discussion - 6c)
-\textcolor{red}{{as we can notice from the table \tableref{tab:bestCONF_SIMU}.}}
-In particular, the CNN-2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
+\textcolor{red}{{as reported in \tableref{tab:bestCONF_SIMU}.}}
+In particular, the CNN-SLOC 2Rx1N architecture reduces the RMSE by 37\% with respect to the method proposed in a previous work by the authors \cite{vesperini2016sloc}.
 Indeed, the introduction of a temporal context improves the performance also with the MLP architecture, with an RMSE reduction equal to 21.5\%.
 
 The  results obtained in the investigation of the audio excerpt are reported in \figref{ctx-str-SIMU}, where the values of the RMSE for different strides $s$ are plotted while varying the temporal context $C$. %It can be noticed that a similar trend of performance with respect to temporal resolution values is registered.
@@ -1036,7 +959,7 @@ The  results obtained in the investigation of the audio excerpt are reported in 
 
 \subsubsection{The effect of smoothing}
 \textcolor{red}{
-The effect of smoothing the positions predicted by the proposed approach as well as by the comparative algorithms is shown in \tableref{tab:smooth_sim}. For each method, the results are related to the smoothing window that provided the lowest RMSE. As shown in \tableref{tab:smooth_sim}, applying a median filter improves the performance of all the methods. The most significant error reduction is observed for SRP-SLOC, with a 15.88\% lower RMSE, showing that a consistent part of the localization error obtained without smoothing was due to inconsistent predictions in adjacent frames. On the contrary, on CSP-SLOC the median filter reduces the error only by 1.70\%, showing that the errors of the method do not present significant frame-by-frame variabilities. Similar considerations can be made for CNN-SLOC, where the error reduces by 2.67\%: being the most performing algorithm, this also demonstrate a certain robustness of CNN-SLOC against inter-frame variabilities that in the SRP-SLOC produce higher errors and are reduced only by applying the median filter.}
+The effect of smoothing the positions predicted by the proposed approach as well as by the comparative algorithms is shown in \tableref{tab:smooth_sim}. For each method, the results are related to the smoothing window that provided the lowest RMSE. As shown in \tableref{tab:smooth_sim}, applying a median filter improves the performance of all the methods. The most significant error reduction is observed for SRP-SLOC, with a 15.88\% lower RMSE, showing that a consistent part of the localization error obtained without smoothing was due to inconsistent predictions in adjacent frames. On the contrary, on CSP-SLOC the median filter reduces the error only by 1.70\%, showing that the errors of the method do not present significant frame-by-frame variabilities. Similar considerations can be made for CNN-SLOC, where the error reduces by 2.67\%: being the most performing algorithm, this also demonstrates a certain robustness of CNN-SLOC against inter-frame variabilities that in the SRP-SLOC produce higher errors and are reduced only by applying the median filter.}
 
 \begin{table}[t]
 \centering
@@ -1051,7 +974,7 @@ SRP-SLOC    & 850 & -15.88 & 15\\
 \end{table}
 
 \textcolor{red}{
-Better insights on the results of the CNN-SLOC algorithm can be obtained by analyzing the distribution of the predicted positions. \figref{fig:distr_simu} shows a bi-dimensional histogram obtained by dividing the plane of the Kitchen Room in a $30 \times 30$ grid and counting the occurrences of the positions that fall in each bin. Bins with higher number of occurrences are shown with a darker color, and the abscissa $\bar{\chi}$ and the ordinate $\bar{\psi}$ represent normalized positions. \figref{fig:distr_simu_gt} shows the distribution of the ground truth: the number of colored bins corresponds to the positions shown in \figref{fig:DIRHA_map}, since in the Simulated scenario speaker's positions are fixed. The highest occurring bins in the ground truth are related to positions A, C, G, J, K, and P. Observing the predicted positions distributions in \figref{fig:distr_simu_pred}, it can be noted that the highest occurring positions are indeed located near the locations of the ground truth, as a further confirm of the results shown in \tableref{tab:smooth_sim}.}
+Better insights on the results of the CNN-SLOC algorithm can be obtained by analyzing the distribution of the predicted positions. \figref{fig:distr_simu} shows a bi-dimensional histogram obtained by dividing the plane of the Kitchen Room in a $30 \times 30$ grid and counting the occurrences of the positions that fall in each bin. Bins with higher number of occurrences are shown with a darker color, and the abscissa $\bar{\chi}$ and the ordinate $\bar{\psi}$ represent normalized positions. \figref{fig:distr_simu_gt} shows the distribution of the ground truth: the number of colored bins corresponds to the positions shown in \figref{fig:DIRHA_map}, since in the Simulated scenario speaker's positions are fixed. The highest occurring bins in the ground truth are related to positions A, C, G, J, K, and P. Observing the predicted positions distributions in \figref{fig:distr_simu_pred}, it can be noted that the highest occurring bins are indeed located near the locations of the ground truth, as a further confirm of the results shown in \tableref{tab:smooth_sim}.}
 
 \begin{figure}[t]
 \centering
@@ -1107,65 +1030,19 @@ The localization performance obtained by the CSP-SLOC algorithm is quite similar
 
 \begin{figure}[t]
 	\centering
-	\begin{tikzpicture}[scale=0.8]
-	
-	\begin{axis}[
-	%legend entries = {1Rx1N, 2Rx1N},
-	% legend to name={legend},
-%	title = Real Dataset - GCC SELECTION,
-	boxplot/draw direction=y,
-	x axis line style={opacity=0},
-	axis x line*=bottom,
-	axis y line=left,
-	enlarge y limits,
-	ymajorgrids,
-	%xtick={1,3,5,7},
-	%xticklabel style = {font=\tiny},
-	xtick={1.5,3.5},
-	xticklabels={CNN, MLP},
-	ylabel={RMSE (\%)},
-	ytick={},ymin=550,ymax=760]
-	]
-	%BLUE MLP
-	%RED CNN
-	\addplot+[boxplot, fill=BoxCol,draw=BoxCol,fill opacity=0.8]  table [row sep=\\,y index=0] {
-								data\\
-								671.43\\ 648.28\\ 658.7\\ 655.32\\ 646.01\\ 630.54\\ 661.41\\ 608.65\\ 636.53\\ 629.51\\ 619.710\\ 692.530\\ 598.900\\ 614.650\\ 644.750\\ 623.150\\ 632.440\\ 625.220\\ 635.760\\ 629.720\\ 661.440\\ 620.580\\ 614.960\\ 615.920\\ 629.070\\
-								};
-	%\addlegendentry{1Rx1N}
-	\addplot+[
-	boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8,
-	] table [row sep=\\,y index=0] {
-									data\\
-									585.63\\ 594.24\\ 601.71\\ 578.19\\ 580.97\\ 585.57\\ 585.33\\ 580.12\\ 598.99\\ 586.75\\ 580.01\\ 588.43\\ 579.80\\ 592.41\\ 594.80\\ 580.39\\ 585.56\\ 583.79\\ 581.05\\ 594.91\\ 585.77\\ 593.92\\ 582.78\\ 565.31\\ 572.91\\ 573.68\\ 579.48\\ 577.76\\ 589.61\\ 583.58\\ 587.52\\ 589.72\\ 581.40\\ 564.42\\ 573.60\\ 580.75\\ 576.67\\ 580.69\\ 572.82\\ 567.93\\ 561.80\\
-									};
-	%\addlegendentry{2Rx1N}
-	\addplot+[
-	boxplot, fill=BoxCol,draw=BoxCol,fill opacity=0.8
-	] table [row sep=\\,y index=0] {
-										data\\
-										716.19\\ 695.891\\ 688.223\\ 711.643\\ 706.764\\ 748.414\\ 712.56\\ 710.212\\ 725.509\\ 699.234\\ 698.327\\ 713.819\\ 722.029\\ 724.523\\ 714.168\\ 719.553\\ 727.514\\ 711.358\\ 697.135\\ 706.967\\ 721.266\\ 727.589\\ 719.993\\ 701.534\\ 722.285\\ 716.471\\ 722.445\\ 735.322\\ 736.152\\
-										};
-	\addplot+[
-	boxplot, fill=BoxCol1,draw=BoxCol1,fill opacity=0.8
-	] table [row sep=\\,y index=0] {
-											data\\
-											636.99\\ 633.31\\ 629\\ 643.78\\ 634.56\\ 635.48\\ 640.88\\ 634.52\\ 640.86\\ 640.56\\ 642.990\\ 642.540\\ 638.040\\ 636.900\\ 645.640\\ 635.300\\ 657.150\\ 656.850\\ 656.130\\ 647.220\\ 627.290\\ 631.270\\ 628.820\\ 621.360\\ 631.370\\ 627.02\\ 623.57\\ 657.35\\ 630.44\\ 617.91\\ 625.23\\ 633.18\\ 634.75\\ 623.97\\ 619.7\\ 647.59\\ 614.15\\ 651.87\\ 616.87\\ 623.01\\ 624.6\\
-											};
-	% \node [above left]  at (rel axis cs:0.9,0.2) {\ref{legend}};
-	\end{axis}
-	
-	\begin{customlegend}[legend entries={1Rx1N, 2Rx1N}, legend style={at={(7.75,5.4)}} ]
-	\addlegendimage{BoxCol,fill=BoxCol,fill opacity=0.8,area legend}
-	\addlegendimage{BoxCol1,fill=BoxCol1,fill opacity=0.8,area legend}
-	\end{customlegend}
-	
-	\end{tikzpicture}
-	
-	\caption{Boxplot for the Real dataset, for MLP and CNN neural network, comparing 1Rx1N and 2Rx1N setups. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC Patterns configurations. The results are related to the Living Room.}
+	\begin{subfigure}[t]{0.45\textwidth}
+	\includegraphics{imgs/boxplot_real_living.tikz}
+	\caption{Living Room.}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.45\textwidth}
+	\includegraphics{imgs/boxplot_real_kitchen.tikz}
+	\caption{Kitchen.}
+	\end{subfigure}	
+	\caption{Boxplot for the Real dataset, for MLP-SLOC and CNN-SLOC algorithm, comparing 1Rx1N and 2Rx1N architectures. This evaluation is performed at the end of the second stage of optimization, considering all the tested GCC-PHAT Patterns configurations.}
 	\label{fig:boxplot_real-mlp}
 \end{figure}
-As shown in \figref{fig:boxplot_real-mlp}, in this case the 2Rx1N architecture produces a more significant improvement of performance both for the MLP-SLOC and the CNN-SLOC, and now the variance with the microphone pairs decreases for both the algorithms.
+\textcolor{red}{\figref{fig:boxplot_real-mlp} presents the overall results obtained at the end of the GCC-PHAT Patterns selection stage. As in the Simulated scenario, the 2Rx1N architecture provides the lowest RMSE, however, in this case the CNN-SLOC results the most performing approach also in this phase.}
+%As shown in \figref{fig:boxplot_real-mlp}, in this case the 2Rx1N architecture produces a more significant improvement of performance both for the MLP-SLOC and the CNN-SLOC, and now the variance with the microphone pairs decreases for both the algorithms.
 As result of the third optimization stage, the best performing MLP layout in the 2Rx1N case is composed of a single layer of 16 units  both for the Kitchen and the Living Room. Regarding the CNN-SLOC,  the most performing configuration is composed of a convolutional layer with 24 $5\times5$ kernels without pooling, followed by a two layers MLP with respectively 256, 256 units and 256, 512 units for Kitchen and Living Room.
 
 %\begin{table}[t]
@@ -1333,7 +1210,7 @@ Details of the best performing configurations are provided in \tableref{tab:best
 
 \subsubsection{The effect of smoothing}
 \textcolor{red}{
-As in the Simulated scenario, the proposed approach and the comparative algorithms have been evaluated after applying a median filter for smoothing the estimated positions. The results in \tableref{tab:smooth_sim} show that the algorithms behavior is similar to the one noted in the Simulated scenario. The highest performance improvement is observed for the SRP-SLOC algorithm, while in this case, the CSP-SLOC RMSE is essentially unchanged, since it reduced by 9\,mm (-0.63\% relative). SRP-SLOC and CNN-SLOC reduce the RMSE respectively by 19.29\% and 5.27\%, thus confirming what remarked in the Simulated scenario.
+As in the Simulated scenario, the proposed approach and the comparative algorithms have been evaluated after applying a median filter for smoothing the estimated positions. The results in \tableref{tab:smooth_sim} show that the algorithms behavior is similar to the one noted in the Simulated scenario. The highest performance improvement is observed for the SRP-SLOC algorithm, while in this case, the CSP-SLOC RMSE is essentially unchanged, since it reduces by 9\,mm (-0.63\% relative). SRP-SLOC and CNN-SLOC reduce the RMSE respectively by 19.29\% and 5.27\%, thus confirming what remarked in the Simulated scenario.
 }
 
 \begin{table}[t]
@@ -1361,7 +1238,7 @@ SRP-SLOC    & 640 & -19.29 & 15\\
 \end{subfigure}
 \begin{subfigure}[t]{0.45\textwidth}
 \includegraphics[width=\textwidth]{imgs/REALCNN1N1RLivRoom_Predictions.tikz}
-\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 1Rx1N algorithm.}\label{fig:distr_real_pred}
+\caption{Distribution of the speaker's positions obtained by using the CNN-SLOC 2Rx1N algorithm.}\label{fig:distr_real_pred}
 \end{subfigure}
 \caption{Distributions of the speaker's positions in the Kitchen Room related to the Real dataset. The room plane has been partitioned in a $30\times 30$ grid, corresponding to $15.97\,\text{cm} \times 12.67\,\text{cm}$ bins. Bins corresponding to higher occurrences are depicted with a darker color. The room dimensions are normalized in the range $[0,1]$.}\label{fig:distr_real}
 \end{figure}
@@ -1395,14 +1272,14 @@ SRP-SLOC & $5.09 \cdot 10^9$  & $6.59 \cdot 10^9 $ &  $5.09 \cdot 10^9$ &  $6.59
 \section{Conclusion and Outlook}
 \label{sec:concl}
 
-In this paper, a DNN-based approach for speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of the performance has been performed. The neural network employs GCC-PHAT Patterns as input features, obtained by combining the signals acquired with several microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). The coordinates of a speaker inside the target room are directly estimated without additional processing, resulting in a fully data-driven approach. \textbf{ndFab: Cambiare questa frase considerando lo smoothing}
-A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. \textcolor{red}{In details, the capability of the network to exploit the audio coming from all the rooms has been evaluated, and different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
+In this paper, a DNN-based approach for speaker localization in a multi-room domestic environment has been proposed and an extensive evaluation of the performance has been performed. The neural network employs GCC-PHAT Patterns as input features, obtained by combining the signals acquired with several microphone pairs. Hence, two different neural network architectures have been investigated, the multi layer perceptron (MLP) and the convolutional neural network (CNN). \textcolor{red}{The networks estimate the coordinates of a speaker inside the target room, and a median filter is applied in order to reduces inter-frame variabilities.} A particular effort has been directed to the evaluation of a spatial and temporal context, revealing the latter to be extremely decisive. \textcolor{red}{In details, the capability of the network to exploit the audio coming from all the rooms has been evaluated, and different numbers of adjacent frames have been concatenated to evaluate the influence of the temporal context.}
 %%
 \textcolor{red}{The algorithm implicitly requires an Oracle multi-room VAD that identifies the time boundaries of the audio signals and the source room.} The performance have been evaluated on the DIRHA Dataset and compared to two state-of-the-art algorithm, based respectively on Crosspower Spectrum Phase estimation (CSP-SLOC) and on Steered Response Power (SRP-SLOC).
 
-In terms of absolute improvement, compared to the SRP-SLOC approach, the CNN-SLOC improves the performance by 66\% and 51\% respectively for the Simulated and the Real dataset. With regards to the two evaluated neural network architectures, the CNN with 3-D kernels is able to exploit the temporal context information more efficiently respect to the MLP network both in terms of RMSE and $P_{cor}$.
+In terms of absolute improvement, compared to the SRP-SLOC approach, the CNN-SLOC improves the performance by 61.88\% and 42.66\% respectively for the Simulated and the Real dataset. With regards to the two evaluated neural network architectures, the CNN with 3-D kernels is able to exploit the temporal context information more efficiently respect to the MLP network both in terms of RMSE and $P_{cor}$.
 %The proposed method operates in a complete autonomous way. Indeed, once trained, the neural network provides the coordinates of the speaker directly from the speech excerpts of the signals captured by the microphone arrays. This allows to totally avoid the fine-tuning of parameters being generally needed by state-of-the-art approaches, which depends on the application environment and implicates a lack of generality.
-\textcolor{red}{An advantage of the proposed approach with respect to the CSP-SLOC and SRP-SLOC algorithms is its less dependence on the characteristics of the environment: indeed, CSP-SLOC and SRP-SLOC require respectively the knowledge of the microphones position and the knowledge of the room geometry, while the proposed approach infers this information directly from the data. Regarding the hyperparameters, all the algorithms require their manual or automatic tuning in order to obtain the lowest localization error. In particular, the proposed approach requires choosing the hyperparameters of the network, the size of the context and the stride, and a microphone selection stage. The hyperparameters of the network mostly depend on the size of the training set. However, it is worth highlighting the microphone selection stage and the context evaluation stage are important for obtaining the best overall performance, but they are not fundamental for obtaining a significant performance improvement with respect to the comparative methods. In particular, the highest RMSE of CNN-SLOC with the 2Rx1N architecture and without using the temporal context and microphone selection is lower than the SRP-SLOC RMSE in both datasets: 286\,mm in the simulated dataset (see \figref{fig:boxplot_simu-mlp} and \tableref{tab:results_SIMU}) and 131\,mm in the real dataset (\figref{fig:boxplot_real-mlp} and \tableref{tab:results_REAL}).}
+\textcolor{red}{An advantage of the proposed approach with respect to the CSP-SLOC and SRP-SLOC algorithms is its less dependence on the characteristics of the environment: indeed, CSP-SLOC and SRP-SLOC require respectively the knowledge of the microphones position and the knowledge of the room geometry, while the proposed approach infers this information directly from the data. Regarding the hyperparameters, all the algorithms require their manual or automatic tuning in order to obtain the lowest localization error. In particular, the proposed approach requires choosing the hyperparameters of the network, the size of the context and the stride, and a microphone selection stage. The hyperparameters of the network mostly depend on the size of the training set. However, it is worth highlighting the microphone selection stage and the context evaluation stage are important for obtaining the best overall performance, but they are not fundamental for obtaining a significant performance improvement with respect to the comparative methods. In particular, the highest RMSE of CNN-SLOC with the 2Rx1N architecture and without using the temporal context and microphone selection is lower than the SRP-SLOC RMSE in both datasets and both rooms: in the Simulated dataset, the difference is equal to 401\,mm in the Kitchen and 171\,mm in the Living Room (see \figref{fig:boxplot_simu-mlp} and \tableref{tab:results_SIMU}), while in the Real dataset it is respectively equal to 172\,mm and 88\,mm (\figref{fig:boxplot_real-mlp} and \tableref{tab:results_REAL}).
+ }
 
 %\textcolor{red}{{Differently, a lack of generality is observed in the proposed state-of-the-art approaches. For example, the CSP-SLOC requires the knowledge of the room geometry, in addition, parameters such as iterations and number of searched maxima has been fine-tuned for the SRP-SLOC.}}
 
@@ -1431,7 +1308,7 @@ This research has been partly supported by the Italian University and Research C
 
 %% References with BibTeX database:
 
-\bibliographystyle{elsarticle-num}
+%\bibliographystyle{elsarticle-num}
 \bibliography{mybib}
 
 %% Authors are advised to use a BibTeX database file for their reference list.
