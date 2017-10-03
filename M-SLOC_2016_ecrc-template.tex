@@ -315,12 +315,13 @@ An example of $\mathbf{X}[n]$ is shown in \figref{fig:GCC-PATT}, where colors re
 \end{figure}
 
 
-\textcolor{red}{The computational cost of the GCC-PHAT Patterns extraction stage has been calculated in \cite{DoSY07}, and it is now reported here. In terms of total number of operations, the computational cost is given by the following processing steps:
+\textcolor{red}{The computational cost of the GCC-PHAT Patterns extraction stage has been calculated in \cite{DoSY07}, and it is now reported here. Denoting with $L$ the size of a frame, the computational cost, in terms of total number of operations per frame, is given by the following processing steps:
 \begin{itemize}
-\item one real FFT per microphone: $\frac{5}{2} N_{FFT} \log N_{FFT}$;
-\item calculation of equation \eqref{eq:CSPCM} for each microphone pair: $10\cdot N_{FFT}$;
-\item one inverse FFT per microphone pair:  $ \frac{5}{2} N_{FFT} \log N_{FFT}$.
+\item one real FFT per microphone: $\frac{5}{2} L \log L$;
+\item calculation of equation \eqref{eq:CSPCM} for each microphone pair: $10\cdot L$;
+\item one inverse FFT per microphone pair:  $ \frac{5}{2} L \log L$.
 \end{itemize}}
+
 
 \subsection{Temporal Context}\label{sec:TEE}
 The temporal context consists in the frames of the signal adjacent to the one being processed. In order to exploit this information, the input of the neural network  is augmented with $(C-1)/2$ GCC-PHAT Patterns preceding and following the current GCC-PHAT Pattern matrix $\mathbf{X}[n]$. The network, thus, estimates the speaker position by employing a \textit{chunk} of feature matrices defined as follows:
