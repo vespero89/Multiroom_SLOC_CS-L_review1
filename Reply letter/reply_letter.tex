@@ -164,7 +164,7 @@ has been replaced with the sentence:
  \end{quote}
  
 \item \textit{Evaluation: It would be very interesting to have a plot of all the source/target locations on a map, to see their distribution.\\}
-\textbf{Reply}: Thank you for your suggestion. The distributions of the ground truth positions and of the ones estimated by the most performing approach (CNN-SLOC) have been included and discussed in Sections 5.2.3 and 5.3.3.
+\textbf{Reply}: Thank you for your suggestion. The distributions of the ground truth positions and of the ones estimated by the most performing approach (CNN-SLOC) have been included and discussed in Sections 5.2.3 and 5.3.3, respectively for the Simulated scenario (Figure 9) and the Real scenario (Figure 13).
 
 \item \textit{Evaluation: Does the baseline methods, CSP and SRP, use any smoothing or temporal context or are they simply evaluated frame by frame? Based on my experience a simple histogram technique computed over a few seconds can improve robustness quite a lot.\\} \label{resp:smooth}
 \textbf{Reply}: Thank you for your suggestion. In the original implementation, no localization method adopted a technique for smoothing the estimated positions. However, SRP-SLOC operates on a wider temporal context with respect to CSP-SLOC and the proposed approaches without temporal context, since speaker localization is performed on frames composed of 2048 samples (about 4 frames of the DNN-based algorithm). As suggested by the reviewer, we investigated two smoothing methods as a final processing step of all the algorithms: median filter and moving average filter. For the sake of conciseness, we included only the results related to the median filter, since it exhibited the lowest RMSE with all the algorithms. Regarding the DNN-based approaches, the smoothing technique has been evaluated only on the most performing ones, i.e., CNN-SLOC 1Rx1N with temporal context in the Simulated scenario and CNN-SLOC 2Rx1N with temporal context in the Real scenario. For all the algorithms, we calculated the results obtained by using four windows sizes ($\{3,7,11,5\}$) and we reported the best results.
@@ -174,7 +174,7 @@ The smoothing technique has been described in Section 2.5 (Smoothing). The relat
 \item \textit{Evaluation: How was the 500mm threshold determined?\\}
 \textbf{Reply}: Thank you for your comment. This threshold and in general the evaluation metrics have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments task of the EVALITA 2014 challenge. We added these details and the respective reference in Section 5.1 - Experimental Setup.
 \begin{quote}
-	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014) task of the EVALITA 2014 challenge [53] (TODO: controllare che il numero rimanga lo stesso!).}
+	\textcolor{red}{The performance metrics and the related hyperparameters have been chosen according to the guidelines of the Speech Activity detection and Speaker LOcalization in DOMestic environments (SASLODOM 2014) task of the EVALITA 2014 challenge [53].}
 \end{quote}
 
 \item \textit{Evaluation: What was the number for $N_{TOT}$?\\}
